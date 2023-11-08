@@ -1,0 +1,17 @@
+Makefile
+TRUCS A FAIRE
+builtins
+exec
+file
+header
+init_struct.c
+libft
+lists
+main.c
+mini_AJ_reprise.code-workspace
+minishell
+parser
+print_list.c
+print_tab.c
+print_token.c
+wc

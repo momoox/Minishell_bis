@@ -1,0 +1,9 @@
+check_quote: ft_exit à uncomment
+
+
+cmd1 > file | cmd2
+cmd 1 sortie file et pas pipe
+entrée pipe
+
+
+setup fd
