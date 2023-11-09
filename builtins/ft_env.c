@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:22:01 by momox             #+#    #+#             */
-/*   Updated: 2023/11/09 20:07:18 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/09 22:53:02 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ void	update_wds(t_data *data, t_mall *mall, char *wd)
 	set_env_var(data, mall, "OLDPWD", get_env_var_value(mall, data->env, "PWD"));
 	printf("old_pwd = [%s]\n",wd);//data->exec->shell->hold_pwd);
 	set_env_var(data, mall, "OLDPWD", wd);
-	if (data->exec->shell->hold_pwd)
+	if (data->shell->hold_pwd)
 	{
 		//free_tmp(data->exec->shell->hold_pwd);
-		data->shell->hold_pwd = ft_strdup_pipe(mall, data->exec->shell->cwd);
+		data->shell->hold_pwd = ft_strdup_pipe(mall, data->shell->cwd);
 		printf("get_env dat= [%s]\n",data->shell->pwd);
 	}
-	if (data->exec->shell->cwd)
+	if (data->shell->cwd)
 	{
 		//free_tmp(data->shell->cwd);
 		data->shell->cwd = ft_strdup_pipe(mall, wd);

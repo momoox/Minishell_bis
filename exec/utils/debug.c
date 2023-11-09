@@ -95,3 +95,13 @@ void	print_bulding(t_data *data, char *str)
 		printf("env[%d] = [%s]\n",i, data->env[i]);
 	}
 }
+void print_var_build(t_data *data)
+{
+	printf("\033[0;31m	   PRINT_VAR_SHELL\033[0m\n");
+
+	printf("\033[0;30CWD = \033[0m\033[0;33m [%s]\033[0m\n",data->shell->cwd);
+	printf("\033[0;30PWD = \033[0m\033[0;33m [%s]\033[0m\n",data->shell->pwd);
+	printf("\033[0;30OLDPWD = \033[0m\033[0;33m [%s]\033[0m\n",data->shell->hold_pwd);
+
+	printf("\033[0;31m	END_PRINT_VAR_SHELL\033[0m\n");
+}

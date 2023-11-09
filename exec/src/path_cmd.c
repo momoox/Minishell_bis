@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:54:40 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/09 20:49:57 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/09 23:40:14 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	init_env(t_data *data, t_mall *mall, char **env)
 {
 	int		i;
 
-	data->env = ft_calloc_env(mall, env_var_count(env)+ 1, sizeof * data->env);
+	data->env = ft_calloc_env(mall, env_var_count(env) + 1, sizeof * data->env);
 	if (!data->env)
 		return (0);
 	i = 0;
@@ -97,7 +97,6 @@ int	init_wds(t_data *data, t_mall *mall)
 	data->shell->cwd = ft_strdup_pipe(mall, wd);
 	if (!data->shell->cwd)
 	{
-		//free(wd);
 		return (0);
 	}
 	if (get_env_var_index(mall, data->env, "OLDPWD") != -1)
