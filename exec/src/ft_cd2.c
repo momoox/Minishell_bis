@@ -18,7 +18,7 @@ void	init_data_shell(t_data *data, t_mall *mall)
 {
 	data->shell = malloc_plus_plus(&mall, sizeof(t_exec_shell));
 	
-	data->shell->cwd = NULL;
+	data->shell->cwd = ft_strdup(mall, get_env(mall))
 	data->shell->pwd = NULL;
 	data->shell->hold_pwd = NULL;
 }

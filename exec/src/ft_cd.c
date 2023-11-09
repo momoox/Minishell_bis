@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 00:53:37 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/09 20:49:57 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/09 23:36:46 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,14 @@ int	change_dir(t_data *data, t_mall *mall, char *path)
 		errmsg_cmd(mall, "cd: error retrieving current directory",
 			"getcwd: cannot access parent directories",
 			strerror(errno), errno);
-		ret = ft_strjoin(mall, data->exec->shell->cwd, "/");
+		ret = ft_strjoin(mall, data->shell->cwd, "/");
 		tmp = ret;
 		ret = ft_strjoin(mall, tmp, path);
-		// //free_tmp(tmp);
 	}
 	else
 		ret = ft_strdup_pipe(mall, cwd);
 	printf("ch_dir ret = %s \n ", ret);
 	update_wds(data, mall, ret);
-	//free(ret);
 	return (1);
 }
 
@@ -57,7 +55,7 @@ int	ft_cd2(t_data *data, t_mall *mall, char **args)
 	if (!args || !args[1] || ft_isspace(args[1][0]) || args[1][0] == '\0'
 		|| ft_strncmp(args[1], "--", 3) == 0)
 	{
-		path = /*ft_my_var(data,"HOME");*/ get_env_var_value(mall, data->env, "HOME");
+		path = get_env_var_value(mall, data->env, "HOME");
 		if (!path || *path == '\0' || ft_isspace(*path))
 			return (errmsg_cmd(mall,"cd", NULL, "HOME not set", EXIT_FAILURE));
 		return (!change_dir(data, mall, path));
@@ -66,13 +64,12 @@ int	ft_cd2(t_data *data, t_mall *mall, char **args)
 		return (errmsg_cmd(mall, "cd", NULL, "too many arguments", EXIT_FAILURE));
 	if (ft_strncmp(args[1], "-", 2) == 0)
 	{
-		path = /*ft_my_var(data, "OLDPWD");*/ get_env_var_value(mall, data->env,
+		path = get_env_var_value(mall, data->env,
 				"OLDPWD");
 		if (!path)
 			return (errmsg_cmd(mall, "cd", NULL, "OLDPWD not set", EXIT_FAILURE));
 		return (!change_dir(data, mall, path));
 	}
 	return (!change_dir(data, mall, args[1]));
-	// return (0);
 }
 

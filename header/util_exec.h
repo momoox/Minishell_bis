@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 23:16:06 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/09 20:34:46 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/09 23:45:44 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int	    exec_build(t_data *data, t_mall *mall, char **cmd);
 //Debug
 void	print_debug(t_data *data);
 void	print_bulding(t_data *data, char *str);
+void    print_var_build(t_data *data);
 // Exec
 
 int	    ft_cd2(t_data *data, t_mall *mall, char **args);

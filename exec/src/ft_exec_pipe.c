@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 02:47:43 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/09 20:33:31 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/09 23:44:51 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ void	run_exec(t_data *data, t_mall *mall)
     // print_env_sort(data->env, mall);
     // ft_export()
     init_data_shell(data, mall);
+    print_var_build(data);
     // init_env(data,data->env);
     // init_wds(data);
 	ft_pipe(data, mall);
