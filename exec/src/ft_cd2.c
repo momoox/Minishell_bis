@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_cd2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 16:22:10 by momox             #+#    #+#             */
-/*   Updated: 2023/11/05 17:55:36 by oliove           ###   ########.fr       */
+/*   Created: 2023/11/06 00:53:37 by oliove            #+#    #+#             */
+/*   Updated: 2023/11/06 00:53:42 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "util_exec.h"
 
-int	ft_pwd(void)
+
+void	init_data_shell(t_data *data, t_mall *mall)
 {
-	printf("%s\n", getcwd(NULL, 0));
-	return (0);
+	data->shell = malloc_plus_plus(&mall, sizeof(t_exec_shell));
+	
+	data->shell->cwd = NULL;
+	data->shell->pwd = NULL;
+	data->shell->hold_pwd = NULL;
 }
-
 

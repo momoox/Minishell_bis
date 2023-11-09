@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 00:21:38 by oliove            #+#    #+#             */
-/*   Updated: 2023/10/22 00:38:51 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/08 23:32:26 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,3 +45,44 @@ int	ft_strcmp(const char *s1, const char *s2)
 // 	}
 // 	return (0);
 // }
+
+
+
+char	*ft_strdup_pipe(t_mall *mall, char *src)
+{
+	char	*dst;
+
+	dst = malloc_plus_plus(&mall, sizeof(char) * (ft_strlen(src) + 1));
+	if (!dst)
+		return (0);
+	ft_strlcpy(dst, src, ft_strlen(src) + 1);
+	dst[ft_strlen(src)] = '\0';
+	return (dst);
+}
+
+char	*ft_substr_pipe(t_mall *mall, char *s, int start, int len)
+{
+	char	*str;
+	int		i;
+	int		slen;
+
+	slen = 0;
+	i = 0;
+	if (!s || start < 0)
+		return (0);
+	if (start >= ft_strlen(s))
+		slen = 0;
+	else
+		while (s[start + slen] != '\0' && slen < len)
+			slen++;
+	str = malloc_plus_plus(&mall, sizeof(char) * (slen) + 1);
+	if (!str)
+		return (0);
+	if (slen != 0)
+	{
+		while (s[start] != '\0' && i + 1 <= len)
+			str[i++] = s[start++];
+	}
+	str[i] = '\0';
+	return (str);
+}

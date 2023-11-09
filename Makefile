@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: momox <momox@student.42.fr>                +#+  +:+       +#+         #
+#    By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/28 20:23:57 by momox             #+#    #+#              #
-#    Updated: 2023/11/08 23:20:11 by momox            ###   ########.fr        #
+#    Updated: 2023/11/09 19:59:57 by oliove           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,10 @@ SRCS = main.c init_struct.c print_tab.c print_token.c\
 		exec/utils/utils_str.c \
 		builtins/ft_echo.c \
 		builtins/ft_env.c \
-		builtins/ft_pwd.c \
+		builtins/ft_export.c \
+		exec/src/ft_cd2.c \
+		exec/src/ft_cd.c \
+		builtins/ft_pwd.c  
 
 OBJECTS = $(SRCS:.c=.o)
 

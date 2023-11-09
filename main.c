@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:40:29 by mgeisler          #+#    #+#             */
-/*   Updated: 2023/11/03 19:47:12 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/09 20:49:57 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void	reader(t_data *data, t_mall *mall)
 			break ;
 		if (data->input[0] == 0)
 		{
-			free(data->input);
+			//free(data->input);
 			continue ;
 		}
 		add_history(data->input);
 		parser(data, mall);
-		// run_exec(data);
-		free(data->input);
+		run_exec(data, mall);
+		//free(data->input);
 	}
 }
 

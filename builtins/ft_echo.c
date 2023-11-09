@@ -53,7 +53,7 @@ void	ft_echo_2(char **cmd)
 int	ft_echo(char **cmd)
 {
 	int	i;
-
+	printf("ft_echo_for_debug\n");
 	if (!cmd[1])
 	{
 		printf("\n");

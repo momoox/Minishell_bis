@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_quote.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 18:19:24 by momox             #+#    #+#             */
-/*   Updated: 2023/11/03 19:43:25 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/09 20:49:57 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*quote_remove(t_mall *mall, char *str)
 	i = -1;
 	quote_index(str, index_tab);
 	new = erase_quote(mall, str, index_tab);
-	free(index_tab);
+	//free(index_tab);
 	return (new);
 }
 

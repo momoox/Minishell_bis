@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_replace.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 16:49:25 by momox             #+#    #+#             */
-/*   Updated: 2023/11/04 20:54:14 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/09 20:49:57 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*identify_replace(t_mall *mall, t_data *data, char *var_env)
 		else
 			replace = NULL;
 	}
-	free(full_var);
+	//free(full_var);
 	return (replace);
 }
 

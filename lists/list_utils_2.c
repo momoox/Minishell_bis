@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:48:56 by momox             #+#    #+#             */
-/*   Updated: 2023/10/21 22:27:55 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/09 20:49:57 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_lstdel_here(t_list **first, t_list *delete)
 		delete->next->prev = delete->prev;
 	if (delete->prev)
 		delete->prev->next = delete->next;
-	free(delete);
+	//free(delete);
 }
 
 int	size_list_string(t_list *list)

@@ -3,15 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 02:47:43 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/04 21:37:20 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/09 20:33:31 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "minishell.h"
-#include "util_exec.h"
 
 // /*
 // on recois noeud par noeud :
@@ -20,8 +17,9 @@
 // 	- data->env
 // les data que jai bessoin dans la struct
 // */
-// #include "util_exec.h"
-// #include "minishell.h"
+
+#include "util_exec.h"
+#include "minishell.h"
 
 static int	ft_pipe2(t_exec *ex, int *fd_stdin, int *fd_stdout)
 {
@@ -30,10 +28,6 @@ static int	ft_pipe2(t_exec *ex, int *fd_stdin, int *fd_stdout)
 	int	fd[2];
 	
   
-//    ex->fd_in;
-//    ex->fd_out;
-//    ex->stdin_st;
-//    ex->stdout_st;
    /*
 	Bleu \033[0;34m
 	Noir \033[0;30m
@@ -45,16 +39,13 @@ static int	ft_pipe2(t_exec *ex, int *fd_stdin, int *fd_stdout)
 	cmd1 = 1;
 	i = 0;
     printf("ft_pipe2 :\n"); 
-    // printf("data->fd_in[%d] | fd_stdin == [%d] == [%s] | fd_stdout == [%d] | cmd == [%d]\n", ex->fd_in, *fd_stdin,(ex->stdin_st != NULL) ? ex->stdin_st->content : NULL, *fd_stdout ,cmd1);
 	if (ex->stdin_st && ex->stdin_st->token != PIPE){
         
-        printf("stdin_st \033[0;33m[%s]\033[0m token == \033[0;34m[%d]\033[0m\n",(ex->stdin_st !=NULL) ? ex->stdin_st->content : NULL, (ex->stdin_st !=NULL) ? ex->stdin_st->token : -1);
 		*fd_stdin = file_o(ex->stdin_st->content, ex->stdin_st->token); //data->exec->cmd[0], 0);
     }
 	if (*fd_stdin == -1)
 		cmd1 = 0;
 	if(ex->stdout_st && ex->stdout_st->token != PIPE){
-        printf("stdout_st \033[0;33m[%s]\033[0m token == \033[0;34m[%d]\033[0m\n",(ex->stdout_st !=NULL) ? ex->stdout_st->content : NULL,(ex->stdout_st !=NULL) ? ex->stdout_st->token : -1);
 		*fd_stdout = file_o(ex->stdout_st->content, ex->stdout_st->token);//  data->exec->cmd[0], 1);
     }
     printf("After_check\n");
@@ -69,26 +60,26 @@ static int	ft_pipe2(t_exec *ex, int *fd_stdin, int *fd_stdout)
 }
 
 
-// int ft_lstsize(t_list *list)
-// {
-//     int i;
+int ft_lstsize(t_list *list)
+{
+    int i;
 
-//     i = 0;
-//     while (list)
-//     {
-//         i++;
-//         list = list->next;
-//     }
-//     return (i);
-// }
+    i = 0;
+    while (list)
+    {
+        i++;
+        list = list->next;
+    }
+    return (i);
+}
  
-void ft_pipe(t_data *data)
+void ft_pipe(t_data *data, t_mall *mall)
 {
     int j;
     int fd_pipe[2];
     pid_t pid;
 
-    // printf("exec : %d\n", data->nb_exec);
+    
     j = 0;
     while (j < data->nb_exec)
     {
@@ -104,49 +95,73 @@ void ft_pipe(t_data *data)
             data->exec[j].fd_out = STDOUT_FILENO;
         if (j == 0)
             data->exec[j].fd_in = STDIN_FILENO;
-        // printf("in = %d | out = %d\n", data->exec[j].fd_in, data->exec[j].fd_out);
-
         ft_pipe2(&data->exec[j],&data->exec[j + 1].fd_in, &data->exec[j].fd_out);
         pid = fork();
         if (pid == -1)
             exit(EXIT_FAILURE);
          
-//         if (pid == 0) 
-//         {
-//             // printf("in = %d | out = %d\n", data->exec[j].fd_in, data->exec[j].fd_out);
-//             data->exec[j].cmd[0] = ft_path_dir(data->exec[j].cmd[0], ft_my_var(data, "PATH"), -1);
-//             //print/////////////////////////////////////////////
-//             for (int l = 0; data->exec[j].cmd[l]; l++)
-//                 // printf("cmd[%d] = %s\n", l, data->exec[j].cmd[l]);
-//                 /////////////////////////////////////////////////
-//             dup2(data->exec[j].fd_out, STDOUT_FILENO);
-//             dup2(data->exec[j].fd_in, STDIN_FILENO);
-//             if (data->exec[j].fd_out != STDOUT_FILENO)
-//                 close(data->exec[j].fd_out);
-//             if (data->exec[j].fd_in != STDIN_FILENO)
-//                 close(data->exec[j].fd_in); 
+        if (pid == 0) 
+        {
+            exec_build(data, mall, data->exec[j].cmd);
+            data->exec[j].cmd[0] = ft_path_dir(mall, data->exec[j].cmd[0], ft_my_var(data, "PATH"), -1);
+            dup2(data->exec[j].fd_out, STDOUT_FILENO);
+            dup2(data->exec[j].fd_in, STDIN_FILENO);
+            if (data->exec[j].fd_out != STDOUT_FILENO)
+                close(data->exec[j].fd_out);
+            if (data->exec[j].fd_in != STDIN_FILENO)
+                close(data->exec[j].fd_in); 
             
-//             execve(data->exec[j].cmd[0], data->exec[j].cmd, data->env);
-//             perror("execve a échoué ft_pipex i == 0\n");
-//             exit(EXIT_FAILURE);
-//         }
-//         else
-//         {
-//             if (data->exec[j].fd_in != STDIN_FILENO)
-//                 close(data->exec[j].fd_in);
-//             if (data->exec[j].fd_out != STDOUT_FILENO)
-//                 close(data->exec[j].fd_out);
-//             wait(NULL);
-//         }
-//         j++;
-//     }
-//     print_debug(data);
-// }
 
+            execve(data->exec[j].cmd[0], data->exec[j].cmd, data->env);
+            perror("execve a échoué ft_pipex i == 0\n");
+            exit(EXIT_FAILURE);
+        }
+        else
+        {
+            if (data->exec[j].fd_in != STDIN_FILENO)
+                close(data->exec[j].fd_in);
+            if (data->exec[j].fd_out != STDOUT_FILENO)
+                close(data->exec[j].fd_out);
+            wait(NULL);
+        }
+        j++;
+    }
+    print_debug(data);
+}
 
-// void	run_exec(t_data *data)
-// {
+int	exec_build(t_data *data, t_mall *mall, char **cmd)
+{
+	int	ret;
+	printf("exec_build_for_debug\n");
+   	printf("exec_b : cmd [0] == %s\n",*cmd);
 
-// 	//ft_pipe(data);
-	}
+	ret = CMD_NOT_FOUND;
+	if (ft_strncmp(cmd[0], "cd", 3) == 0)
+		ret = ft_cd2(data, mall, cmd);
+	else if (ft_strncmp(cmd[0], "echo", 5) == 0){
+       	printf("exec_build_echo\n");
+		ret = ft_echo(cmd);
+    }
+	else if (ft_strncmp(cmd[0], "env", 4) == 0)
+		ret = ft_env(data->env);
+	else if (ft_strncmp(cmd[0], "export", 7) == 0)
+		ret = ft_export(data,mall, cmd);
+	else if (ft_strncmp(cmd[0], "pwd", 4) == 0)
+		ret = ft_pwd();
+	else if (ft_strncmp(cmd[0], "unset", 6) == 0)
+		ret = ft_unset(data, mall, cmd);
+	// else if (ft_strncmp(cmd->cmd, "exit", 5) == 0)
+		// ret = ft_exit(data, cmd->cmd);
+	return (ret);
+}
+
+void	run_exec(t_data *data, t_mall *mall)
+{
+    // print_bulding(data,"PATH");
+    // print_env_sort(data->env, mall);
+    // ft_export()
+    init_data_shell(data, mall);
+    // init_env(data,data->env);
+    // init_wds(data);
+	ft_pipe(data, mall);
 }

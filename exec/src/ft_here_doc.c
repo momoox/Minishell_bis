@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 02:04:10 by oliove            #+#    #+#             */
-/*   Updated: 2023/10/22 00:20:17 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/09 20:49:57 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ void	ft_here_doc_put_in(char **av, int *p_fd)
 		if (ft_strncmp(ret, av[2], ft_strlen(av[2])) == 0
 			&& ft_strlen(ret) == ft_strlen(av[2]) + 1)
 		{
-			free(ret);
+			//free(ret);
 			exit(0);
 		}
 		ft_putstr_fd(ret, p_fd[1]);
-		free(ret);
+		//free(ret);
 	}
 }

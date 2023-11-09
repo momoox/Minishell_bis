@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 20:24:08 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/03 22:38:10 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/09 20:49:57 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ t_list	*free_stash(t_list *stash)
 	current = stash;
 	while (current)
 	{
-		free(current->content);
+		//free(current->content);
 		next = current->next;
-		free(current);
+		//free(current);
 		current = next;
 	}
 	stash = NULL;

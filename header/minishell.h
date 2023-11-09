@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:38:23 by mgeisler          #+#    #+#             */
-/*   Updated: 2023/11/08 23:51:38 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/09 19:51:37 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,13 @@ typedef struct s_list
 	struct s_data	*data;
 }					t_list;
 
+typedef struct s_exec_shell
+{
+	char	*pwd;
+	char	*cwd;
+	char	*hold_pwd;
+}				t_exec_shell;
+
 typedef struct s_exec
 {
 	t_list			*stdin_st;
@@ -65,6 +72,7 @@ typedef struct s_exec
 	int				fd_pipe[2];
 	t_list			*stdout_st;
 	char			**cmd;
+	t_exec_shell	*shell;
 }					t_exec;
 
 typedef struct s_data
@@ -78,6 +86,7 @@ typedef struct s_data
 	int				exit_code;
 	t_exec			*exec;
 	t_list			*list;
+	t_exec_shell	*shell;
 }					t_data;
 
 /* LIBFT */
@@ -175,6 +184,6 @@ int		ft_echo(char **cmd);
 int		ft_pwd(void);
 
 // olive
-void	run_exec(t_data *data);
+void	run_exec(t_data *data, t_mall *mall);
 
 #endif

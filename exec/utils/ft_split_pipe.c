@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_pipe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 23:55:12 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/03 22:41:10 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/09 20:53:05 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ static int	ft_word_count(char const *s, char car)
 	return (j);
 }
 
-static char	*ft_free_sub(char *str)
-{
-	free(str);
-	return (NULL);
-}
+// static char	*ft_free_sub(char *str)
+// {
+// 	//free(str);
+// 	return (NULL);
+// }
 
-static char	*ft_substr_mod(char const *s, unsigned int start, size_t len)
+static char	*ft_substr_mod(t_mall *mall, char const *s, unsigned int start, size_t len)
 {
 	int		i;
 	int		j;
@@ -51,9 +51,9 @@ static char	*ft_substr_mod(char const *s, unsigned int start, size_t len)
 		len = ft_strlen_pipe(s) - start;
 	if (start > (unsigned int)ft_strlen_pipe(s))
 		len = 0;
-	dest = malloc(sizeof(char) * (len + 1));
+	dest = malloc_plus_plus(&mall, sizeof(char) * (len + 1));
 	if (!dest)
-		return (ft_free_sub(dest));
+		return (0);// (ft_free_sub(dest));
 	while (s[i])
 	{
 		if (i >= (int)start && j < (int)len)
@@ -64,19 +64,7 @@ static char	*ft_substr_mod(char const *s, unsigned int start, size_t len)
 	return (dest);
 }
 
-static void	*ft_free(char **tab, int w)
-{
-	int	i;
 
-	i = 0;
-	while (i != w)
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-	return (NULL);
-}
 
 char	**ft_split_pipe(t_mall *mall, char const *s, char c)
 {
@@ -103,8 +91,8 @@ char	**ft_split_pipe(t_mall *mall, char const *s, char c)
 			j++;
 		printf("split_pipe : S = [%s]\n",s);
 		tab[w++] = ft_substr_mod(mall, s, i, j - i);
-		if (!tab[w - 1])
-			return (ft_free(tab, w));
+		// if (!tab[w - 1])
+			// return (ft_//free(tab, w));
 		tab[w] = NULL;
 	}
 	printf("split_pipe : tab = [%s]\n",*tab);

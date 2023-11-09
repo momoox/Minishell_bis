@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 23:47:57 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/03 19:51:26 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/09 19:40:05 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ char	*ft_strjoin_pipe2(t_mall *mall, char const *s1, char const *s2)
 	res[len1] = '\0';
 	return (res);
 }
-
 void	ft_putstr_fd_jump(char *str, int fd)
 {
 	int	i;
@@ -110,4 +109,35 @@ void	ft_putstr_fd_jump(char *str, int fd)
 		i++;
 	}
 	ft_putchar_fd('\n', fd);
+}
+
+
+int	ft_isalnum(int c)
+{
+	if (ft_isalpha(c) || ft_isdigit(c))
+		return (c);
+	return (0);
+}
+
+int	ft_isalpha(int c)
+{
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+		return (c);
+	return (0);
+}
+
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (c);
+	return (0);
+}
+
+int	ft_isspace(int c)
+{
+	if (c == ' ' || c == '\t' || c == '\n' || c == '\r'
+		|| c == '\v' || c == '\f')
+		return (c);
+	return (0);
 }

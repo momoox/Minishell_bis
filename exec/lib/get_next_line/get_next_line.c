@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 20:24:08 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/03 18:48:36 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/09 20:49:57 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*get_next_line(int fd)
 		return (line);
 	free_stash(stash);
 	stash = NULL;
-	free(line);
+	//free(line);
 	return (NULL);
 }
 
@@ -55,12 +55,12 @@ void	read_and_stash(int fd, t_list **stash, int *readed_ptr)
 			{
 				free_stash(*stash);
 			}
-			free(buff);
+			//free(buff);
 			return ;
 		}
 		buff[*readed_ptr] = '\0';
 		add_to_stash(stash, buff, *readed_ptr);
-		free(buff);
+		//free(buff);
 	}
 }
 
@@ -132,7 +132,7 @@ void	update_stash(t_list **stash)
 	new_node = malloc_plus_plus(sizeof(t_list));
 	if (new_node == NULL)
 	{
-		free(clean_str);
+		//free(clean_str);
 		return ;
 	}
 	new_node->content = clean_str;
