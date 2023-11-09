@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 23:18:53 by momox             #+#    #+#             */
-/*   Updated: 2023/11/08 23:46:35 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/09 21:44:34 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	redir_in_manage(t_mall *mall, t_data *data, t_list *list)
 		return ;
 	}
 	close(fd);
+	list->next->token = REDIR_IN;
 }
 
 void	redir_out_manage(t_mall *mall, t_data *data, t_list *list)
@@ -49,6 +50,8 @@ void	redir_out_manage(t_mall *mall, t_data *data, t_list *list)
 	int		fd;
 	char	*error_msg;
 
+	printf("maillon = %s\n", list->next->content);
+	printf("maillon token = %d\n", list->next->token);
 	if (!list->next || list->next->token != FILES)
 		redir_error(data, list);
 	fd = open(list->next->content, O_WRONLY, O_CREAT, O_TRUNC, 0644);
@@ -60,6 +63,7 @@ void	redir_out_manage(t_mall *mall, t_data *data, t_list *list)
 		return ;
 	}
 	close(fd);
+	list->next->token = REDIR_OUT;
 }
 
 void	redir_append_manage(t_mall *mall, t_data *data, t_list *list)
@@ -78,4 +82,5 @@ void	redir_append_manage(t_mall *mall, t_data *data, t_list *list)
 		return ;
 	}
 	close(fd);
+	list->next->token = REDIR_APPEND;
 }

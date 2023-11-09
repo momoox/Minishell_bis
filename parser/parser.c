@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:21:33 by momox             #+#    #+#             */
-/*   Updated: 2023/11/09 21:34:11 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/09 21:48:26 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	parser(t_data *data, t_mall *mall)
 	print_list(data->list);
 	cmd_tab(mall, data);
 	tab_exec(mall, data);
-	file_inout(data->list);
+	//file_inout(data->list);
 	if (data->flag_delete != 0)
 		return (0);
 	return (1);
