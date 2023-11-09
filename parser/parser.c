@@ -36,7 +36,6 @@ int	parser(t_data *data, t_mall *mall)
 	print_list(data->list);
 	cmd_tab(mall, data);
 	tab_exec(mall, data);
-	//file_inout(data->list);
 	if (data->flag_delete != 0)
 		return (0);
 	return (1);
