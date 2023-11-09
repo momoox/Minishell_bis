@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_quote.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 18:19:24 by momox             #+#    #+#             */
-/*   Updated: 2023/11/09 20:49:57 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/10 00:35:26 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ char	*quote_remove(t_mall *mall, char *str)
 	i = -1;
 	quote_index(str, index_tab);
 	new = erase_quote(mall, str, index_tab);
-	//free(index_tab);
 	return (new);
 }
 
@@ -61,7 +60,7 @@ void	check_quote_remove(t_mall *mall, t_list *list)
 	temp = list;
 	while (temp)
 	{
-		if (is_between_quote(temp->content, ft_strlen(temp->content)) != 0)
+		if (is_between_quote(temp->content, ft_strlen(temp->content)) != '0')
 			temp->content = quote_remove(mall, temp->content);
 		temp = temp->next;
 	}
