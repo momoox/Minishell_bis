@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 23:18:53 by momox             #+#    #+#             */
-/*   Updated: 2023/11/09 22:37:10 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/09 22:42:13 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	redir_error(t_data *data, t_list *list)
 	}
 }
 
-void	redir_in_manage(t_mall *mall, t_data *data, t_list *list)
+void	redir_in_manage(t_mall *mall, t_data *data, t_list *list, int i)
 {
 	int		fd;
 	char	*error_msg;
@@ -43,9 +43,10 @@ void	redir_in_manage(t_mall *mall, t_data *data, t_list *list)
 	}
 	close(fd);
 	list->next->token = REDIR_IN;
+	data->exec[i].stdin_st = list->next;
 }
 
-void	redir_out_manage(t_mall *mall, t_data *data, t_list *list)
+void	redir_out_manage(t_mall *mall, t_data *data, t_list *list, int i)
 {
 	int		fd;
 	char	*error_msg;
@@ -62,9 +63,10 @@ void	redir_out_manage(t_mall *mall, t_data *data, t_list *list)
 	}
 	close(fd);
 	list->next->token = REDIR_OUT;
+	data->exec[i].stdout_st = list->next;
 }
 
-void	redir_append_manage(t_mall *mall, t_data *data, t_list *list)
+void	redir_append_manage(t_mall *mall, t_data *data, t_list *list, int i)
 {
 	int		fd;
 	char	*error_msg;
@@ -81,4 +83,5 @@ void	redir_append_manage(t_mall *mall, t_data *data, t_list *list)
 	}
 	close(fd);
 	list->next->token = REDIR_APPEND;
+	data->exec[i].stdout_st = list->next;
 }

@@ -6,13 +6,11 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:38:20 by momox             #+#    #+#             */
-/*   Updated: 2023/11/09 22:34:29 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/09 22:43:39 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
 
 void	create_tab(t_mall *mall, t_data *data, t_list *temp, int i)
 {
@@ -21,22 +19,13 @@ void	create_tab(t_mall *mall, t_data *data, t_list *temp, int i)
 		while (temp && temp->token != PIPE)
 		{
 			if (temp->token == REDIR_IN && temp->next->token == FILES)
-			{
-				redir_in_manage(mall, data, temp);
-				data->exec[i].stdin_st = temp->next;
-			}
+				redir_in_manage(mall, data, temp, i);
 			else if (temp->token == COMMAND && data->exec[i].cmd == NULL)
 				data->exec[i].cmd = temp->cmd;
 			else if (temp->token == REDIR_OUT && temp->next->token == FILES)
-			{
-				redir_out_manage(mall, data, temp);
-				data->exec[i].stdout_st = temp->next;
-			}
+				redir_out_manage(mall, data, temp, i);
 			else if (temp->token == REDIR_APPEND && temp->next->token == FILES)
-			{
-				redir_append_manage(mall, data, temp);
-				data->exec[i].stdout_st = temp->next;
-			}
+				redir_append_manage(mall, data, temp, i);
 			else if (temp->token == PIPE && data->exec[i].stdin_st == NULL)
 				data->exec[i].stdin_st = temp;
 			else if (temp->token == PIPE && data->exec[i].stdout_st == NULL)

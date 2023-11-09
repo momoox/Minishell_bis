@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:38:23 by mgeisler          #+#    #+#             */
-/*   Updated: 2023/11/09 21:52:44 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/09 22:42:33 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,9 +138,9 @@ void	tab_exec(t_mall *mall, t_data *data);
 void	file_manage(t_data *data, t_list *temp, int i);
 void	cmd_tab(t_mall *mall, t_data *data);
 void	check_exit_var(t_mall *mall, t_data *data);
-void	redir_in_manage(t_mall *mall, t_data *data, t_list *list);
-void	redir_out_manage(t_mall *mall, t_data *data, t_list *list);
-void	redir_append_manage(t_mall *mall, t_data *data, t_list *list);
+void	redir_in_manage(t_mall *mall, t_data *data, t_list *list, int i);
+void	redir_out_manage(t_mall *mall, t_data *data, t_list *list, int i);
+void	redir_append_manage(t_mall *mall, t_data *data, t_list *list, int i);
 void	redir_error(t_data *data, t_list *list);
 
 /* split */
