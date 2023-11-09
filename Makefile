@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+         #
+#    By: momox <momox@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/28 20:23:57 by momox             #+#    #+#              #
-#    Updated: 2023/11/09 19:59:57 by oliove           ###   ########.fr        #
+#    Updated: 2023/11/09 22:20:06 by momox            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 
 NAME		:= minishell
 CC			:=	gcc
-CFLAGS		:=	-Wall -Wextra -Werror
+CFLAGS		:=	-Wall -Wextra -Werror -g3
 HEADER		:= -I ./header
 LIB			:= -lreadline -L /opt/homebrew/Cellar/readline/8.2.1/lib
 INCLUDE 	:= -I /opt/homebrew/Cellar/readline/8.2.1/include/ 
@@ -63,7 +63,6 @@ SRCS = main.c init_struct.c print_tab.c print_token.c\
 		parser/ft_split_whitespaces.c \
 		parser/ft_split_operators.c \
 		parser/tab_exec.c \
-		parser/file_inout.c \
 		parser/tokenize.c \
 		parser/cmd_tab.c \
 		parser/check_exit_var.c \
