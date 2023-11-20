@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 02:47:43 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/09 23:44:51 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/20 16:06:58 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include "util_exec.h"
 #include "minishell.h"
 
-static int	ft_pipe2(t_exec *ex, int *fd_stdin, int *fd_stdout)
+int	ft_pipe2(t_exec *ex, int *fd_stdin, int *fd_stdout)
 {
 	int	cmd1;
 	int	i;
@@ -73,61 +73,61 @@ int ft_lstsize(t_list *list)
     return (i);
 }
  
-void ft_pipe(t_data *data, t_mall *mall)
-{
-    int j;
-    int fd_pipe[2];
-    pid_t pid;
+// void ft_pipe(t_data *data, t_mall *mall)
+// {
+//     int j;
+//     int fd_pipe[2];
+//     pid_t pid;
 
     
-    j = 0;
-    while (j < data->nb_exec)
-    {
+//     j = 0;
+//     while (j < data->nb_exec)
+//     {
         
-        if (j < data->nb_exec - 1)
-        {
-            if (pipe(fd_pipe) == -1)
-                exit(0);
-            data->exec[j + 1].fd_in = fd_pipe[0];
-            data->exec[j].fd_out = fd_pipe[1];
-        }
-        else
-            data->exec[j].fd_out = STDOUT_FILENO;
-        if (j == 0)
-            data->exec[j].fd_in = STDIN_FILENO;
-        ft_pipe2(&data->exec[j],&data->exec[j + 1].fd_in, &data->exec[j].fd_out);
-        pid = fork();
-        if (pid == -1)
-            exit(EXIT_FAILURE);
+//         if (j < data->nb_exec - 1)
+//         {
+//             if (pipe(fd_pipe) == -1)
+//                 exit(0);
+//             data->exec[j + 1].fd_in = fd_pipe[0];
+//             data->exec[j].fd_out = fd_pipe[1];
+//         }
+//         else
+//             data->exec[j].fd_out = STDOUT_FILENO;
+//         if (j == 0)
+//             data->exec[j].fd_in = STDIN_FILENO;
+//         ft_pipe2(&data->exec[j],&data->exec[j + 1].fd_in, &data->exec[j].fd_out);
+//         exec_build(data, mall, data->exec[j].cmd);
+//         pid = fork();
+//         if (pid == -1)
+//             exit(EXIT_FAILURE);
          
-        if (pid == 0) 
-        {
-            exec_build(data, mall, data->exec[j].cmd);
-            data->exec[j].cmd[0] = ft_path_dir(mall, data->exec[j].cmd[0], ft_my_var(data, "PATH"), -1);
-            dup2(data->exec[j].fd_out, STDOUT_FILENO);
-            dup2(data->exec[j].fd_in, STDIN_FILENO);
-            if (data->exec[j].fd_out != STDOUT_FILENO)
-                close(data->exec[j].fd_out);
-            if (data->exec[j].fd_in != STDIN_FILENO)
-                close(data->exec[j].fd_in); 
+//         if (pid == 0) 
+//         {
+//             data->exec[j].cmd[0] = ft_path_dir(mall, data->exec[j].cmd[0], ft_my_var(data, "PATH"), -1);
+//             dup2(data->exec[j].fd_out, STDOUT_FILENO);
+//             dup2(data->exec[j].fd_in, STDIN_FILENO);
+//             if (data->exec[j].fd_out != STDOUT_FILENO)
+//                 close(data->exec[j].fd_out);
+//             if (data->exec[j].fd_in != STDIN_FILENO)
+//                 close(data->exec[j].fd_in); 
             
 
-            execve(data->exec[j].cmd[0], data->exec[j].cmd, data->env);
-            perror("execve a échoué ft_pipex i == 0\n");
-            exit(EXIT_FAILURE);
-        }
-        else
-        {
-            if (data->exec[j].fd_in != STDIN_FILENO)
-                close(data->exec[j].fd_in);
-            if (data->exec[j].fd_out != STDOUT_FILENO)
-                close(data->exec[j].fd_out);
-            wait(NULL);
-        }
-        j++;
-    }
-    print_debug(data);
-}
+//             execve(data->exec[j].cmd[0], data->exec[j].cmd, data->env);
+//             perror("execve a échoué ft_pipex i == 0\n");
+//             exit(EXIT_FAILURE);
+//         }
+//         else
+//         {
+//             if (data->exec[j].fd_in != STDIN_FILENO)
+//                 close(data->exec[j].fd_in);
+//             if (data->exec[j].fd_out != STDOUT_FILENO)
+//                 close(data->exec[j].fd_out);
+//             wait(NULL);
+//         }
+//         j++;
+//     }
+//     print_debug(data);
+// }
 
 int	exec_build(t_data *data, t_mall *mall, char **cmd)
 {
@@ -150,8 +150,8 @@ int	exec_build(t_data *data, t_mall *mall, char **cmd)
 		ret = ft_pwd();
 	else if (ft_strncmp(cmd[0], "unset", 6) == 0)
 		ret = ft_unset(data, mall, cmd);
-	// else if (ft_strncmp(cmd->cmd, "exit", 5) == 0)
-		// ret = ft_exit(data, cmd->cmd);
+	else if (ft_strncmp(cmd[0], "exit", 5) == 0)
+		ret = ft_exit(data, mall, cmd);
 	return (ret);
 }
 

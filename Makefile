@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: momox <momox@student.42.fr>                +#+  +:+       +#+         #
+#    By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/28 20:23:57 by momox             #+#    #+#              #
-#    Updated: 2023/11/09 22:20:06 by momox            ###   ########.fr        #
+#    Updated: 2023/11/20 15:48:28 by oliove           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 
 NAME		:= minishell
 CC			:=	gcc
-CFLAGS		:=	-Wall -Wextra -Werror -g3
+CFLAGS		:=	-Wall -Wextra  -g3
 HEADER		:= -I ./header
 LIB			:= -lreadline -L /opt/homebrew/Cellar/readline/8.2.1/lib
 INCLUDE 	:= -I /opt/homebrew/Cellar/readline/8.2.1/include/ 
@@ -83,7 +83,9 @@ SRCS = main.c init_struct.c print_tab.c print_token.c\
 		builtins/ft_export.c \
 		exec/src/ft_cd2.c \
 		exec/src/ft_cd.c \
-		builtins/ft_pwd.c  
+		builtins/ft_pwd.c \
+		exec/src/nouvell_exec.c \
+		builtins/ft_exit.c
 
 OBJECTS = $(SRCS:.c=.o)
 

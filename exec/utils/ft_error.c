@@ -6,18 +6,18 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 00:11:03 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/09 20:07:18 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/20 16:07:12 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "util_exec.h"
 
-void	ft_exit(int n_exit)
-{
-	if (n_exit == 1)
-		ft_putstr_fd("./pipex infile cmd cmd outfile\n", 2);
-	exit(0);
-}
+// void	ft_exit(int n_exit)
+// {
+// 	if (n_exit == 1)
+// 		ft_putstr_fd("./pipex infile cmd cmd outfile\n", 2);
+// 	exit(0);
+// }
 
 void	p_error_perm(char *av)
 {

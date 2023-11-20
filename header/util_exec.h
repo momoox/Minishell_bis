@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 23:16:06 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/09 23:45:44 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/20 16:06:26 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <sys/wait.h>
 # include <unistd.h>
 # include "minishell.h"
+# include "limits.h"
+
 
 
 
@@ -49,7 +51,7 @@ void	ft_pipe(t_data *data, t_mall *mall);//, char *cmd, char **env);
 // void	ft_here_doc(char **av);
 void	ft_here_doc_put_in(char **av, int *p_fd);
 
-void	ft_exit(int n_exit);
+// void	ft_exit(int n_exit);
 void	p_error_perm(char *av);
 void	p_error_exist(char *av);
 void	ft_check_error_parser(int ac, char **av);
@@ -110,5 +112,12 @@ int	    chdir_errno_mod(char *path, t_mall *mall);
 int	    change_dir(t_data *data, t_mall *mall, char *path);
 char	*get_env_var_value(t_mall *mall, char **env, char *var);
 
+// Nouvel exec
+void cleanup_pipes(t_data *data, int *j);
+void pipe_execution(t_data *data, t_mall *mall, int *j);
+void initialize_pipes(t_data *data,t_mall *mall, int fd_pipe[2], int *j, pid_t *pid);
+int	ft_pipe2(t_exec *ex, int *fd_stdin, int *fd_stdout);
+void	exit_shell(t_data *data, t_mall *mall, int ret);
+int	ft_exit(t_data *data,t_mall *mall, char **args);
 
 #endif
