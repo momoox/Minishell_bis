@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 23:28:11 by momox             #+#    #+#             */
-/*   Updated: 2023/11/04 21:04:26 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/22 19:30:25 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,19 @@ int	len_tmp(char *str)
 	return (0);
 }
 
-void	exit_var_next(t_mall *mall, char *start_len, t_list *temp, char *nb)
+void	exit_var_next(t_data *data, char *start_len, t_list *temp, char *nb)
 {
 	int	len;
 
 	len = len_tmp(temp->content);
-	start_len = ft_substr(mall, temp->content, 0, len);
-	temp->content = ft_substr(mall, temp->content, (len + 2),
+	start_len = ft_substr(data->mall, temp->content, 0, len);
+	temp->content = ft_substr(data->mall, temp->content, (len + 2),
 			ft_strlen(temp->content) - (len + 2));
-	nb = ft_strjoin(mall, start_len, nb);
-	temp->content = ft_strjoin(mall, nb, temp->content);
+	nb = ft_strjoin(data->mall, start_len, nb);
+	temp->content = ft_strjoin(data->mall, nb, temp->content);
 }
 
-void	check_exit_var(t_mall *mall, t_data *data)
+void	check_exit_var(t_data *data)
 {
 	t_list	*temp;
 	char	*nb;
@@ -66,14 +66,14 @@ void	check_exit_var(t_mall *mall, t_data *data)
 		if (is_exit_code(temp->content) == 1)
 		{
 			len = len_tmp(temp->content);
-			nb = ft_itoa(mall, data->exit_code);
+			nb = ft_itoa(data->mall, data->exit_code);
 			if (len > 0)
-				exit_var_next(mall, start_len, temp, nb);
+				exit_var_next(data, start_len, temp, nb);
 			else
 			{
-				start_len = ft_substr(mall, temp->content, 2,
+				start_len = ft_substr(data->mall, temp->content, 2,
 						ft_strlen(temp->content) - 2);
-				temp->content = ft_strjoin(mall, nb, start_len);
+				temp->content = ft_strjoin(data->mall, nb, start_len);
 			}
 		}
 		temp = temp->next;

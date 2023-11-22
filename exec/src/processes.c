@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 00:14:52 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/09 20:50:41 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/21 17:53:10 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@
 // 		dup2(data->exec->fd_pipe[0], 0);
 // 	}
 // }
-
-
 
 // char *ft_my_path(t_data *data,char *cmd, char **env)
 // {
@@ -70,9 +68,9 @@ int	search_idx(char **env, char *key_str)
 char	*ft_my_var(t_data *data, char *str)
 {
 	int		i;
-	// int		size;
 	char	*var;
 
+	// int		size;
 	// t_data tmp;
 	// char *tmp;
 	i = 0;
@@ -88,10 +86,10 @@ char	*ft_my_var(t_data *data, char *str)
 		i++;
 	}
 	// size = strlen(var);
-	//free(var);
+	// free(var);
 	// if (!data->env[i])
 	// return( NULL);
-	return (data->env[i]);// + size);
+	return (data->env[i]); // + size);
 }
 
 // void	exece(t_data *data, char **cmd, char **env)

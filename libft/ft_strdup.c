@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 21:05:04 by momox             #+#    #+#             */
-/*   Updated: 2023/11/03 19:26:22 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/22 19:13:27 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_strdup(t_mall *mall, char *src)
+char	*ft_strdup(t_data *data, char *src)
 {
 	char	*dst;
 
-	dst = malloc_plus_plus(&mall, sizeof(char) * (ft_strlen(src) + 1));
+	dst = malloc_plus_plus(&data->mall, sizeof(char) * (ft_strlen(src) + 1));
 	if (!dst)
 		return (0);
 	ft_strlcpy(dst, src, ft_strlen(src) + 1);

@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 23:18:53 by momox             #+#    #+#             */
-/*   Updated: 2023/11/09 22:42:13 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/22 20:14:04 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	redir_error(t_data *data, t_list *list)
 	}
 }
 
-void	redir_in_manage(t_mall *mall, t_data *data, t_list *list, int i)
+void	redir_in_manage(t_data *data, t_list *list, int i)
 {
 	int		fd;
 	char	*error_msg;
@@ -37,7 +37,7 @@ void	redir_in_manage(t_mall *mall, t_data *data, t_list *list, int i)
 	if (fd == -1)
 	{
 		data->exit_code = 1;
-		error_msg = ft_strjoin(mall, "Minishell: ", list->next->content);
+		error_msg = ft_strjoin(data->mall, "Minishell: ", list->next->content);
 		perror(error_msg);
 		return ;
 	}
@@ -46,18 +46,19 @@ void	redir_in_manage(t_mall *mall, t_data *data, t_list *list, int i)
 	data->exec[i].stdin_st = list->next;
 }
 
-void	redir_out_manage(t_mall *mall, t_data *data, t_list *list, int i)
+void	redir_out_manage(t_data *data, t_list *list, int i)
 {
 	int		fd;
 	char	*error_msg;
 
+	printf("test dans redir out manage\n");
 	if (!list->next || list->next->token != FILES)
 		redir_error(data, list);
 	fd = open(list->next->content, O_WRONLY, O_CREAT, O_TRUNC, 0644);
 	if (fd == -1)
 	{
 		data->exit_code = 1;
-		error_msg = ft_strjoin(mall, "Minishell: ", list->next->content);
+		error_msg = ft_strjoin(data->mall, "Minishell: ", list->next->content);
 		perror(error_msg);
 		return ;
 	}
@@ -66,7 +67,7 @@ void	redir_out_manage(t_mall *mall, t_data *data, t_list *list, int i)
 	data->exec[i].stdout_st = list->next;
 }
 
-void	redir_append_manage(t_mall *mall, t_data *data, t_list *list, int i)
+void	redir_append_manage(t_data *data, t_list *list, int i)
 {
 	int		fd;
 	char	*error_msg;
@@ -77,7 +78,7 @@ void	redir_append_manage(t_mall *mall, t_data *data, t_list *list, int i)
 	if (fd == -1)
 	{
 		data->exit_code = 1;
-		error_msg = ft_strjoin(mall, "Minishell: ", list->next->content);
+		error_msg = ft_strjoin(data->mall, "Minishell: ", list->next->content);
 		perror(error_msg);
 		return ;
 	}

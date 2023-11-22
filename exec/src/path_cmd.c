@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:54:40 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/09 23:40:14 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/22 19:34:22 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	init_wds(t_data *data, t_mall *mall)
 	}
 	if (get_env_var_index(mall, data->env, "OLDPWD") != -1)
 	{
-		data->shell->hold_pwd = ft_strdup(mall, get_env_var_value(mall, data->env,
+		data->shell->hold_pwd = ft_strdup(data, get_env_var_value(mall, data->env,
 					"OLDPWD"));
 		if (!data->shell->hold_pwd){
 			
@@ -111,7 +111,7 @@ int	init_wds(t_data *data, t_mall *mall)
 	}
 	else
 	{
-		data->shell->hold_pwd = ft_strdup(mall,wd);
+		data->shell->hold_pwd = ft_strdup(data,wd);
 		if (!data->shell->hold_pwd)
 		{
 			//free(wd);	

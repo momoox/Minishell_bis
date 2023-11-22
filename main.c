@@ -6,13 +6,13 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:40:29 by mgeisler          #+#    #+#             */
-/*   Updated: 2023/11/09 22:36:06 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/21 21:23:40 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	reader(t_data *data, t_mall *mall)
+void	reader(t_data *data)
 {
 	while (1)
 	{
@@ -29,8 +29,8 @@ void	reader(t_data *data, t_mall *mall)
 			continue ;
 		}
 		add_history(data->input);
-		parser(data, mall);
-		run_exec(data, mall);
+		parser(data);
+		run_exec(data);
 		free(data->input);
 	}
 }
@@ -38,12 +38,12 @@ void	reader(t_data *data, t_mall *mall)
 int	main(int argc, char **argv, char **env)
 {
 	t_data	data;
-	t_mall	*mall;
+	// t_mall	*mall;
 
 	(void)argc;
 	(void)argv;
 	init_data(&data);
-	mall = NULL;
-	tab_env(mall, &data, env);
-	reader(&data, mall);
+	// mall = NULL;
+	tab_env(&data, env);
+	reader(&data);
 }

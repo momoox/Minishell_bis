@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util_exec.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 23:16:06 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/20 16:06:26 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/22 19:35:07 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	*ft_path_dir(t_mall *mall, char *cmd, char *path, int i);
 // void	exece(t_data *data,char **cmd, char **env);
 void	exece(t_data *data, char **cmd, char **env);
 int		file_o(char *file, int token);
-void	ft_pipe(t_data *data, t_mall *mall);//, char *cmd, char **env);
+void	ft_pipe(t_data *data);//, char *cmd, char **env);
 // void	ft_here_doc(char **av);
 void	ft_here_doc_put_in(char **av, int *p_fd);
 
@@ -55,7 +55,7 @@ void	ft_here_doc_put_in(char **av, int *p_fd);
 void	p_error_perm(char *av);
 void	p_error_exist(char *av);
 void	ft_check_error_parser(int ac, char **av);
-void	run_exec(t_data *data, t_mall *mall);
+void	run_exec(t_data *data);
 char	*ft_my_var(t_data *data, char *str);
 char	*ft_my_path(t_data *data, char *cmd, char **env);
 char	*ft_strjoin_pipe(t_mall *mall, char const *s1, char const *s2);
@@ -65,7 +65,7 @@ char	*ft_strjoin_pipe2(t_mall *mall, char const *s1, char const *s2);
 int	search_idx(char **env, char *key_str);
 // void	tab_env(t_mall *mall, t_data *data, char **env);
 void    print_env_sort(char **env, t_mall *mall);
-void	init_data_shell(t_data *data, t_mall *mall);
+void	init_data_shell(t_data *data);
 
 char	*ft_strjoin_norml(char const *s1, char const *s2);
 void	*ft_calloc_env(t_mall *mall,size_t count, size_t size);
@@ -114,8 +114,8 @@ char	*get_env_var_value(t_mall *mall, char **env, char *var);
 
 // Nouvel exec
 void cleanup_pipes(t_data *data, int *j);
-void pipe_execution(t_data *data, t_mall *mall, int *j);
-void initialize_pipes(t_data *data,t_mall *mall, int fd_pipe[2], int *j, pid_t *pid);
+void pipe_execution(t_data *data, int *j);
+void initialize_pipes(t_data *data, int fd_pipe[2], int *j, pid_t *pid);
 int	ft_pipe2(t_exec *ex, int *fd_stdin, int *fd_stdout);
 void	exit_shell(t_data *data, t_mall *mall, int ret);
 int	ft_exit(t_data *data,t_mall *mall, char **args);

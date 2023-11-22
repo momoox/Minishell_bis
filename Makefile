@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+         #
+#    By: momox <momox@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/28 20:23:57 by momox             #+#    #+#              #
-#    Updated: 2023/11/20 15:48:28 by oliove           ###   ########.fr        #
+#    Updated: 2023/11/22 20:08:47 by momox            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 
 NAME		:= minishell
 CC			:=	gcc
-CFLAGS		:=	-Wall -Wextra  -g3
+CFLAGS		:=	-Wall -Wextra
 HEADER		:= -I ./header
 LIB			:= -lreadline -L /opt/homebrew/Cellar/readline/8.2.1/lib
 INCLUDE 	:= -I /opt/homebrew/Cellar/readline/8.2.1/include/ 

@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 18:19:24 by momox             #+#    #+#             */
-/*   Updated: 2023/11/10 00:35:26 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/22 19:24:20 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*quote_remove(t_mall *mall, char *str)
 	return (new);
 }
 
-void	check_quote_remove(t_mall *mall, t_list *list)
+void	check_quote_remove(t_data *data, t_list *list)
 {
 	t_list	*temp;
 
@@ -61,7 +61,7 @@ void	check_quote_remove(t_mall *mall, t_list *list)
 	while (temp)
 	{
 		if (is_between_quote(temp->content, ft_strlen(temp->content)) != '0')
-			temp->content = quote_remove(mall, temp->content);
+			temp->content = quote_remove(data->mall, temp->content);
 		temp = temp->next;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 00:53:27 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/09 20:49:57 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/22 19:34:30 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	**realloc_env(t_data *data, t_mall *mall, size_t size)
 	i = 0;
 	while (data->env[i] && i < size)
 	{
-		new_env[i] = ft_strdup(mall, data->env[i]);
+		new_env[i] = ft_strdup(data, data->env[i]);
 		//free_tmp(data->env[i]);
 		i++;
 	}

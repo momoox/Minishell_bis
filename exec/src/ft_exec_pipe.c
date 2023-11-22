@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 02:47:43 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/20 16:06:58 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/22 19:31:40 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,14 +155,14 @@ int	exec_build(t_data *data, t_mall *mall, char **cmd)
 	return (ret);
 }
 
-void	run_exec(t_data *data, t_mall *mall)
+void	run_exec(t_data *data)
 {
     // print_bulding(data,"PATH");
     // print_env_sort(data->env, mall);
     // ft_export()
-    init_data_shell(data, mall);
+    init_data_shell(data);
     print_var_build(data);
     // init_env(data,data->env);
     // init_wds(data);
-	ft_pipe(data, mall);
+	ft_pipe(data);
 }

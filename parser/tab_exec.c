@@ -6,26 +6,26 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:38:20 by momox             #+#    #+#             */
-/*   Updated: 2023/11/09 22:43:39 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/22 20:20:34 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	create_tab(t_mall *mall, t_data *data, t_list *temp, int i)
+void	create_tab(t_data *data, t_list *temp, int i)
 {
 	while (temp && i < data->nb_exec)
 	{
-		while (temp && temp->token != PIPE)
+		while (temp && temp->next && temp->token != PIPE)
 		{
 			if (temp->token == REDIR_IN && temp->next->token == FILES)
-				redir_in_manage(mall, data, temp, i);
+				redir_in_manage(data, temp, i);
 			else if (temp->token == COMMAND && data->exec[i].cmd == NULL)
 				data->exec[i].cmd = temp->cmd;
 			else if (temp->token == REDIR_OUT && temp->next->token == FILES)
-				redir_out_manage(mall, data, temp, i);
+				redir_out_manage(data, temp, i);
 			else if (temp->token == REDIR_APPEND && temp->next->token == FILES)
-				redir_append_manage(mall, data, temp, i);
+				redir_append_manage(data, temp, i);
 			else if (temp->token == PIPE && data->exec[i].stdin_st == NULL)
 				data->exec[i].stdin_st = temp;
 			else if (temp->token == PIPE && data->exec[i].stdout_st == NULL)
@@ -41,12 +41,12 @@ void	create_tab(t_mall *mall, t_data *data, t_list *temp, int i)
 	}
 }
 
-void	init_exec(t_mall *mall, t_data *data, int nb_pipe)
+void	init_exec(t_data *data, int nb_pipe)
 {
 	int	i;
 
 	i = 0;
-	data->exec = malloc_plus_plus(&mall, sizeof(t_exec) * (nb_pipe + 1));
+	data->exec = malloc_plus_plus(&data->mall, sizeof(t_exec) * (nb_pipe + 1));
 	while (i < nb_pipe)
 	{
 		data->exec[i].cmd = NULL;
@@ -72,7 +72,7 @@ int	count_pipe(t_list *list)
 	return (nb_pipe + 1);
 }
 
-void	tab_exec(t_mall *mall, t_data *data)
+void	tab_exec(t_data *data)
 {
 	t_list	*temp;
 	int		i;
@@ -80,6 +80,6 @@ void	tab_exec(t_mall *mall, t_data *data)
 	temp = data->list;
 	i = 0;
 	data->nb_exec = count_pipe(temp);
-	init_exec(mall, data, data->nb_exec);
-	create_tab(mall, data, temp, i);
+	init_exec(data, data->nb_exec);
+	create_tab(data, temp, i);
 }

@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 21:07:04 by momox             #+#    #+#             */
-/*   Updated: 2023/11/08 23:32:12 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/21 21:22:47 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_data(t_data *data)
 	data->nb_exec = 0;
 	data->exit_code = 0;
 	data->flag_delete = 0;
+	data->mall = NULL;
 }
 
 void	reinit(t_data *data)

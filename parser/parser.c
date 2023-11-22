@@ -6,13 +6,13 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:21:33 by momox             #+#    #+#             */
-/*   Updated: 2023/11/10 00:34:34 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/22 20:07:23 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	parser(t_data *data, t_mall *mall)
+int	parser(t_data *data)
 {
 	if (check_whitespaces(data->input) == 1)
 		return (0);
@@ -20,22 +20,21 @@ int	parser(t_data *data, t_mall *mall)
 		return (0);
 	if (!check_char(data->input, data))
 		return (0);
-	split_line(mall, data);
-	check_exit_var(mall, data);
-	printf("test input = %s\n", data->input);
-	env_check(mall, data);
+	split_line(data);
+	check_exit_var(data);
+	env_check(data);
 	if (ft_strchr(data->input, '|'))
-		split_op(mall, data, '|');
+		split_op(data, '|');
 	if (ft_strchr(data->input, '<'))
-		split_op(mall, data, '<');
+		split_op(data, '<');
 	if (ft_strchr(data->input, '>'))
-		split_op(mall, data, '>');
+		split_op(data, '>');
 	if (!(ft_strncmp(data->input, "<<", 2)))
-		split_hd(mall, data->list);
+		split_hd(data, data->list);
 	tokenize(data);
-	check_quote_remove(mall, data->list);
-	cmd_tab(mall, data);
-	tab_exec(mall, data);
+	check_quote_remove(data, data->list);
+	cmd_tab(data);
+	tab_exec(data);
 	if (data->flag_delete != 0)
 		return (0);
 	return (1);
