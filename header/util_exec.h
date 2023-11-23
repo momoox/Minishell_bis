@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 23:16:06 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/22 20:28:16 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/23 19:19:25 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,9 @@ char	*get_env_var_value(t_mall *mall, char **env, char *var);
 // Nouvel exec
 void cleanup_pipes(t_data *data, int *j);
 void pipe_execution(t_data *data, int *j);
-void initialize_pipes(t_data *data, int fd_pipe[2], pid_t *pid);
+void	initialize_pipes(t_data *data, int fd_pipe[2], int *j, pid_t *pid);
 int	ft_pipe2(t_exec *ex, int *fd_stdin, int *fd_stdout);
 void	exit_shell(t_data *data, t_mall *mall, int ret);
-int	ft_exit(t_data *data,t_mall *mall, char **args);
+int	ft_exit(t_data *data, t_mall *mall, char **args);
 
 #endif

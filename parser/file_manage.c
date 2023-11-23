@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 23:18:53 by momox             #+#    #+#             */
-/*   Updated: 2023/11/22 20:14:04 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/23 18:58:21 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,9 @@ void	redir_out_manage(t_data *data, t_list *list, int i)
 	int		fd;
 	char	*error_msg;
 
-	printf("test dans redir out manage\n");
 	if (!list->next || list->next->token != FILES)
 		redir_error(data, list);
-	fd = open(list->next->content, O_WRONLY, O_CREAT, O_TRUNC, 0644);
+	fd = open(list->next->content, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 	{
 		data->exit_code = 1;
@@ -74,7 +73,7 @@ void	redir_append_manage(t_data *data, t_list *list, int i)
 
 	if (!list->next || list->next->token != FILES)
 		redir_error(data, list);
-	fd = open(list->next->content, O_WRONLY, O_CREAT, O_APPEND, 0644);
+	fd = open(list->next->content, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
 	{
 		data->exit_code = 1;
