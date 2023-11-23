@@ -31,14 +31,12 @@ int	check_char(char *str, t_data *data)
 		}
 		i++;
 	}
-	if (ft_strncmp(data->input, "$ENV", ft_strlen(data->input))
-		|| ft_strncmp(data->input, "$env", ft_strlen(data->input)))
+	if (ft_strchr_char(data->input, "$ENV")
+		|| ft_strchr_char(data->input, "$env"))
 	{
-		if (ft_strchr(data->input, 'echo'))
+		if (ft_strchr_char(data->input, "echo"))
 			printf("\n");
 		return (0);
 	}
 	return (1);
 }
-
-	// if (ft_strchr(data->input, '$ENV') || ft_strchr(data->input, '$env'))
