@@ -31,7 +31,8 @@ int	check_char(char *str, t_data *data)
 		}
 		i++;
 	}
-	if (ft_strchr(data->input, '$ENV') || ft_strchr(data->input, '$env'))
+	if (ft_strncmp(data->input, "$ENV", ft_strlen(data->input))
+		|| ft_strncmp(data->input, "$env", ft_strlen(data->input)))
 	{
 		if (ft_strchr(data->input, 'echo'))
 			printf("\n");
@@ -39,3 +40,5 @@ int	check_char(char *str, t_data *data)
 	}
 	return (1);
 }
+
+	// if (ft_strchr(data->input, '$ENV') || ft_strchr(data->input, '$env'))
