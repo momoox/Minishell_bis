@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:40:29 by mgeisler          #+#    #+#             */
-/*   Updated: 2023/11/27 18:26:54 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/27 22:47:11 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	reader(t_data *data)
 		}
 		add_history(data->input);
 		parser(data);
-		//printf("in main : %p\n", &data->exec->cmd[0]);
 		run_exec(data);
 		free(data->input);
 	}
@@ -41,13 +40,10 @@ void	reader(t_data *data)
 int	main(int argc, char **argv, char **env)
 {
 	t_data	data;
-	// t_mall *mall;
-	
 
 	(void)argc;
 	(void)argv;
 	init_data(&data);
-	// data.mall = mall;
 	tab_env(&data, env);
-	reader(&data); 
+	reader(&data);
 }

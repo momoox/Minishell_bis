@@ -1,3 +1,0 @@
-exec_build_for_debug
-exec_b : cmd [0] == ls
-exec_buil Test 
