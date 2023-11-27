@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 02:47:43 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/27 02:36:53 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/27 20:08:22 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ int	ft_pipe2(t_exec *ex, int *fd_stdin, int *fd_stdout)
 	cmd1 = 1;
 	i = 0;
     //printf("ft_pipe2 :\n"); 
-	if (ex->stdin_st && ex->stdin_st->token == REDIR_IN){
+	if (ex->stdin_st && ex->stdin_st->token == REDIR_I){
         
 		*fd_stdin = file_o(ex->stdin_st->content, ex->stdin_st->token); //data->exec->cmd[0], 0);
     }
 	if (*fd_stdin == -1)
 		cmd1 = 0;
-	if(ex->stdout_st && (ex->stdout_st->token == REDIR_OUT || ex->stdout_st->token == REDIR_APPEND)){
+	if(ex->stdout_st && (ex->stdout_st->token == REDIR_O || ex->stdout_st->token == REDIR_A)){
 		*fd_stdout = file_o(ex->stdout_st->content, ex->stdout_st->token);//  data->exec->cmd[0], 1);
     }
     //printf("After_check\n");

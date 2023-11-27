@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 20:13:11 by momox             #+#    #+#             */
-/*   Updated: 2023/11/09 20:49:57 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/27 20:08:22 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_here_doc(char *bp, t_data *data)
 void heredoc_manage(t_list *temp, t_data *data)
 {
 	ft_here_doc(temp->next->content, data);
-	temp->token = REDIR_IN;
+	temp->token = REDIR_I;
 	temp->content = ".heredocminishelltrobien";
 	ft_lstdel_here(&data->list, temp->next);
 }
@@ -69,15 +69,15 @@ void	tokenize(t_data *data)
 		else if (!(ft_strncmp(temp->content, "<<", 2)))
 			heredoc_manage(temp, data);
 		else if (!(ft_strncmp(temp->content, ">>", 2)))
-			temp->token = REDIR_APPEND;
+			temp->token = REDIR_A;
 		else if (!(ft_strncmp(temp->content, "<", 1)))
-			temp->token = REDIR_IN;
+			temp->token = REDIR_I;
 		else if (!(ft_strncmp(temp->content, ">", 1)))
-			temp->token = REDIR_OUT;
+			temp->token = REDIR_O;
 		else if (temp->prev
-			&& (temp->prev->token == REDIR_IN
-				|| temp->prev->token == REDIR_OUT
-				|| temp->prev->token == REDIR_APPEND))
+			&& (temp->prev->token == REDIR_I
+				|| temp->prev->token == REDIR_O
+				|| temp->prev->token == REDIR_A))
 			temp->token = FILES;
 		else
 			temp->token = COMMAND;

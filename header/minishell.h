@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:38:23 by mgeisler          #+#    #+#             */
-/*   Updated: 2023/11/27 18:50:45 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/27 20:08:22 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ enum	e_token
 	PIPE = 0,
 	FILES = 1,
 	COMMAND = 2,
-	REDIR_IN = 3,
-	REDIR_APPEND = 4,
-	REDIR_OUT = 5,
+	REDIR_I = 3,
+	REDIR_A = 4,
+	REDIR_O = 5,
 	REDIR_HERE_DOC = 6,
 };
 

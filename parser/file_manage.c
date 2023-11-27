@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 23:18:53 by momox             #+#    #+#             */
-/*   Updated: 2023/11/23 18:58:21 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/27 20:08:22 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	redir_in_manage(t_data *data, t_list *list, int i)
 		return ;
 	}
 	close(fd);
-	list->next->token = REDIR_IN;
+	list->next->token = REDIR_I;
 	data->exec[i].stdin_st = list->next;
 }
 
@@ -62,7 +62,7 @@ void	redir_out_manage(t_data *data, t_list *list, int i)
 		return ;
 	}
 	close(fd);
-	list->next->token = REDIR_OUT;
+	list->next->token = REDIR_O;
 	data->exec[i].stdout_st = list->next;
 }
 
@@ -82,6 +82,6 @@ void	redir_append_manage(t_data *data, t_list *list, int i)
 		return ;
 	}
 	close(fd);
-	list->next->token = REDIR_APPEND;
+	list->next->token = REDIR_A;
 	data->exec[i].stdout_st = list->next;
 }

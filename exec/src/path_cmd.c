@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:54:40 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/27 02:15:23 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/27 20:08:22 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ int	file_o(char *file, int token)
 	int	res;
 
 	// pour redir_in
-	if (token == REDIR_IN)
+	if (token == REDIR_I)
 		res = open(file, O_RDONLY, 0777);
 	// for redir_out
-	if (token == REDIR_OUT)
+	if (token == REDIR_O)
 		res = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	// redir_Append
-	if (token == REDIR_APPEND)
+	if (token == REDIR_A)
 		res = open(file, O_WRONLY | O_CREAT | O_APPEND, 0777);
 	if (res == -1)
 		return (-1);
