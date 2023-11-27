@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tab_exec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:38:20 by momox             #+#    #+#             */
-/*   Updated: 2023/11/23 23:02:58 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/27 19:02:37 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	create_tab(t_data *data, t_list *temp, int i)
 {
 	while (temp && i < data->nb_exec)
 	{
-		while (temp && temp->next && temp->token != PIPE)
+		while (temp && temp->token != PIPE)
 		{
 			if (temp->token == REDIR_IN && temp->next->token == FILES)
 				redir_in_manage(data, temp, i);
 			else if (temp->token == COMMAND && data->exec[i].cmd == NULL)
-				data->exec[i].cmd = temp->cmd;
+				data->exec[i].cmd = ft_tabdup(data, temp->cmd);
 			else if (temp->token == REDIR_OUT && temp->next->token == FILES)
 				redir_out_manage(data, temp, i);
 			else if (temp->token == REDIR_APPEND && temp->next->token == FILES)
@@ -80,7 +80,6 @@ void	tab_exec(t_data *data)
 	temp = data->list;
 	i = 0;
 	data->nb_exec = count_pipe(temp);
-	printf("in tab_exec %d\n",data->nb_exec);
 	init_exec(data, data->nb_exec);
 	create_tab(data, temp, i);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:21:33 by momox             #+#    #+#             */
-/*   Updated: 2023/11/27 03:13:26 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/27 19:02:14 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,12 @@ int	parser(t_data *data)
 	tokenize(data);
 	check_quote_remove(data, data->list);
 	cmd_tab(data);
-	printf("in parser : %p\n",data->exec);
 	tab_exec(data);
-	printf("in parser : %p\n",data->exec);
 	if (data->flag_delete != 0)
 		return (0);
 	return (1);
 }
 
 	// print_exec(data);
-	// print_list(data->list);
 	// print_token(data->list);
+	// print_list(data->list);

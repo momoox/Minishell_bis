@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:43:09 by momox             #+#    #+#             */
-/*   Updated: 2023/10/23 22:24:49 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/27 18:43:22 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,18 @@ void	print_exec(t_data *data)
 	u = 0;
 	while (data->exec[0].cmd[u])
 	{
-		printf("tab line = %s\n", data->exec[0].cmd[u]);
-		printf("struct = %s\n", data->exec[0].stdin_st->content);
-		printf("struct = %s\n", data->exec[0].stdout_st->content);
-		u++;
-	}
-	u = 0;
-	while (data->exec[1].cmd[u])
-	{
-		printf("tab line = %s\n", data->exec[1].cmd[u]);
-		printf("struct = %s\n", data->exec[1].stdin_st->content);
-		printf("struct = %s\n", data->exec[1].stdout_st->content);
-		u++;
+		printf("tab line = %s\n", data->exec[0].cmd[0]);
+		// printf("struct = %s\n", data->exec[0].stdin_st->content);
+		// printf("struct = %s\n", data->exec[0].stdout_st->content);
+		// u++;
+	// }
+	// u = 0;
+	// while (data->exec[1].cmd[u])
+	// {
+	// 	printf("tab line = %s\n", data->exec[1].cmd[u]);
+	// 	printf("struct = %s\n", data->exec[1].stdin_st->content);
+	// 	printf("struct = %s\n", data->exec[1].stdout_st->content);
+	// 	u++;
 	}
 }
 

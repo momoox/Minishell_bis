@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:38:23 by mgeisler          #+#    #+#             */
-/*   Updated: 2023/11/26 01:16:36 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/27 18:50:45 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,8 @@ char	**ft_tabadd_back(t_mall *mall, char **tab, char *new_str);
 char	*ft_itoa(t_mall *mall, int n);
 void	*malloc_plus_plus(t_mall **mall, size_t size);
 void	free_mall(t_mall **mall);
-int	ft_strchr_char(const char *str, char *s);
+int		ft_strchr_char(const char *str, char *s);
+char	**ft_tabdup(t_data *data, char **tab);
 
 
 /* main */
