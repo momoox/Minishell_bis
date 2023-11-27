@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:38:23 by mgeisler          #+#    #+#             */
-/*   Updated: 2023/11/23 23:14:02 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/26 01:16:36 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <termios.h>
 # include <unistd.h>
 
+// typedef struct s_data;
 enum	e_token
 {
 	PIPE = 0,
@@ -72,8 +73,19 @@ typedef struct s_exec
 	int				fd_pipe[2];
 	t_list			*stdout_st;
 	char			**cmd;
+	char			*path;
 	t_exec_shell	*shell;
 }					t_exec;
+
+struct s_data;
+
+typedef int (*builtin_func)(struct s_data *data, char **cmd);
+
+typedef struct s_builtin{
+    const char *cmd_name;
+    builtin_func func;
+} t_builtin;
+extern t_builtin builtins[];
 
 typedef struct s_data
 {
@@ -88,7 +100,13 @@ typedef struct s_data
 	t_exec			*exec;
 	t_list			*list;
 	t_exec_shell	*shell;
+	pid_t			pid;
+	t_builtin		*func;
 }					t_data;
+/////////TESTE-BUILD OLIVE/////////////
+builtin_func find_builtin(const char *cmd_name, t_builtin *builtins);
+int exec_build(t_data *data, char **cmd);
+//////////////////////////////////////////////////
 
 /* LIBFT */
 char	*ft_strchr(const char *str, int search);
@@ -112,7 +130,8 @@ char	**ft_tabadd_back(t_mall *mall, char **tab, char *new_str);
 char	*ft_itoa(t_mall *mall, int n);
 void	*malloc_plus_plus(t_mall **mall, size_t size);
 void	free_mall(t_mall **mall);
-int		ft_strchr_char(const char *str, char *s);
+int	ft_strchr_char(const char *str, char *s);
+
 
 /* main */
 void	reader(t_data *data);

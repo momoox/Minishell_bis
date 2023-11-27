@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: momox <momox@student.42.fr>                +#+  +:+       +#+         #
+#    By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/28 20:23:57 by momox             #+#    #+#              #
-#    Updated: 2023/11/23 23:13:51 by momox            ###   ########.fr        #
+#    Updated: 2023/11/27 02:55:12 by oliove           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 
 NAME		:= minishell
 CC			:=	gcc
-CFLAGS		:=	-Wall -Wextra
+CFLAGS		:=	-Wall -Wextra -g3
 HEADER		:= -I ./header
 LIB			:= -lreadline -L /opt/homebrew/Cellar/readline/8.2.1/lib
 INCLUDE 	:= -I /opt/homebrew/Cellar/readline/8.2.1/include/ 
@@ -52,8 +52,8 @@ SRCS = main.c init_struct.c print_tab.c print_token.c\
 		libft/ft_split.c \
 		libft/ft_tab_addback.c \
 		libft/ft_itoa.c \
-		libft/malloc_plus_plus.c \
 		libft/ft_strchr_char.c \
+		libft/malloc_plus_plus.c \
 		parser/parser.c \
 		parser/check_quote.c \
 		parser/check_char.c \
@@ -86,7 +86,8 @@ SRCS = main.c init_struct.c print_tab.c print_token.c\
 		exec/src/ft_cd.c \
 		builtins/ft_pwd.c \
 		exec/src/nouvell_exec.c \
-		builtins/ft_exit.c
+		builtins/ft_exit.c \
+		builtins/check_build.c
 
 OBJECTS = $(SRCS:.c=.o)
 

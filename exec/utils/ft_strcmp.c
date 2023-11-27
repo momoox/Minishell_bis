@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 00:21:38 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/08 23:32:26 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/24 01:07:49 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ int	ft_strcmp(const char *s1, const char *s2)
 
 
 
-char	*ft_strdup_pipe(t_mall *mall, char *src)
+char	*ft_strdup_pipe(t_data *data, char *src)
 {
 	char	*dst;
 
-	dst = malloc_plus_plus(&mall, sizeof(char) * (ft_strlen(src) + 1));
+	dst = malloc_plus_plus(&data->mall, sizeof(char) * (ft_strlen(src) + 1));
 	if (!dst)
 		return (0);
 	ft_strlcpy(dst, src, ft_strlen(src) + 1);
@@ -60,7 +60,7 @@ char	*ft_strdup_pipe(t_mall *mall, char *src)
 	return (dst);
 }
 
-char	*ft_substr_pipe(t_mall *mall, char *s, int start, int len)
+char	*ft_substr_pipe(t_data *data, char *s, int start, int len)
 {
 	char	*str;
 	int		i;
@@ -75,7 +75,7 @@ char	*ft_substr_pipe(t_mall *mall, char *s, int start, int len)
 	else
 		while (s[start + slen] != '\0' && slen < len)
 			slen++;
-	str = malloc_plus_plus(&mall, sizeof(char) * (slen) + 1);
+	str = malloc_plus_plus(&data->mall, sizeof(char) * (slen) + 1);
 	if (!str)
 		return (0);
 	if (slen != 0)

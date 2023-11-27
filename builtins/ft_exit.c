@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:44:52 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/20 16:06:08 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/24 00:58:56 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,16 @@ static int	get_exit_code(t_data *data, char *arg, bool *error)
 }
 
 
-void	exit_shell(t_data *data, t_mall *mall, int ret)
+void	exit_shell(t_data *data, int ret)
 {
 	if (data)
 	{
-		free_mall(&mall);
+		free_mall(&data->mall);
 	}
 	exit(ret);
 }
 
-int	ft_exit(t_data *data,t_mall *mall, char **args)
+int	ft_exit(t_data *data, char **args)
 {
 	int		exit_code;
 	bool	error;
@@ -96,11 +96,11 @@ int	ft_exit(t_data *data,t_mall *mall, char **args)
 	{
 		exit_code = get_exit_code(data, args[1], &error);
 		if (error)
-			exit_code = errmsg_cmd(mall, "exit", args[1],
+			exit_code = errmsg_cmd(data, "exit", args[1],
 					"numeric argument required", 2);
 		else if (args[2])
-			return (errmsg_cmd(mall, "exit", NULL, "too many arguments", 1));
+			return (errmsg_cmd(data, "exit", NULL, "too many arguments", 1));
 	}
-	exit_shell(data, mall, exit_code);
+	exit_shell(data, exit_code);
 	return (2);
 }

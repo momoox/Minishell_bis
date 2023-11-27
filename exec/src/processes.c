@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 00:14:52 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/21 17:53:10 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/27 02:15:41 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@
 // 	char	**c_args;
 // 	(void)env;
 // 	char	*path;
-// 	printf("val cmd %s\n",cmd);
+// 	//printf("val cmd %s\n",cmd);
 // 	c_args = ft_split(cmd, ' ');
-// 	printf("val2 env %s\n", data->env[0]);
+// 	//printf("val2 env %s\n", data->env[0]);
 // 	path = ft_path_dir(c_args, ft_my_var(data, "PATH"), -1);
 
-// 	printf("var = [%s]\n",ft_my_var(data,cmd));
+// 	//printf("var = [%s]\n",ft_my_var(data,cmd));
 // 	return (path);
 
 // }
@@ -80,7 +80,7 @@ char	*ft_my_var(t_data *data, char *str)
 	strcat(var, "=");
 	while (data->env && data->env[i])
 	{
-		// printf("prout\n");
+		// //printf("prout\n");
 		if (strncmp(data->env[i], var, strlen(var)) == 0)
 			break ;
 		i++;
@@ -103,18 +103,18 @@ char	*ft_my_var(t_data *data, char *str)
 // 	// int		i;
 // 	// ft_my_path(data);
 // 	// i = -1;
-// 	printf("val cmd %s\n",cmd[0]);
+// 	//printf("val cmd %s\n",cmd[0]);
 // 	c_args = ft_split_pipe(cmd[0], ' ');
 
-// 	// printf("exece : cmd[1] = [%s]\n",cmd[1]);
+// 	// //printf("exece : cmd[1] = [%s]\n",cmd[1]);
 
 // 	tmp = ft_strjoin_pipe2(c_args[0], cmd[1]);
 // 	c_args[0] = tmp;
 
-// 	printf("c_args ==  [%s]\n",c_args[0]);
-// 	// printf("exece : tmp == [%s]\n",tmp[0]);
+// 	//printf("c_args ==  [%s]\n",c_args[0]);
+// 	// //printf("exece : tmp == [%s]\n",tmp[0]);
 // 	path = ft_path_dir(c_args, ft_my_var(data, "PATH"), -1);
-// 	// printf("var = [%s]\n",ft_my_var(data,cmd));
+// 	// //printf("var = [%s]\n",ft_my_var(data,cmd));
 // 	if ((char **)path == c_args)
 // 	{
 // 		ft_putstr_fd("pipex: ", STDERR_FILENO);
@@ -140,10 +140,10 @@ char	*ft_my_var(t_data *data, char *str)
 // 	// int		i;
 // 	// ft_my_path(data);
 // 	// i = -1;
-// 	printf("val cmd %s\n",cmd);
+// 	//printf("val cmd %s\n",cmd);
 // 	c_args = ft_split_pipe(cmd, ' ');
 // 	path = ft_path_dir(c_args, ft_my_var(data, "PATH"), -1);
-// 	// printf("var = [%s]\n",ft_my_var(data,cmd));
+// 	// //printf("var = [%s]\n",ft_my_var(data,cmd));
 // 	if ((char **)path == c_args)
 // 	{
 // 		ft_putstr_fd("pipex: ", STDERR_FILENO);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 00:53:27 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/22 19:34:30 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/24 01:08:31 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	free_tmp(char *str)
 	}
 }
 
-int	get_env_var_index(t_mall *mall, char **env, char *var)
+int	get_env_var_index(t_data *data, char **env, char *var)
 {
 	int		i;
 	char	*tmp;
 
-	tmp = ft_strjoin(mall, var, "=");
+	tmp = ft_strjoin(data->mall, var, "=");
 	if (!tmp)
 		return (-1);
 	i = 0;
@@ -44,12 +44,12 @@ int	get_env_var_index(t_mall *mall, char **env, char *var)
 }
 
 
-char	**realloc_env(t_data *data, t_mall *mall, size_t size)
+char	**realloc_env(t_data *data, size_t size)
 {
 	char	**new_env;
 	size_t	i;
 
-	new_env = ft_calloc_env(mall, size + 1, sizeof *new_env);
+	new_env = ft_calloc_env(data, size + 1, sizeof *new_env);
 	if (!new_env)
 		return (NULL);
 	i = 0;
@@ -63,35 +63,35 @@ char	**realloc_env(t_data *data, t_mall *mall, size_t size)
 	return (new_env);
 }
 
-int	set_env_var(t_data *data, t_mall *mall, char *key, char *value)
+int	set_env_var(t_data *data, char *key, char *value)
 {
 	int		idx;
 	char	*tmp;
 
-	idx = get_env_var_index(mall, data->env, key);
+	idx = get_env_var_index(data, data->env, key);
 	if (value == NULL)
 		value = "";
-	tmp = ft_strjoin(mall, "=", value);
+	tmp = ft_strjoin(data->mall, "=", value);
 	if (!tmp)
 		return (1);
 	if (idx != -1 && data->env[idx])
 	{
 		//free_tmp(data->env[idx]);
-		data->env[idx] = ft_strjoin(mall, key, tmp);
+		data->env[idx] = ft_strjoin(data->mall, key, tmp);
 	}
 	else
 	{
 		idx = env_var_count(data->env);
-		data->env = realloc_env(data, mall, idx + 1);
+		data->env = realloc_env(data, idx + 1);
 		if (!data->env)
 			return (1);
-		data->env[idx] = ft_strjoin(mall, key, tmp);
+		data->env[idx] = ft_strjoin(data->mall, key, tmp);
 	}
 	//free_tmp(tmp);
 	return (0);
 }
 
-int	remove_env_var(t_data *data,t_mall *mall, int idx)
+int	remove_env_var(t_data *data, int idx)
 {
 	int	i;
 	int	count;
@@ -103,12 +103,12 @@ int	remove_env_var(t_data *data,t_mall *mall, int idx)
 	count = idx;
 	while (data->env[i + 1])
 	{
-		data->env[i] = ft_strdup_pipe(mall, data->env[i + 1]);
+		data->env[i] = ft_strdup_pipe(data, data->env[i + 1]);
 		//free_tmp(data->env[i + 1]);
 		count++;
 		i++;
 	}
-	data->env = realloc_env(data, mall, count);
+	data->env = realloc_env(data, count);
 	if (!data->env)
 		return (false);
 	return (0);
@@ -136,31 +136,31 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
-void	*ft_calloc_env(t_mall *mall, size_t count, size_t size)
+void	*ft_calloc_env(t_data *data, size_t count, size_t size)
 {
 	void	*ptr;
 
-	ptr = (void *)malloc_plus_plus(&mall, count * size);
+	ptr = (void *)malloc_plus_plus(&data->mall, count * size);
 	if (!ptr)
 		return (NULL);
 	ft_bzero(ptr, count * size);
 	return (ptr);
 }
 
-char	**get_key_value_pair(t_mall *mall, char *arg)
+char	**get_key_value_pair(t_data *data, char *arg)
 {
 	char	**tmp;
 	char	*eq_pos;
 
 	eq_pos = ft_strchr(arg, '=');
-	tmp = malloc_plus_plus(&mall, sizeof *tmp * (2 + 1));
-	tmp[0] = ft_substr_pipe(mall, arg, 0, eq_pos - arg);
-	tmp[1] = ft_substr_pipe(mall, eq_pos, 1, ft_strlen(eq_pos));
+	tmp = malloc_plus_plus(&data->mall, sizeof *tmp * (2 + 1));
+	tmp[0] = ft_substr_pipe(data, arg, 0, eq_pos - arg);
+	tmp[1] = ft_substr_pipe(data, eq_pos, 1, ft_strlen(eq_pos));
 	tmp[2] = NULL;
 	return (tmp);
 }
 
-int	ft_export(t_data *data, t_mall *mall, char **args)
+int	ft_export(t_data *data, char **args)
 {
 	int		i;
 	char	**tmp;
@@ -169,18 +169,18 @@ int	ft_export(t_data *data, t_mall *mall, char **args)
 	ret = EXIT_SUCCESS;
 	i = 1;
 	if (!args[i])
-		return (env_builtin(data,mall, NULL));
+		return (env_builtin(data, NULL));
 	while (args[i])
 	{
 		if (!is_valid_env_var_key(args[i]))
 		{
-			errmsg_cmd(mall, "export", args[i], "not a valid identifier", false);
+			errmsg_cmd(data, "export", args[i], "not a valid identifier", false);
 			ret = EXIT_FAILURE;
 		}
 		else if (ft_strchr(args[i], '=') != NULL)
 		{
-			tmp = get_key_value_pair(mall, args[i]);
-			set_env_var(data, mall, tmp[0], tmp[1]);
+			tmp = get_key_value_pair(data, args[i]);
+			set_env_var(data, tmp[0], tmp[1]);
 			// free_tab_args(tmp);
 		}
 		i++;
@@ -188,7 +188,7 @@ int	ft_export(t_data *data, t_mall *mall, char **args)
 	return (ret);
 }
 
-int	ft_unset(t_data *data, t_mall *mall, char **args)
+int	ft_unset(t_data *data, char **args)
 {
 	int	i;
 	int	idx;
@@ -200,14 +200,14 @@ int	ft_unset(t_data *data, t_mall *mall, char **args)
 	{
 		if (!is_valid_env_var_key(args[i]) || ft_strchr(args[i], '=') != NULL)
 		{
-			errmsg_cmd(mall,"unset", args[i], "not a valid identifier", false);
+			errmsg_cmd(data,"unset", args[i], "not a valid identifier", false);
 			ret = EXIT_FAILURE;
 		}
 		else
 		{
-			idx = get_env_var_index(mall, data->env, args[i]);
+			idx = get_env_var_index(data, data->env, args[i]);
 			if (idx != -1)
-				remove_env_var(data, mall, idx);
+				remove_env_var(data, idx);
 		}
 		i++;
 	}
@@ -231,12 +231,12 @@ bool	is_valid_env_var_key(char *var)
 	return (true);
 }
 
-int	env_builtin(t_data *data,t_mall *mall, char **args)
+int	env_builtin(t_data *data, char **args)
 {
 	int i;
 
 	if (args && args[1])
-		(errmsg_cmd(mall,"env", NULL, "too many arguments", 2));
+		(errmsg_cmd(data,"env", NULL, "too many arguments", 2));
 	i = 0;
 	if (!data->env)
 		return (EXIT_FAILURE);

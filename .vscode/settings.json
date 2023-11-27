@@ -1,5 +1,18 @@
 {
     "files.associations": {
-        "minishell.h": "c"
-    }
+        "minishell.h": "c",
+        "util_exec.h": "c"
+    },
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/Users/oliove/Documents/tranzit_git/mini_bis_AJ",
+            "binaryPath": "/Users/oliove/Documents/tranzit_git/mini_bis_AJ/minishell",
+            "binaryArgs": [
+                "ls",
+                "|",
+                "wc -l"
+            ]
+        }
+    ],
+    "C_Cpp.errorSquiggles": "disabled"
 }

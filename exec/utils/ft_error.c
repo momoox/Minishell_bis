@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 00:11:03 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/20 16:07:12 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/24 01:09:25 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,42 +56,42 @@ bool	add_detail_quotes(char *command)
 	return (false);
 }
 
-char	*join_strs(t_mall *mall, char *str, char *add)
+char	*join_strs(t_data *data, char *str, char *add)
 {
 	char	*tmp;
 
 	if (!add)
 		return (str);
 	if (!str)
-		return (ft_strdup_pipe(mall, add));
+		return (ft_strdup_pipe(data, add));
 	tmp = str;
-	str = ft_strjoin(mall, tmp, add);
+	str = ft_strjoin(data->mall, tmp, add);
 	//free_tmp(tmp);
 	return (str);
 }
 
-int	errmsg_cmd(t_mall *mall, char *command, char *detail, char *error_message, int error_nb)
+int		errmsg_cmd(t_data *data, char *command, char *detail, char *error_message, int error_nb)
 {
 	char	*msg;
 	bool	detail_quotes;
 
 	detail_quotes = add_detail_quotes(command);
-	msg = ft_strdup_pipe(mall,"minishell: ");
+	msg = ft_strdup_pipe(data,"minishell: ");
 	if (command != NULL)
 	{
-		msg = join_strs(mall, msg, command);
-		msg = join_strs(mall, msg, ": ");
+		msg = join_strs(data, msg, command);
+		msg = join_strs(data, msg, ": ");
 	}
 	if (detail != NULL)
 	{
 		if (detail_quotes)
-			msg = join_strs(mall, msg, "`");
-		msg = join_strs(mall, msg, detail);
+			msg = join_strs(data, msg, "`");
+		msg = join_strs(data, msg, detail);
 		if (detail_quotes)
-			msg = join_strs(mall, msg, "'");
-		msg = join_strs(mall, msg, ": ");
+			msg = join_strs(data, msg, "'");
+		msg = join_strs(data, msg, ": ");
 	}
-	msg = join_strs(mall, msg, error_message);
+	msg = join_strs(data, msg, error_message);
 	ft_putendl_fd(msg, STDERR_FILENO);
 	//free_tmp(msg);
 	return (error_nb);

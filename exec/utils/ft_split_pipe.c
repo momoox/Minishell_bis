@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 23:55:12 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/09 20:53:05 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/27 02:15:54 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static char	*ft_substr_mod(t_mall *mall, char const *s, unsigned int start, size
 
 
 
-char	**ft_split_pipe(t_mall *mall, char const *s, char c)
+char	**ft_split_pipe(t_data *data, char const *s, char c)
 {
 	char	**tab;
 	int		i;
@@ -76,7 +76,7 @@ char	**ft_split_pipe(t_mall *mall, char const *s, char c)
 	i = 0;
 	j = 0;
 	w = 0;
-	tab = (char **)malloc_plus_plus(&mall, sizeof(char *)
+	tab = (char **)malloc_plus_plus(&data->mall, sizeof(char *)
 			* (ft_word_count(s, c) + 1));
 	if (!tab)
 		return (NULL);
@@ -85,16 +85,16 @@ char	**ft_split_pipe(t_mall *mall, char const *s, char c)
 		i = j;
 		while (s[i] && s[i] == c)
 			i++;
-		printf("split_pipe : S = [%s]\n",s);
+		//printf("split_pipe : S = [%s]\n",s);
 		j = i;
 		while (s[j] && s[j] != c)
 			j++;
-		printf("split_pipe : S = [%s]\n",s);
-		tab[w++] = ft_substr_mod(mall, s, i, j - i);
+		//printf("split_pipe : S = [%s]\n",s);
+		tab[w++] = ft_substr_mod(data->mall, s, i, j - i);
 		// if (!tab[w - 1])
 			// return (ft_//free(tab, w));
 		tab[w] = NULL;
 	}
-	printf("split_pipe : tab = [%s]\n",*tab);
+	//printf("split_pipe : tab = [%s]\n",*tab);
 	return (tab);
 }

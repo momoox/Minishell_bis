@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 02:47:43 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/22 19:31:40 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/27 02:36:53 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
 // */
 
 #include "util_exec.h"
-#include "minishell.h"
+// #include "minishell.h"
 
 int	ft_pipe2(t_exec *ex, int *fd_stdin, int *fd_stdout)
 {
+	//printf("in ft_pipe2\n");
 	int	cmd1;
 	int	i;
 	int	fd[2];
@@ -38,17 +39,18 @@ int	ft_pipe2(t_exec *ex, int *fd_stdin, int *fd_stdout)
 */ 
 	cmd1 = 1;
 	i = 0;
-    printf("ft_pipe2 :\n"); 
-	if (ex->stdin_st && ex->stdin_st->token != PIPE){
+    //printf("ft_pipe2 :\n"); 
+	if (ex->stdin_st && ex->stdin_st->token == REDIR_IN){
         
 		*fd_stdin = file_o(ex->stdin_st->content, ex->stdin_st->token); //data->exec->cmd[0], 0);
     }
 	if (*fd_stdin == -1)
 		cmd1 = 0;
-	if(ex->stdout_st && ex->stdout_st->token != PIPE){
+	if(ex->stdout_st && (ex->stdout_st->token == REDIR_OUT || ex->stdout_st->token == REDIR_APPEND)){
 		*fd_stdout = file_o(ex->stdout_st->content, ex->stdout_st->token);//  data->exec->cmd[0], 1);
     }
-    printf("After_check\n");
+    //printf("After_check\n");
+	// //printf("cmd == [%s] \n",ex->cmd[0]);
 	if (!cmd1)
 	{
 		i++;
@@ -56,6 +58,7 @@ int	ft_pipe2(t_exec *ex, int *fd_stdin, int *fd_stdout)
         close(fd[1]);
 		fd_stdin = &fd[0];
 	}
+	//printf("end ft_pipe2\n");
 	return (i);
 }
 
@@ -129,40 +132,96 @@ int ft_lstsize(t_list *list)
 //     print_debug(data);
 // }
 
-int	exec_build(t_data *data, t_mall *mall, char **cmd)
-{
-	int	ret;
-	printf("exec_build_for_debug\n");
-   	printf("exec_b : cmd [0] == %s\n",*cmd);
 
-	ret = CMD_NOT_FOUND;
-	if (ft_strncmp(cmd[0], "cd", 3) == 0)
-		ret = ft_cd2(data, mall, cmd);
-	else if (ft_strncmp(cmd[0], "echo", 5) == 0){
-       	printf("exec_build_echo\n");
-		ret = ft_echo(cmd);
-    }
-	else if (ft_strncmp(cmd[0], "env", 4) == 0)
-		ret = ft_env(data->env);
-	else if (ft_strncmp(cmd[0], "export", 7) == 0)
-		ret = ft_export(data,mall, cmd);
-	else if (ft_strncmp(cmd[0], "pwd", 4) == 0)
-		ret = ft_pwd();
-	else if (ft_strncmp(cmd[0], "unset", 6) == 0)
-		ret = ft_unset(data, mall, cmd);
-	else if (ft_strncmp(cmd[0], "exit", 5) == 0)
-		ret = ft_exit(data, mall, cmd);
-	return (ret);
+int	execute_sys_bin(t_data *data, t_exec *cmd)
+{
+	//printf("start execute_sys_bin \n");
+	if (!cmd->cmd || cmd->cmd[0] == NULL)//'\0')
+		return (CMD_NOT_FOUND);
+	cmd->path = ft_path_dir(data->mall, *cmd->cmd, ft_my_var(data,"PATH"),0);
+	//printf("path = [%s]\n",cmd->path);
+	if (!cmd->path)
+		return (CMD_NOT_FOUND);
+	if (execve(cmd->path, cmd->cmd, data->env) == -1)
+		errmsg_cmd(data, "execve", NULL, strerror(errno), errno);
+	//printf("end execute_sys_bin \n");
+	return (EXIT_FAILURE);
 }
 
 void	run_exec(t_data *data)
 {
+	//printf("start run exec\n");
     // print_bulding(data,"PATH");
-    // print_env_sort(data->env, mall);
+    // print_env_sort(data->env, data->mall);
     // ft_export()
     init_data_shell(data);
     print_var_build(data);
-    // init_env(data,data->env);
-    // init_wds(data);
-	ft_pipe(data);
+    init_env(data,data->env);
+    init_wds(data);
+	//printf("in run %d\n", data->nb_exec);
+	// print_debug(data);
+	//printf("nb_exec = [%d]\n",data->nb_exec);
+	// if(data->nb_exec > 1)
+		ft_pipe(data);
+	// else{
+	// 	//printf("else\n");
+	// 	// if(is_build(data->exec->cmd))
+	// 		execute_sys_bin(data, data->exec);
+	// }
+		
+	//printf("end run exec\n");
 }
+int	execute_local_bin(t_data *data, t_exec *cmd)
+{
+	int	ret;
+
+	ret = check_cmd_not_found(data, cmd);
+	if (ret != 0)
+		return (ret);
+	if (execve(cmd->cmd[0], cmd->cmd, data->env) == -1)
+		return (errmsg_cmd(data, "execve", NULL, strerror(errno), errno));
+	return (EXIT_FAILURE);
+}
+int	execute_command(t_data *data, t_exec *cmd)
+{
+	int	ret;
+
+	if (!cmd || !cmd->cmd)
+		exit_shell(data, errmsg_cmd(data, "child", NULL,
+				"parsing error: no cmd to execute!", EXIT_FAILURE));
+	if (ft_strchr(cmd->cmd[0], '/') == NULL)
+	{
+		ret = exec_build(data, cmd->cmd);
+		if (ret != CMD_NOT_FOUND)
+			exit_shell(data, ret);
+		ret = execute_sys_bin(data, cmd);
+		if (ret != CMD_NOT_FOUND)
+			exit_shell(data, ret);
+	}
+	ret = execute_local_bin(data, cmd);
+	exit_shell(data, ret);
+	return (ret);
+}
+/// /////////////////test////////////////////////////////////////////////
+// void run_exec(t_data *data) {
+//     // ... (autre code)
+
+//     if (is_build(data->exec[j].cmd)) {
+//         int ret =  run_builtin(data, data->exec[j].cmd);
+//         if (ret == CMD_NOT_FOUND) {
+//             // La commande n'est pas une fonction intégrée
+//             // Traitez-la en conséquence
+//             // ...
+//         } else if (ret != 0) {
+//             // Gestion de l'échec de l'exécution de la fonction intégrée
+//             // ...
+//         }
+//     } else {
+//         // La commande n'est pas une fonction intégrée
+//         // Traitez-la en conséquence
+//         // ...
+//     }
+
+//     // ... (autre code)
+// }
+/////////////////////////////////////////////////////////////

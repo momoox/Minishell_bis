@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tab_exec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:38:20 by momox             #+#    #+#             */
-/*   Updated: 2023/11/22 20:20:34 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/23 23:02:58 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	tab_exec(t_data *data)
 	temp = data->list;
 	i = 0;
 	data->nb_exec = count_pipe(temp);
+	printf("in tab_exec %d\n",data->nb_exec);
 	init_exec(data, data->nb_exec);
 	create_tab(data, temp, i);
 }

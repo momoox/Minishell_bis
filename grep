@@ -1,0 +1,3 @@
+exec_build_for_debug
+exec_b : cmd [0] == ls
+execve error cmd = [ls]

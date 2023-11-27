@@ -105,3 +105,11 @@ void print_var_build(t_data *data)
 
 	printf("\033[0;31m	END_PRINT_VAR_SHELL\033[0m\n");
 }
+void debug_print(char *str, int actif)
+{
+	if(actif == 1){
+		printf("%s\n",str);
+	}
+	else
+		return;
+}
