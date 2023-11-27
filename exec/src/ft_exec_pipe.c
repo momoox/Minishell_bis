@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 02:47:43 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/27 22:17:46 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/27 22:59:03 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,21 @@ int	ft_pipe2(t_exec *ex, int *fd_stdin, int *fd_stdout)
 	cmd1 = 1;
 	i = 0;
     //printf("ft_pipe2 :\n"); 
+	// Boucle sur ex->cmd,
+	//   si REDIR_IN, change stdin
+	//   si REDIR+
+	if (ex->stdin_st)
+		printf("in = %s | token = %d\n", ex->stdin_st->content, ex->stdin_st->token);
+	if (ex->stdout_st)
+		printf("out = %s | token = %d\n", ex->stdout_st->content, ex->stdout_st->token);
 	if (ex->stdin_st && ex->stdin_st->token == REDIR_I){
-        
+        close(*fd_stdin);
 		*fd_stdin = file_o(ex->stdin_st->content, ex->stdin_st->token); //data->exec->cmd[0], 0);
     }
 	if (*fd_stdin == -1)
 		cmd1 = 0;
 	if(ex->stdout_st && (ex->stdout_st->token == REDIR_O || ex->stdout_st->token == REDIR_A)){
+        close(*fd_stdout);
 		*fd_stdout = file_o(ex->stdout_st->content, ex->stdout_st->token);//  data->exec->cmd[0], 1);
     }
     //printf("After_check\n");
@@ -179,7 +187,7 @@ void	run_exec(t_data *data)
 	//printf("in run %d\n", data->nb_exec);
 	// print_debug(data);
 	//printf("nb_exec = [%d]\n",data->nb_exec);
-	if(data->nb_exec > 1)
+	// if(data->nb_exec > 1)
 		ft_pipe(data);
 		
 	// else{
