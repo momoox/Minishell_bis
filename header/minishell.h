@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:38:23 by mgeisler          #+#    #+#             */
-/*   Updated: 2023/11/26 01:16:36 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/27 20:08:22 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ enum	e_token
 	PIPE = 0,
 	FILES = 1,
 	COMMAND = 2,
-	REDIR_IN = 3,
-	REDIR_APPEND = 4,
-	REDIR_OUT = 5,
+	REDIR_I = 3,
+	REDIR_A = 4,
+	REDIR_O = 5,
 	REDIR_HERE_DOC = 6,
 };
 
@@ -130,7 +130,8 @@ char	**ft_tabadd_back(t_mall *mall, char **tab, char *new_str);
 char	*ft_itoa(t_mall *mall, int n);
 void	*malloc_plus_plus(t_mall **mall, size_t size);
 void	free_mall(t_mall **mall);
-int	ft_strchr_char(const char *str, char *s);
+int		ft_strchr_char(const char *str, char *s);
+char	**ft_tabdup(t_data *data, char **tab);
 
 
 /* main */

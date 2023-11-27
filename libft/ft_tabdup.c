@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tab_addback.c                                   :+:      :+:    :+:   */
+/*   ft_tabdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 21:38:43 by momox             #+#    #+#             */
-/*   Updated: 2023/11/27 18:56:27 by momox            ###   ########.fr       */
+/*   Created: 2023/11/27 18:49:54 by momox             #+#    #+#             */
+/*   Updated: 2023/11/27 18:51:16 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**ft_tabadd_back(t_mall *mall, char **tab, char *new_str)
+char	**ft_tabdup(t_data *data, char **tab)
 {
-	int		len;
 	int		i;
 	char	**new_tab;
 
-	if (!tab || !new_str)
+	i = 0;
+	if (!tab)
 		return (NULL);
-	len = 0;
-	while (tab[len])
-		len++;
-	new_tab = malloc_plus_plus(&mall, sizeof(char *) * (len + 2));
+	while (tab[i])
+		i++;
+	new_tab = malloc_plus_plus(&data->mall, sizeof(char *) * (i + 1));
 	if (!new_tab)
-		return (NULL);
-	i = -1;
-	while (tab[++i])
-		new_tab[i] = tab[i];
-	new_tab[i] = new_str;
-	new_tab[i + 1] = NULL;
-	//free(tab);
+		return (perror("Malloc"), NULL);
+	i = 0;
+	while (tab[i])
+	{
+		new_tab[i] = ft_strdup(data, tab[i]);
+		i++;
+	}
+	new_tab[i] = NULL;
 	return (new_tab);
 }

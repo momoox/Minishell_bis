@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 02:47:43 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/27 19:56:21 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/27 22:17:46 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ int	ft_pipe2(t_exec *ex, int *fd_stdin, int *fd_stdout)
 	cmd1 = 1;
 	i = 0;
     //printf("ft_pipe2 :\n"); 
-	if (ex->stdin_st && ex->stdin_st->token == REDIR_IN){
+	if (ex->stdin_st && ex->stdin_st->token == REDIR_I){
         
 		*fd_stdin = file_o(ex->stdin_st->content, ex->stdin_st->token); //data->exec->cmd[0], 0);
     }
 	if (*fd_stdin == -1)
 		cmd1 = 0;
-	if(ex->stdout_st && (ex->stdout_st->token == REDIR_OUT || ex->stdout_st->token == REDIR_APPEND)){
+	if(ex->stdout_st && (ex->stdout_st->token == REDIR_O || ex->stdout_st->token == REDIR_A)){
 		*fd_stdout = file_o(ex->stdout_st->content, ex->stdout_st->token);//  data->exec->cmd[0], 1);
     }
     //printf("After_check\n");
@@ -56,7 +56,7 @@ int	ft_pipe2(t_exec *ex, int *fd_stdin, int *fd_stdout)
 		i++;
 		pipe(fd);
         close(fd[1]);
-		fd_stdin = &fd[0];
+		*fd_stdin = fd[0];
 	}
 	//printf("end ft_pipe2\n");
 	return (i);
@@ -175,12 +175,13 @@ void	run_exec(t_data *data)
     print_var_build(data);
     init_env(data,data->env);
     init_wds(data);
-	prep_exec(data)
+	// prep_exec(data);
 	//printf("in run %d\n", data->nb_exec);
 	// print_debug(data);
 	//printf("nb_exec = [%d]\n",data->nb_exec);
-	// if(data->nb_exec > 1)
+	if(data->nb_exec > 1)
 		ft_pipe(data);
+		
 	// else{
 	// 	//printf("else\n");
 	// 	// if(is_build(data->exec->cmd))
@@ -207,7 +208,7 @@ int	execute_command(t_data *data, t_exec *cmd)
 	if (!cmd || !cmd->cmd)
 		exit_shell(data, errmsg_cmd(data, "child", NULL,
 				"parsing error: no cmd to execute!", EXIT_FAILURE));
-	if (ft_strchr(cmd->cmd[0], '/') == NULL)
+	if (/* ft_strchr(cmd->cmd[0], '/') == NULL */check_path_slash(ft_my_var(data,"PATH"), cmd->cmd[0]))
 	{
 		ret = exec_build(data, cmd->cmd);
 		if (ret != CMD_NOT_FOUND)
@@ -216,8 +217,11 @@ int	execute_command(t_data *data, t_exec *cmd)
 		if (ret != CMD_NOT_FOUND)
 			exit_shell(data, ret);
 	}
-	ret = execute_local_bin(data, cmd);
-	exit_shell(data, ret);
+	else
+	{
+		ret = execute_local_bin(data, cmd);
+		exit_shell(data, ret);
+	}
 	return (ret);
 }
 /// /////////////////test////////////////////////////////////////////////

@@ -5,13 +5,16 @@ Makefile
 TRUCS A FAIRE
 builtins
 exec
+f
 fil
+file23
 file23.txt
 foiile
 grep
 header
 ic.txt
 init_struct.c
+ji
 libft
 lists
 main.c

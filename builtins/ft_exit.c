@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:44:52 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/24 00:58:56 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/27 20:52:09 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static int	get_exit_code(t_data *data, char *arg, bool *error)
 
 void	exit_shell(t_data *data, int ret)
 {
+	printf("exit_shell\n");
 	if (data)
 	{
 		free_mall(&data->mall);

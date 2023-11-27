@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 23:16:06 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/27 19:46:57 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/27 22:08:33 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ char	*get_env_var_value(t_data *data, char **env, char *var);
 
 // Nouvel exec
 void cleanup_pipes(t_data *data, int *j);
-void pipe_execution(t_data *data, int *j);
+int pipe_execution(t_data *data, int *j);
 int	initialize_pipes(t_data *data, int fd_pipe[2], int *j);
 int	ft_pipe2(t_exec *ex, int *fd_stdin, int *fd_stdout);
 void	exit_shell(t_data *data, int ret);
@@ -128,5 +128,7 @@ int	execute_local_bin(t_data *data, t_exec *cmd);
 int	execute_command(t_data *data, t_exec *cmd);
 int	execute_sys_bin(t_data *data, t_exec *cmd);
 int	prep_exec(t_data *data, int *fd_pipe, int *j);
+int init_io(t_data *data, int fd_pipe[2], int *j);
 
+int	check_path_slash(char *path, char *cmd);
 #endif

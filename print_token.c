@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:28:47 by momox             #+#    #+#             */
-/*   Updated: 2023/10/11 16:05:05 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/27 20:08:22 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	print_token(t_list *list)
 			printf("%s = PIPE\n", list->content);
 		if (list->token == COMMAND)
 			printf("%s = COMMAND\n", list->content);
-		if (list->token == REDIR_IN)
+		if (list->token == REDIR_I)
 			printf("%s = REDIR IN\n", list->content);
-		if (list->token == REDIR_OUT)
+		if (list->token == REDIR_O)
 			printf("%s = REDIR OUT\n", list->content);
-		if (list->token == REDIR_APPEND)
+		if (list->token == REDIR_A)
 			printf("%s = REDIR APPEND\n", list->content);
 		if (list->token == FILES)
 			printf("%s = FILES\n", list->content);

@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 22:28:55 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/27 18:42:48 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/27 22:04:11 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@
 
 bool is_build(char **cmd)
 {
-	int	ret;
+	// int	ret;
 	// printf("exec_build_for_debug\n");
    	// printf("exec_b : cmd [0] == %s\n",*cmd);
 
-	ret = CMD_NOT_FOUND;
+	// ret = false;
 	if (ft_strncmp(cmd[0], "cd", 3) == 0)
         return (true);
 	else if (ft_strncmp(cmd[0], "echo", 5) == 0)
@@ -61,7 +61,7 @@ bool is_build(char **cmd)
         return (true);
 	else if (ft_strncmp(cmd[0], "exit", 5) == 0)
         return (true);
-	return (ret);
+	return (false);
 }
 t_builtin builtins[] = {
     // {"cd", ft_cd2},
@@ -92,8 +92,10 @@ builtin_func find_builtin(const char *cmd_name, t_builtin *builtins) {
 int exec_build(t_data *data, char **cmd) {
     printf("exec_build_for_debug\n");
     printf("exec_b : cmd [0] == %s\n", *cmd);
+    int ret;
 
     builtin_func func = find_builtin(cmd[0], builtins);
+    printf("exec_buil Test \n");
     if (func != NULL) {
         return func(data, cmd);
     } else {
