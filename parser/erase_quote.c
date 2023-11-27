@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 20:17:48 by momox             #+#    #+#             */
-/*   Updated: 2023/11/03 19:43:31 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/27 22:42:16 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,26 @@ char	*erase_quote(t_mall *mall, char *str, int *index_tab)
 	index_len = u;
 	new = erase_quote_2(str, new, index_tab, index_len);
 	return (new);
+}
+char	is_between_quote_rem(char *str, int index)
+{
+	char	quote;
+	int		i;
+
+	quote = '0';
+	i = 0;
+	if (!str)
+		return (1);
+	while (str[i] && i <= index)
+	{
+		if (quote == '0' && (str[i] == '\'' || str[i] == '\"'))
+		{
+			quote = str[i];
+			return (quote);
+		}
+		else if (quote != '0' && str[i] == quote)
+			quote = '0';
+		i++;
+	}
+	return (quote);
 }

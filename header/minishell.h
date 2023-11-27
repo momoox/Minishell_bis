@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:38:23 by mgeisler          #+#    #+#             */
-/*   Updated: 2023/11/27 20:08:22 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/27 22:41:51 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ void	quote_index(char *str, int *index_tab);
 void	check_quote_remove(t_data *data, t_list *list);
 char	*erase_quote(t_mall *mall, char *str, int *index_tab);
 char	is_between_quote(char *str, int index);
+char	is_between_quote_rem(char *str, int index);
 int		is_operator(char c);
 void	ft_here_doc(char *bp, t_data *data);
 int		split_op(t_data *data, char c);
