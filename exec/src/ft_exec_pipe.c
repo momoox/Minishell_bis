@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 02:47:43 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/27 02:36:53 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/27 19:56:21 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,24 @@ int ft_lstsize(t_list *list)
 //     print_debug(data);
 // }
 
-
+int	prep_exec(t_data *data, int *fd_pipe, int *j)
+{
+	printf("pre_exec %p \n",data->exec);
+	if (!data || !data->exec)
+		return (EXIT_SUCCESS);
+	printf("pre_exec2\n");
+	if (!data->exec[*j].cmd[0])
+	{
+		printf("pre exec val cmd {%s}\n", data->exec[*j].cmd[0]);
+		if (data->exec
+			&& !initialize_pipes(data, fd_pipe, j))
+			return (EXIT_FAILURE);
+		return (EXIT_SUCCESS);
+	}
+	// if (!create_pipes(data, mall))
+	// 	return (EXIT_FAILURE);
+	return (CMD_NOT_FOUND);
+}
 int	execute_sys_bin(t_data *data, t_exec *cmd)
 {
 	//printf("start execute_sys_bin \n");
@@ -158,6 +175,7 @@ void	run_exec(t_data *data)
     print_var_build(data);
     init_env(data,data->env);
     init_wds(data);
+	prep_exec(data)
 	//printf("in run %d\n", data->nb_exec);
 	// print_debug(data);
 	//printf("nb_exec = [%d]\n",data->nb_exec);

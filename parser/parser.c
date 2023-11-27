@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:21:33 by momox             #+#    #+#             */
-/*   Updated: 2023/11/27 03:13:26 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/27 18:29:25 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	parser(t_data *data)
 	cmd_tab(data);
 	printf("in parser : %p\n",data->exec);
 	tab_exec(data);
-	printf("in parser : %p\n",data->exec);
+	printf("in parser : %s\n",data->exec[0].cmd[0]);
 	if (data->flag_delete != 0)
 		return (0);
 	return (1);

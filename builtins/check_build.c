@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 22:28:55 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/26 22:53:55 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/27 18:42:48 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int run_builtin(t_data *data, char **cmd) {
 	int i = 0;
 	while (builtins[i].cmd_name != NULL)
 	{
-        if (strcmp(cmd[0], builtins[i].cmd_name) == 0)
+        if (ft_strcmp(cmd[0], builtins[i].cmd_name) == 0)
 		{
             return builtins[i].func(data, cmd);
         }
