@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:46:47 by momox             #+#    #+#             */
-/*   Updated: 2023/11/22 19:26:48 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/28 22:42:08 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	count(char *s)
 			words++;
 		i++;
 	}
-	words++;
+	if (ft_whitespace(s[i]) && s[i + 1])
+		words++;
 	return (words);
 }
 
@@ -97,7 +98,7 @@ char	**ft_split_whitespaces(t_mall *mall, char *s)
 		return (0);
 	while (j < count(s))
 	{
-		tab[j++] = cpyword(mall, s, &i, lenword(s, i));
+		tab[j] = cpyword(mall, s, &i, lenword(s, i));
 		if (!tab[j - 1])
 			return (freeall(tab));
 	}

@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 21:05:04 by momox             #+#    #+#             */
-/*   Updated: 2023/11/22 19:13:27 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/28 22:14:38 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlcpy(char *dest, char *src, size_t size)
 	size_t	i;
 
 	i = 0;
+	if (!dest || !src)
+		return (0);
 	while (src[i] != '\0' && i + 1 < size)
 	{
 		dest[i] = src[i];

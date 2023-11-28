@@ -7,3 +7,6 @@ entrée pipe
 
 
 setup fd
+
+supprimer regle make
+supprimer print debug, ls... 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_plus_plus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:53:53 by momox             #+#    #+#             */
-/*   Updated: 2023/11/09 20:50:14 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/28 20:33:01 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	free_mall(t_mall **mall)
 {
 	t_mall	*temp;
 
-	while (mall)
+	while (*mall)
 	{
 		temp = (*mall)->next;
 		free((*mall)->content);

@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:40:29 by mgeisler          #+#    #+#             */
-/*   Updated: 2023/11/27 22:47:11 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/28 22:16:14 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	reader(t_data *data)
 		signal(SIGQUIT, sig_handler);
 		reinit(data);
 		data->input = readline("\033[0;33mminishell>\033[0m ");
-
 		if (!data->input)
 			break ;
 		if (data->input[0] == 0)
