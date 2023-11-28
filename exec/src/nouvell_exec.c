@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:23:31 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/28 03:41:40 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/28 03:46:39 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	 initialize_pipes(t_data *data, int fd_pipe[2], int *j)
 		// printf("1: in = %d | out = %d\n", data->exec[*j].fd_in, data->exec[*j].fd_out);
 		ft_pipe2(&data->exec[*j], &data->exec[*j].fd_in,
 			&data->exec[*j].fd_out);
-		if(data->nb_exec > 1){
+		// if(data->nb_exec > 1){
 			
 			data->pid = fork();
 			if (data->pid == -1)
@@ -48,7 +48,7 @@ int	 initialize_pipes(t_data *data, int fd_pipe[2], int *j)
 			else {
 				cleanup_pipes(data, j);
 			}
-		}
+		// }
 		// else{
 		// 	execute_command(data, &data->exec[*j]);
 		// }
