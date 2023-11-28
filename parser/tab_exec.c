@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:38:20 by momox             #+#    #+#             */
-/*   Updated: 2023/11/28 19:50:39 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/28 19:54:15 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,7 @@ int	count_pipe(t_list *list)
 	while (temp)
 	{
 		if (temp->token == PIPE)
-		{
-			printf("je ne devrais pas être ici\n");
 			nb_pipe++;
-		}
 		temp = temp->next;
 	}
 	return (nb_pipe + 1);
