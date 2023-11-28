@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:54:40 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/27 22:47:18 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/28 01:53:55 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ int	init_wds(t_data *data)
 	}
 	if (get_env_var_index(data, data->env, "OLDPWD") != -1)
 	{
-		data->shell->hold_pwd = ft_strdup(data, get_env_var_value(data, data->env,
+		data->shell->old_pwd = ft_strdup(data, get_env_var_value(data, data->env,
 					"OLDPWD"));
-		if (!data->shell->hold_pwd){
+		if (!data->shell->old_pwd){
 			
 			//free(wd);
 			return (0);
@@ -111,8 +111,8 @@ int	init_wds(t_data *data)
 	}
 	else
 	{
-		data->shell->hold_pwd = ft_strdup(data,wd);
-		if (!data->shell->hold_pwd)
+		data->shell->old_pwd = ft_strdup(data,wd);
+		if (!data->shell->old_pwd)
 		{
 			//free(wd);	
 			return (0);
@@ -120,20 +120,6 @@ int	init_wds(t_data *data)
 	}
 	return (1);
 }
-// void *ft_memset(void *b, int c, size_t len)
-// {
-// 	unsigned char *p;
-// 	unsigned char *ch;
-	
-// 	p = (unsigned char *)b;
-// 	ch = (unsigned char)c;
-// 	while (len--)
-// 	{
-// 		*p = ch;
-// 		p++;
-// 	}
-// 	return (b);
-// }
 
 void	*ft_memset(void *b, int c, size_t len)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:38:23 by mgeisler          #+#    #+#             */
-/*   Updated: 2023/11/27 22:41:51 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/28 02:54:21 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,8 @@ typedef struct s_list
 
 typedef struct s_exec_shell
 {
-	char	*pwd;
 	char	*cwd;
-	char	*hold_pwd;
+	char	*old_pwd;
 }				t_exec_shell;
 
 typedef struct s_exec
@@ -202,9 +201,9 @@ void	printtab2(int *tab);
 void	print_token(t_list *list);
 
 /* builtins */
-int		ft_env(char **env);
-int		ft_echo(char **cmd);
-int		ft_pwd(void);
+int		ft_env(t_data *data, char **env);
+int		ft_echo(t_data *data, char **cmd);
+int		ft_pwd(t_data *data, char **null);
 
 // olive
 void	run_exec(t_data *data);

@@ -6,12 +6,12 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:21:42 by momox             #+#    #+#             */
-/*   Updated: 2023/10/22 20:10:40 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/28 01:40:07 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+#include "util_exec.h"
 int	check_n(char *str)
 {
 	int	i;
@@ -50,14 +50,15 @@ void	ft_echo_2(char **cmd)
 	printf("\n");
 }
 
-int	ft_echo(char **cmd)
+int	ft_echo(t_data *data, char **cmd)
 {
+	(void)data;
 	int	i;
 	printf("ft_echo_for_debug\n");
 	if (!cmd[1])
 	{
 		printf("\n");
-		return (0);
+		return (CMD_NOT_FOUND);
 	}
 	if (check_n(cmd[1]) == 1)
 	{
@@ -74,5 +75,5 @@ int	ft_echo(char **cmd)
 	}
 	else
 		ft_echo_2(cmd);
-	return (0);
+	return (CMD_NOT_FOUND);
 }

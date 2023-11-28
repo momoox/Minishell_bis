@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:22:01 by momox             #+#    #+#             */
-/*   Updated: 2023/11/24 01:08:59 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/28 03:29:06 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,12 @@ void	update_wds(t_data *data, char *wd)
 	set_env_var(data, "OLDPWD", get_env_var_value(data, data->env, "PWD"));
 	printf("old_pwd = [%s]\n",wd);//data->exec->shell->hold_pwd);
 	set_env_var(data, "OLDPWD", wd);
-	if (data->shell->hold_pwd)
+	if (data->shell->old_pwd)
 	{
 		//free_tmp(data->exec->shell->hold_pwd);
-		data->shell->hold_pwd = ft_strdup_pipe(data, data->shell->cwd);
-		printf("get_env dat= [%s]\n",data->shell->pwd);
+		data->shell->old_pwd = ft_strdup_pipe(data, data->shell->cwd);
+		printf("get_env dat= cwd [%s]\n",data->shell->cwd);
+		printf("get_env dat= old [%s]\n",data->shell->old_pwd);
 	}
 	if (data->shell->cwd)
 	{
@@ -58,15 +59,17 @@ void	update_wds(t_data *data, char *wd)
 	//free_tmp(wd);
 }
 
-int	ft_env(char **env)
+int	ft_env(t_data *data, char **env)
 {
+	(void)env;
 	int	i;
 
 	i = 0;
-	while (env[i])
+	printf("env[i] : = %s\n",data->env[i]);
+	while (data->env[i])
 	{
-		printf("%s\n", env[i]);
+		printf("%s\n", data->env[i]);
 		i++;
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }

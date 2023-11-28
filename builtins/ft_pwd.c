@@ -6,14 +6,16 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:22:10 by momox             #+#    #+#             */
-/*   Updated: 2023/11/05 17:55:36 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/28 02:53:49 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_pwd(void)
+int	ft_pwd(t_data *data, char **null)
 {
+	(void)data;
+	(void)null;
 	printf("%s\n", getcwd(NULL, 0));
 	return (0);
 }

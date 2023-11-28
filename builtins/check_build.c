@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 22:28:55 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/27 22:04:11 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/28 03:00:03 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ bool is_build(char **cmd)
 	return (false);
 }
 t_builtin builtins[] = {
-    // {"cd", ft_cd2},
-    // {"echo", ft_echo},
-    // {"env", ft_env},
+    {"cd", ft_cd2},
+    {"echo", ft_echo},
+    {"env", ft_env},
     {"export", ft_export},
-    // {"pwd", ft_pwd},
+    {"pwd", ft_pwd},
     {"unset", ft_unset},
     {"exit", ft_exit},
    
@@ -78,6 +78,7 @@ t_builtin builtins[] = {
 
 builtin_func find_builtin(const char *cmd_name, t_builtin *builtins) {
     int i = 0;
+    
 	while (builtins[i].cmd_name != NULL) 
 	{
         if (ft_strcmp(cmd_name, builtins[i].cmd_name) == 0) {
@@ -90,16 +91,19 @@ builtin_func find_builtin(const char *cmd_name, t_builtin *builtins) {
 
 ///////////////////////////////////////////
 int exec_build(t_data *data, char **cmd) {
-    printf("exec_build_for_debug\n");
-    printf("exec_b : cmd [0] == %s\n", *cmd);
+    // printf("exec_build_for_debug\n");
+    // printf("exec_b : cmd [0] == %s\n", *cmd);
     int ret;
 
+    ret = EXIT_SUCCESS;
     builtin_func func = find_builtin(cmd[0], builtins);
     printf("exec_buil Test \n");
     if (func != NULL) {
         return func(data, cmd);
+        printf("NULL\n");
     } else {
         // La commande n'est pas une commande intégrée, traiter normalement
+        printf("ESLE\n");
        return CMD_NOT_FOUND;
     }
 }

@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 00:53:37 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/24 01:08:13 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/28 01:57:15 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	change_dir(t_data *data, char *path)
 		ret = ft_strdup_pipe(data, cwd);
 	printf("ch_dir ret = %s \n ", ret);
 	update_wds(data, ret);
-	return (1);
+	return (EXIT_SUCCESS);
 }
 
 int	ft_cd2(t_data *data, char **args)
