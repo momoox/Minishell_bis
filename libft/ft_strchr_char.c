@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr_char.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 23:06:19 by momox             #+#    #+#             */
-/*   Updated: 2023/11/23 23:14:00 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/28 18:24:18 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ int	ft_strchr_char(const char *str, char *s)
 
 	i = 0;
 	u = 0;
-	while (str[i])
+	while (str && s[u] && str[i])
 	{
 		if (str[i] == s[u])
 		{
-			while (str[i] == s[u] && s[u])
+			while (str[i] == s[u] && s[u] && str[i])
 			{
 				u++;
 				i++;

@@ -12,6 +12,11 @@
                 "|",
                 "wc -l"
             ]
+        },
+        {
+            "cwd": "/Users/oliove/save_min",
+            "binaryPath": "/Users/oliove/save_min/minishell",
+            "binaryArgs": []
         }
     ],
     "C_Cpp.errorSquiggles": "disabled"

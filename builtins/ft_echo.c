@@ -6,12 +6,13 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:21:42 by momox             #+#    #+#             */
-/*   Updated: 2023/11/28 04:35:42 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/28 18:02:26 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "util_exec.h"
+
 int	check_n(char *str)
 {
 	int	i;

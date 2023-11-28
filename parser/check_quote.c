@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_quote.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 18:19:24 by momox             #+#    #+#             */
-/*   Updated: 2023/11/27 22:44:11 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/28 18:14:16 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	quote_index(char *str, int *index_tab)
 	static int	i;
 	static int	u;
 
-	while (str[i])
+	while (str && str[i])
 	{
 		if (quote == '\0' && (str[i] == '\'' || str[i] == '\"'))
 		{
