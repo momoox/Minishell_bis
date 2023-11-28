@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 22:28:55 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/28 03:00:03 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/28 03:59:24 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int exec_build(t_data *data, char **cmd) {
 
     ret = EXIT_SUCCESS;
     builtin_func func = find_builtin(cmd[0], builtins);
-    printf("exec_buil Test \n");
+    // printf("exec_buil Test \n");
     if (func != NULL) {
         return func(data, cmd);
         printf("NULL\n");

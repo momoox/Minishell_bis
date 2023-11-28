@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 02:47:43 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/28 03:39:36 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/28 04:35:19 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,22 +58,22 @@ int ft_lstsize(t_list *list)
     }
     return (i);
 }
-int	prep_exec(t_data *data, int *fd_pipe, int *j)
-{
-	// printf("pre_exec %p \n",data->exec);
-	if (!data || !data->exec)
-		return (EXIT_SUCCESS);
-	// printf("pre_exec2\n");
-	if (!data->exec[*j].cmd[0])
-	{
-		// printf("pre exec val cmd {%s}\n", data->exec[*j].cmd[0]);
-		if (data->exec
-			&& !initialize_pipes(data, fd_pipe, j))
-			return (EXIT_FAILURE);
-		return (EXIT_SUCCESS);
-	}
-	return (CMD_NOT_FOUND);
-}
+// int	prep_exec(t_data *data, int *fd_pipe, int *j)
+// {
+// 	// printf("pre_exec %p \n",data->exec);
+// 	if (!data || !data->exec)
+// 		return (EXIT_SUCCESS);
+// 	// printf("pre_exec2\n");
+// 	if (!data->exec[*j].cmd[0])
+// 	{
+// 		// printf("pre exec val cmd {%s}\n", data->exec[*j].cmd[0]);
+// 		if (data->exec
+// 			&& !initialize_pipes(data, fd_pipe, j))
+// 			return (EXIT_FAILURE);
+// 		return (EXIT_SUCCESS);
+// 	}
+// 	return (CMD_NOT_FOUND);
+// }
 int	execute_sys_bin(t_data *data, t_exec *cmd)
 {
 	if (!cmd->cmd || cmd->cmd[0] == NULL)//'\0')
@@ -137,14 +137,18 @@ int	execute_command(t_data *data, t_exec *cmd)
 		// printf("execute_command[0]== [%s]\n", data->exec[0].cmd[0]);
 		
 		ret = exec_build(data, cmd->cmd);
-		// printf("ret1 == [%d]\n", ret);
-		if (ret != CMD_NOT_FOUND)
+		printf("ret1 == [%d]\n", ret);
+		if (ret != CMD_NOT_FOUND && ret != EXIT_SUCCESS)
 			exit_shell(data, ret);
-		ret = execute_sys_bin(data, cmd);
-		// printf("ret2 == [%d]\n", ret);
+		if(!find_builtin(cmd->cmd[0], data->func))
+		{
+			ret = execute_sys_bin(data, cmd);
+			printf("ret2 == [%d]\n", ret);
+			
+			if (ret != CMD_NOT_FOUND && ret != EXIT_SUCCESS)
+				exit_shell(data, ret);
+		}
 		
-		if (ret != CMD_NOT_FOUND)
-			exit_shell(data, ret);
 	}
 	else
 	{

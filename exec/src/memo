@@ -1,3 +1,9 @@
+problemme avec echo :
+        get_env_value: tmp == [OLDPWD=]
+        exec_buil Test 
+        ft_echo_for_debug
+        popop
+        popop
 
 Ceci est ma ligne de command :
 minishell>      ls > file23 > grep ".c" | wc -w
