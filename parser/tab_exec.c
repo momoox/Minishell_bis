@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tab_exec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:38:20 by momox             #+#    #+#             */
-/*   Updated: 2023/11/28 02:51:43 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/28 19:50:39 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,10 @@ int	count_pipe(t_list *list)
 	while (temp)
 	{
 		if (temp->token == PIPE)
+		{
+			printf("je ne devrais pas être ici\n");
 			nb_pipe++;
+		}
 		temp = temp->next;
 	}
 	return (nb_pipe + 1);
@@ -81,6 +84,5 @@ void	tab_exec(t_data *data)
 	i = 0;
 	data->nb_exec = count_pipe(temp);
 	init_exec(data, data->nb_exec);
-	// printf("temp before create tab = %s\n", temp->content);
 	create_tab(data, temp, i);
 }
