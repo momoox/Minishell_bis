@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 00:53:27 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 05:18:47 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 15:58:43 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_export(t_data *data, char **args)
 	ret = EXIT_SUCCESS;
 	i = 1;
 	if (!args[i])
-		return (env_builtin(data, NULL));
+		return (ft_env(data, NULL));
 	while (args[i])
 	{
 		if (!is_valid_env_var_key(args[i]))
@@ -77,7 +77,7 @@ int compare_env_vars(const void *a, const void *b)
     return strcmp(env_var_a, env_var_b);
 }
 
-int ft_export(t_data *data, char **args)
+int ft_export2(t_data *data, char **args)
 {
     int i;
     int ret;
@@ -90,13 +90,13 @@ int ft_export(t_data *data, char **args)
         int env_count = 0;
         while (data->env[env_count])
             env_count++;
-        char **env_copy = (char **)malloc_plus_plus(data, (env_count + 1) * sizeof(char *));
+        char **env_copy = (char **)malloc_plus_plus(&data->mall, (env_count + 1) * sizeof(char *));
         if (!env_copy)
             return EXIT_FAILURE;
         for (int i = 0; i < env_count; i++)
-            env_copy[i] = ft_strdup(datam data->env[i]);
+            env_copy[i] = ft_strdup(data, data->env[i]);
         env_copy[env_count] = NULL;
-        qsort(env_copy, env_count, sizeof(char *), compare_env_vars);
+        qsort(env_copy, env_count, sizeof(char *), compare_env_vars);// faire ma vertion
         for (int i = 0; i < env_count; i++)
             ft_putendl_fd(env_copy[i], STDOUT_FILENO);
     }

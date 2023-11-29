@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 23:16:06 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 01:24:22 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 15:44:22 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,11 @@ int	    env_builtin(t_data *data, char **args);
 char	*ft_substr_pipe(t_data *data, char *s, int start, int len);
 void	free_tab_args(char **args);
 char	*join_strs(t_data *data, char *str, char *add);
+
 int	    errmsg_cmd(t_data *data, char *command, char *detail, char *error_message, int error_nb);
+// void errmsg_cmd(t_data *data);//celle a utililer
+int ft_export2(t_data *data, char **args);
+
 bool	add_detail_quotes(char *command);
 // int	    ft_cd2(t_data *data, char **args);
 int	    ft_isspace(int c);
@@ -135,4 +139,7 @@ int is_forck(t_data *data, t_exec *cmd);
 char *ft_strcpy(char *dest, char *src);
 
 char *ft_strcat(char *dest, char *src);
+
+char	**realloc_env(t_data *data, size_t size);
+int	remove_env_var(t_data *data, int idx);
 #endif
