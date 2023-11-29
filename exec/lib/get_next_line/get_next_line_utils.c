@@ -6,12 +6,12 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 20:24:08 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/09 20:49:57 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 20:47:47 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-/**/
+
 t_list	*free_stash(t_list *stash)
 {
 	t_list	*current;

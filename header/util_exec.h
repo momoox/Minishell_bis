@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util_exec.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 23:16:06 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 18:31:41 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/29 20:30:08 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,4 +144,5 @@ char *ft_strcat(char *dest, char *src);
 char	**realloc_env(t_data *data, size_t size);
 int	remove_env_var(t_data *data, int idx);
 void	sort_tab(char **tab);
+int norm_cmd(int *i, int fd[], int *fd_stdin);
 #endif

@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 00:14:52 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 03:53:09 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 20:02:54 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,17 @@ char	*ft_my_var(t_data *data, char *str)
 	int		i;
 	char	*var;
 
-	// int		size;
-	// t_data tmp;
-	// char *tmp;
 	i = 0;
-	// size = 0;
 	var = ft_calloc_env(data, 1, ft_strlen(str) + 2);
 	ft_strcpy(var, str);
 	ft_strcat(var, "=");
 	while (data->env && data->env[i])
 	{
-		// //printf("prout\n");
 		if (ft_strncmp(data->env[i], var, ft_strlen(var)) == 0)
 			break ;
 		i++;
 	}
-	// size = strlen(var);
-	// free(var);
-	// if (!data->env[i])
-	// return( NULL);
-	return (data->env[i]); // + size);
+	return (data->env[i]);
 }
 
 // void	exece(t_data *data, char **cmd, char **env)

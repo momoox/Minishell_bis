@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 20:13:11 by momox             #+#    #+#             */
-/*   Updated: 2023/11/29 19:02:09 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/29 19:51:39 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	exec_heredoc(pid_t pid, char *line, char *bp, int fd)
 			if (!(ft_strncmp(line, bp, ft_strlen(line) + ft_strlen(bp)))
 				|| line == NULL)
 				break ;
-			//free(line);
 		}
 		exit (0);
 	}
@@ -44,9 +43,7 @@ void	ft_here_doc(char *bp, t_data *data)
 	waitpid(pid, 0, 0);
 	sig_onoff(1);
 	close(fd);
-	// unlink(".heredocminishelltrobien");
 	data->flag_unlink = 1;
-	//free(line);
 }
 
 int heredoc_manage(t_list *temp, t_data *data)

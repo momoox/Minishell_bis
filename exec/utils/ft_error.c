@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 00:11:03 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 17:38:54 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 19:59:35 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	ft_check_error_parser(int ac, char **av)
 
 bool	add_detail_quotes(char *command)
 {
-	if (ft_strncmp(command, "export", 7) == 0
-		|| ft_strncmp(command, "unset", 6) == 0)
+	if (ft_strncmp(command, "export", 7) == 0 || ft_strncmp(command, "unset",
+			6) == 0)
 		return (true);
 	return (false);
 }
@@ -59,74 +59,5 @@ char	*join_strs(t_data *data, char *str, char *add)
 		return (ft_strdup_pipe(data, add));
 	tmp = str;
 	str = ft_strjoin(data->mall, tmp, add);
-	//free_tmp(tmp);
 	return (str);
 }
-// errmsg_cmd(data, (char[3]){cmd, detail, errmsg})
-// int		errmsg_cmd(t_data *data, char *command, char *detail, char *error_message, int error_nb)
-
-/*
-char *command[0],
-char *detail[1],
-char *error_message[3], 
-*/
-int		errmsg_cmd(t_data *data, char *msg_err[3], int error_nb)
-{
-	char	*msg;
-	bool	detail_quotes;
-	
-	detail_quotes = add_detail_quotes(msg_err[0]);
-	msg = ft_strdup_pipe(data,"minishell: ");
-	if (msg_err[0])
-	{
-		msg = join_strs(data, msg, msg_err[0]);
-		msg = join_strs(data, msg, ": ");
-	}
-	if (msg[1])
-	{
-		if (detail_quotes)
-			msg = join_strs(data, msg, "`");
-		msg = join_strs(data, msg, msg_err[1]);
-		if (detail_quotes)
-			msg = join_strs(data, msg, "'");
-		msg = join_strs(data, msg, ": ");
-	}
-	msg = join_strs(data, msg, msg_err[2] /* error_message */);
-	ft_putendl_fd(msg, STDERR_FILENO);
-	//free_tmp(msg);
-	return (error_nb);
-}
-
-
-// void errmsg_cmd(t_data *data)
-// {
-//     char *msg;
-//     bool detail_quotes;
-
-//     detail_quotes = add_detail_quotes(data->error_info.command);
-//     msg = ft_strdup_pipe(data, "minishell: ");
-//     if (data->error_info.command != NULL)
-//     {
-//         msg = join_strs(data, msg, data->error_info.command);
-//         msg = join_strs(data, msg, ": ");
-//     }
-//     if (data->error_info.detail != NULL)
-//     {
-//         if (detail_quotes)
-//             msg = join_strs(data, msg, "`");
-//         msg = join_strs(data, msg, data->error_info.detail);
-//         if (detail_quotes)
-//             msg = join_strs(data, msg, "'");
-//         msg = join_strs(data, msg, ": ");
-//     }
-//     msg = join_strs(data, msg, data->error_info.error_message);
-//     ft_putendl_fd(msg, STDERR_FILENO);
-// }
-
-// // Utilisation de la fonction errmsg_cmd
-// data->error_info.command = "my_command";
-// data->error_info.detail = "my_detail";
-// data->error_info.error_message = "my_error_message";
-// data->error_info.error_nb = 42;
-
-// errmsg_cmd(data);

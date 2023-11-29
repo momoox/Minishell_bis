@@ -6,19 +6,18 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 00:53:37 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 18:19:40 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 20:45:47 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "util_exec.h"
 
-
 int	chdir_errno_mod(char *path, t_data *data)
 {
 	if (errno == ESTALE)
 		errno = ENOENT;
-	errmsg_cmd(data,(char *[3]){"cd", path, strerror(errno)}, errno);
+	errmsg_cmd(data, (char *[3]){"cd", path, strerror(errno)}, errno);
 	return (0);
 }
 
@@ -35,8 +34,8 @@ int	change_dir(t_data *data, char *path)
 	if (!ret)
 	{
 		errmsg_cmd(data, (char *[3]){"cd: error retrieving current directory",
-			"getcwd: cannot access parent directories",
-			strerror(errno)}, errno);
+			"getcwd: cannot access parent directories", strerror(errno)},
+			errno);
 		ret = ft_strjoin(data->mall, data->shell->cwd, "/");
 		tmp = ret;
 		ret = ft_strjoin(data->mall, tmp, path);
@@ -52,23 +51,25 @@ int	ft_cd2(t_data *data, char **args)
 	char	*path;
 
 	if (!args || !args[1] || ft_isspace(args[1][0]) || args[1][0] == '\0'
-		|| ft_strncmp(args[1], "--", 3) == 0 || ft_strncmp(args[1], "~", 2) == 0)
+		|| ft_strncmp(args[1], "--", 3) == 0 || ft_strncmp(args[1], "~",
+			2) == 0)
 	{
 		path = get_env_var_value(data, data->env, "HOME");
 		if (!path || *path == '\0' || ft_isspace(*path))
-			return (errmsg_cmd(data,(char *[3]){"cd", NULL, "HOME not set"}, EXIT_FAILURE));
+			return (errmsg_cmd(data, (char *[3]){"cd", NULL, "HOME not set"},
+				EXIT_FAILURE));
 		return (!change_dir(data, path));
 	}
 	if (args[2])
-		return (errmsg_cmd(data, (char *[3]){"cd", NULL, "too many arguments"}, EXIT_FAILURE));
+		return (errmsg_cmd(data, (char *[3]){"cd", NULL, "too many arguments"},
+			EXIT_FAILURE));
 	if (ft_strncmp(args[1], "-", 2) == 0)
 	{
-		path = get_env_var_value(data, data->env,
-				"OLDPWD");
+		path = get_env_var_value(data, data->env, "OLDPWD");
 		if (!path)
-			return (errmsg_cmd(data, (char *[3]){"cd", NULL, "OLDPWD not set"}, EXIT_FAILURE));
+			return (errmsg_cmd(data, (char *[3]){"cd", NULL, "OLDPWD not set"},
+				EXIT_FAILURE));
 		return (!change_dir(data, path));
 	}
 	return (!change_dir(data, args[1]));
 }
-

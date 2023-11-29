@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nouvell_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:23:31 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 19:10:48 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/29 20:22:04 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "util_exec.h"
 
 // Partie 1 : Initialisation
-int	 initialize_pipes(t_data *data, int fd_pipe[2], int *j)
+int	initialize_pipes(t_data *data, int fd_pipe[2], int *j)
 {
 	while ((*j) < data->nb_exec)
 	{
@@ -31,35 +31,36 @@ int	 initialize_pipes(t_data *data, int fd_pipe[2], int *j)
 			data->exec[*j].fd_in = dup(STDIN_FILENO);
 		ft_pipe2(&data->exec[*j], &data->exec[*j].fd_in,
 			&data->exec[*j].fd_out);
-			sig_onoff(0);
-			data->pid = fork();
-			if (data->pid == -1)
-				exit(EXIT_FAILURE);
-			if (data->pid == 0)
-			{
-				pipe_execution(data, j);
-				exit(EXIT_SUCCESS); // Sortir du loop si c'est le processus enfant
-			}
-			else {
-				cleanup_pipes(data, j);
-			}
-  		(*j)++;
+		sig_onoff(0);
+		data->pid = fork();
+		if (data->pid == -1)
+			exit(EXIT_FAILURE);
+		if (data->pid == 0)
+		{
+			pipe_execution(data, j);
+			exit(EXIT_SUCCESS);
+		}
+		else
+			cleanup_pipes(data, j);
+		(*j)++;
 	}
-	return(1);
+	return (1);
 }
 
 // Partie 2 : Gestion des tubes
 int	pipe_execution(t_data *data, int *j)
 {
-	int ret;
-	builtin_func func = find_builtin(data->exec[*j].cmd[0], builtins);
-    if(func == NULL)
+	int				ret;
+	builtin_func	func;
+
+	func = find_builtin(data->exec[*j].cmd[0], builtins);
+	if (func == NULL)
 	{
 		printf("pipe_exec\n");
 		data->exec[*j].cmd[0] = ft_path_dir(data->mall, data->exec[*j].cmd[0],
-			ft_my_var(data, "PATH"), -1);
-    }
-    dup2(data->exec[*j].fd_out, STDOUT_FILENO);
+				ft_my_var(data, "PATH"), -1);
+	}
+	dup2(data->exec[*j].fd_out, STDOUT_FILENO);
 	dup2(data->exec[*j].fd_in, STDIN_FILENO);
 	close(data->exec[*j].fd_out);
 	close(data->exec[*j].fd_in);
@@ -71,7 +72,8 @@ int	pipe_execution(t_data *data, int *j)
 // Partie 3 : Nettoyage
 void	cleanup_pipes(t_data *data, int *j)
 {
-	int status;
+	int	status;
+
 	status = close(data->exec[*j].fd_in);
 	status = close(data->exec[*j].fd_out);
 	waitpid(-1, &status, 0);
@@ -80,10 +82,9 @@ void	cleanup_pipes(t_data *data, int *j)
 // Fonction principale ft_pipe
 void	ft_pipe(t_data *data)
 {
-	int		j;
-	int		fd_pipe[2];
+	int	j;
+	int	fd_pipe[2];
 
 	j = 0;
 	initialize_pipes(data, fd_pipe, &j);
-
 }

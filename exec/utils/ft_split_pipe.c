@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 23:55:12 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 03:39:35 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 19:54:35 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static int	ft_word_count(char const *s, char car)
 	return (j);
 }
 
-static char	*ft_substr_mod(t_mall *mall, char const *s, unsigned int start, size_t len)
+static char	*ft_substr_mod(t_mall *mall, char const *s, unsigned int start,
+		size_t len)
 {
 	int		i;
 	int		j;
