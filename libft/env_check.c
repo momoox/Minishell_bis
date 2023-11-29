@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 17:13:21 by momox             #+#    #+#             */
-/*   Updated: 2023/11/23 23:47:53 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/28 19:48:33 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	env_check(t_data *data)
 			var_env = get_env(data->mall, temp->content, env_len);
 			replace = identify_replace(data->mall, data, var_env);
 			temp->content = replace_env(data->mall, temp->content, replace);
+			if (!temp->content)
+				ft_lstdel_here(&data->list, temp);
 		}
 		temp = temp->next;
 	}

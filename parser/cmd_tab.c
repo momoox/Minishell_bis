@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 20:44:18 by momox             #+#    #+#             */
-/*   Updated: 2023/11/27 18:58:57 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/28 22:18:31 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ void	cmd_tab(t_data *data)
 {
 	t_list	*temp;
 	t_list	*tab;
-	int	i;
 
-	i = 0;
 	temp = data->list;
 	tab = data->list;
 	while (temp)
@@ -29,6 +27,8 @@ void	cmd_tab(t_data *data)
 		{
 			if (temp->token == COMMAND)
 				tab->cmd = ft_tabadd_back(data->mall, tab->cmd, temp->content);
+			if (!temp->content)
+				ft_lstdel_here(&data->list, temp);
 			temp = temp->next;
 		}
 		if (temp)
