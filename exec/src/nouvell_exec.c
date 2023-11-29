@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:23:31 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 03:52:43 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 18:36:25 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ int	 initialize_pipes(t_data *data, int fd_pipe[2], int *j)
 // Partie 2 : Gestion des tubes
 int	pipe_execution(t_data *data, int *j)
 {
-	printf("in pipe_exec j = %d pid = %d | ppid = %d\n",*j,getpid(),getppid());
 	int ret;
-	// find_builtin(data->exec[*j].cmd[0], t_b *builtins)
 	builtin_func func = find_builtin(data->exec[*j].cmd[0], builtins);
-    if(/* is_build(data->exec[*j].cmd) == false *//* find_builtin(data->exec[*j].cmd[0], data->func) == NULL */func == NULL){
+    if(func == NULL)
+	{
+		printf("pipe_exec\n");
 		data->exec[*j].cmd[0] = ft_path_dir(data->mall, data->exec[*j].cmd[0],
 			ft_my_var(data, "PATH"), -1);
     }

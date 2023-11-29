@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 00:53:37 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 17:43:33 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 18:19:40 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	chdir_errno_mod(char *path, t_data *data)
 
 int	change_dir(t_data *data, char *path)
 {
-	printf("in change dir\n");
 	char	*ret;
 	char	*tmp;
 	char	cwd[PATH_MAX];
@@ -50,7 +49,6 @@ int	change_dir(t_data *data, char *path)
 
 int	ft_cd2(t_data *data, char **args)
 {
-	printf("in cd2\n");
 	char	*path;
 
 	if (!args || !args[1] || ft_isspace(args[1][0]) || args[1][0] == '\0'

@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:44:52 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 17:33:10 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 19:01:54 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,8 @@ static int	get_exit_code(t_data *data, char *arg, bool *error)
 
 void	exit_shell(t_data *data, int ret)
 {
-	printf("exit_shell\n");
 	if (data)
-	{
 		free_mall(&data->mall);
-	}
 	exit(ret);
 }
 
@@ -97,8 +94,12 @@ int	ft_exit(t_data *data, char **args)
 	{
 		exit_code = get_exit_code(data, args[1], &error);
 		if (error)
-			exit_code = errmsg_cmd(data, (char *[3]){"exit", args[1],
+		{
+			 errmsg_cmd(data, (char *[3]){"exit", args[1],
 					"numeric argument required"}, 2);
+			exit_code = 255;			
+			
+		}
 		else if (args[2])
 			return (errmsg_cmd(data, (char *[3]){"exit", NULL, "too many arguments"}, 1));
 	}

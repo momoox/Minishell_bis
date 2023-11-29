@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:38:20 by momox             #+#    #+#             */
-/*   Updated: 2023/11/29 01:33:05 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 18:19:16 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int	count_pipe(t_list *list)
 			nb_pipe++;
 		temp = temp->next;
 	}
-	printf("nb_)ec %d\n",nb_pipe);
 	return (nb_pipe + 1);
 }
 

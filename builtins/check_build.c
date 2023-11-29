@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 22:28:55 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 03:25:15 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 18:30:54 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,10 @@ int exec_build(t_data *data, char **cmd)
     int ret;
     ret = EXIT_SUCCESS;
     builtin_func func = find_builtin(cmd[0], builtins);
-    if (func != NULL) {
-        printf("NULL\n");
+    if (func != NULL) 
         return func(data, cmd);
-    } else {
-        // La commande n'est pas une commande intégrée, traiter normalement
-        printf("ESLE\n");
+    else 
        return CMD_NOT_FOUND;
-    }
 }
 
 int run_builtin(t_data *data, char **cmd) {

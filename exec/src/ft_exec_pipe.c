@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 02:47:43 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 18:11:01 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 18:59:10 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int ft_lstsize(t_list *list)
 
 int	execute_sys_bin(t_data *data, t_exec *cmd)
 {
-	if (!cmd->cmd || cmd->cmd[0] == NULL)//'\0')
+	if (!cmd->cmd || cmd->cmd[0] == NULL)
 		return (CMD_NOT_FOUND);
 	cmd->path = ft_path_dir(data->mall, *cmd->cmd, ft_my_var(data,"PATH"),0);
 	if (!cmd->path)
@@ -104,7 +104,7 @@ int	execute_command(t_data *data, t_exec *cmd)
 	if (/* check_path_slash(ft_my_var(data,"PATH"), cmd->cmd[0]) */ft_strchr(*cmd->cmd, '/') == NULL)
 	{
 		ret = exec_build(data, cmd->cmd);
-		printf("ret1 == [%d], is_fork = %d\n", ret, is_forck(data, cmd));
+		printf("ret == %d]\n",ret);
 		if (ret != CMD_NOT_FOUND && is_forck(data, cmd) == 0/*  && ret != EXIT_SUCCESS */)
 			exit_shell(data, ret);
 		if(!find_builtin(cmd->cmd[0], data->func))

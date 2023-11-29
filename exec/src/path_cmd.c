@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:54:40 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 17:36:28 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 18:35:40 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	*ft_path_dir(t_mall *mall, char *cmd, char *path, int i)
 	char	**path_directo;
 	char	*name;
 	char	*tmp;
-	// //printf("ft_path_dir : cmd == [%s]\n",cmd);
 	if (check_path_slash(path, cmd) == 0)
 		return (cmd);
 	path_directo = ft_split(mall, path, ':');
@@ -37,18 +36,13 @@ void	*ft_path_dir(t_mall *mall, char *cmd, char *path, int i)
 	{
 		tmp = ft_strjoin_pipe(mall, path_directo[i], "/");
 		name = ft_strjoin_pipe(mall, tmp, cmd);
-		//free(tmp);
 		if (access(name, F_OK) == 0)
 		{
 			i = 0;
-			while (path_directo[i])
-				//free(path_directo[i++]);
-			//free(cmd);
+			while (path_directo[i++])
+				;
 			return (name);
 		}
-		// //printf("ft_path_dir : name = [%s]\n",name);
-		// //printf("ft_path_dir : cmd = [%s]\n",cmd);
-		//free(name);
 	}
 	return (cmd);
 }
@@ -57,13 +51,10 @@ int	file_o(char *file, int token)
 {
 	int	res;
 
-	// pour redir_in
 	if (token == REDIR_I)
 		res = open(file, O_RDONLY);
-	// for redir_out
 	if (token == REDIR_O)
 		res = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	// redir_Append
 	if (token == REDIR_A)
 		res = open(file, O_WRONLY | O_CREAT | O_APPEND, 0777);
 	if (res == -1)
@@ -76,16 +67,16 @@ int	init_env(t_data *data, char **env)
 
 	data->env = ft_calloc_env(data, env_var_count(env) + 1, sizeof * data->env);
 	if (!data->env)
-		return (0);
+		return (EXIT_FAILURE);
 	i = 0;
 	while (env[i])
 	{
 		data->env[i] = ft_strdup_pipe(data, env[i]);
 		if (!data->env[i])
-			return (0);
+			return (EXIT_SUCCESS);
 		i++;
 	}
-	return (1);
+	return (EXIT_SUCCESS);
 }
 
 int	init_wds(t_data *data)
@@ -96,16 +87,12 @@ int	init_wds(t_data *data)
 	wd = getcwd(buff, PATH_MAX);
 	data->shell->cwd = ft_strdup_pipe(data, wd);
 	if (!data->shell->cwd)
-	{
 		return (0);
-	}
 	if (get_env_var_index(data, data->env, "OLDPWD") != -1)
 	{
 		data->shell->old_pwd = ft_strdup(data, get_env_var_value(data, data->env,
 					"OLDPWD"));
 		if (!data->shell->old_pwd){
-			
-			//free(wd);
 			return (0);
 		}
 	}
@@ -113,10 +100,7 @@ int	init_wds(t_data *data)
 	{
 		data->shell->old_pwd = ft_strdup(data,wd);
 		if (!data->shell->old_pwd)
-		{
-			//free(wd);	
 			return (0);
-		}
 	}
 	return (1);
 }
