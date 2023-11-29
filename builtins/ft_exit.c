@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:44:52 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 19:01:54 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 22:04:51 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 static bool	check_out_of_range(int neg, unsigned long long num, bool *error)
 {
-	if ((neg == 1 && num > LONG_MAX)
-		|| (neg == -1 && num > -(unsigned long)LONG_MIN))
+	if ((neg == 1 && num > LONG_MAX) || (
+			neg == -1 && num > -(unsigned long)LONG_MIN))
 		*error = true;
 	return (*error);
 }
@@ -74,7 +74,6 @@ static int	get_exit_code(t_data *data, char *arg, bool *error)
 	return (i % 256);
 }
 
-
 void	exit_shell(t_data *data, int ret)
 {
 	if (data)
@@ -84,8 +83,8 @@ void	exit_shell(t_data *data, int ret)
 
 int	ft_exit(t_data *data, char **args)
 {
-	int		exit_code;
 	bool	error;
+	int		exit_code;
 
 	error = false;
 	if (!args || !args[1])
@@ -95,13 +94,13 @@ int	ft_exit(t_data *data, char **args)
 		exit_code = get_exit_code(data, args[1], &error);
 		if (error)
 		{
-			 errmsg_cmd(data, (char *[3]){"exit", args[1],
-					"numeric argument required"}, 2);
-			exit_code = 255;			
-			
+			errmsg_cmd(data, (char *[3]){"exit", args[1],
+				"numeric argument required"}, 2);
+			exit_code = 255;
 		}
 		else if (args[2])
-			return (errmsg_cmd(data, (char *[3]){"exit", NULL, "too many arguments"}, 1));
+			return (errmsg_cmd(data, (char *[3]){"exit", NULL,
+					"too many arguments"}, 1));
 	}
 	exit_shell(data, exit_code);
 	return (2);

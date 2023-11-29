@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 00:53:27 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 18:50:49 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 22:21:20 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	**get_key_value_pair(t_data *data, char *arg)
 	char	*eq_pos;
 
 	eq_pos = ft_strchr(arg, '=');
-	tmp = malloc_plus_plus(&data->mall, sizeof *tmp * (2 + 1));
+	tmp = malloc_plus_plus(&data->mall, sizeof (*tmp) * (2 + 1));
 	tmp[0] = ft_substr_pipe(data, arg, 0, eq_pos - arg);
 	tmp[1] = ft_substr_pipe(data, eq_pos, 1, ft_strlen(eq_pos));
 	tmp[2] = NULL;
@@ -39,7 +39,8 @@ int	ft_export(t_data *data, char **args)
 	{
 		if (!is_valid_env_var_key(args[i]))
 		{
-			errmsg_cmd(data, (char *[3]){"export", args[i], "not a valid identifier"}, false);
+			errmsg_cmd(data, (char *[3]){"export", args[i],
+				"not a valid identifier"}, false);
 			ret = EXIT_FAILURE;
 			return (ret);
 		}
@@ -55,37 +56,39 @@ int	ft_export(t_data *data, char **args)
 	return (ret);
 }
 
-
-int compare_env_vars(const void *a, const void *b)
+int	compare_env_vars(const void *a, const void *b)
 {
-    const char *env_var_a = *(const char **)a;
-    const char *env_var_b = *(const char **)b;
-    return strcmp(env_var_a, env_var_b);
+	const char	*env_var_a = *(const char **)a;
+	const char	*env_var_b = *(const char **)b;
+
+	return (strcmp(env_var_a, env_var_b));
 }
 
-int ft_export2(t_data *data, char **args)
+int	ft_export2(t_data *data, char **args)
 {
-    int i;
-    int ret;
+	int		i;
+	int		ret;
+	int		env_count;
+	char	**env_copy;
 
-    ret = EXIT_SUCCESS;
-    i = 0;
-
-    if (!args[1])
-    {
-        int env_count = 0;
-        while (data->env[env_count])
-            env_count++;
-        char **env_copy = (char **)malloc_plus_plus(&data->mall, (env_count + 1) * sizeof(char *));
-        if (!env_copy)
-            return EXIT_FAILURE;
-        while (i++ < env_count)
-            env_copy[i] = ft_strdup(data, data->env[i]);
-        env_copy[env_count] = NULL;
-        sort_tab(env_copy);
+	ret = EXIT_SUCCESS;
+	i = 0;
+	if (!args[1])
+	{
+		env_count = 0;
+		while (data->env[env_count])
+			env_count++;
+		env_copy = (char **)malloc_plus_plus(&data->mall, (env_count + 1)
+				* sizeof(char *));
+		if (!env_copy)
+			return (EXIT_FAILURE);
+		while (i++ < env_count)
+			env_copy[i] = ft_strdup(data, data->env[i]);
+		env_copy[env_count] = NULL;
+		sort_tab(env_copy);
 		i = 0;
-        while (i++ < env_count)
-            ft_putendl_fd(env_copy[i], STDOUT_FILENO);
-    }
-    return ret;
+		while (i++ < env_count)
+			ft_putendl_fd(env_copy[i], STDOUT_FILENO);
+	}
+	return (ret);
 }

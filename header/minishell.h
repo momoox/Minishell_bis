@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:38:23 by mgeisler          #+#    #+#             */
-/*   Updated: 2023/11/29 18:33:32 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/29 21:47:29 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ extern t_builtin	builtins[];
 
 typedef struct s_data
 {
-	int 			flag_unlink; // here_doc
+	int flag_unlink; // here_doc
 	int				flag_delete;
 	char			*input;
 	int				nb_exec;

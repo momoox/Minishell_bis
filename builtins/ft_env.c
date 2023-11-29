@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:22:01 by momox             #+#    #+#             */
-/*   Updated: 2023/11/29 03:50:16 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 22:23:10 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*get_env_var_value(t_data *data, char **env, char *var)
 }
 
 void	update_wds(t_data *data, char *wd)
-{ 
+{
 	set_env_var(data, "OLDPWD", get_env_var_value(data, data->env, "PWD"));
 	set_env_var(data, "OLDPWD", wd);
 	if (data->shell->old_pwd)
@@ -63,8 +63,8 @@ void	update_wds(t_data *data, char *wd)
 
 int	ft_env(t_data *data, char **env)
 {
-	(void)env;
 	int	i;
+	(void)env;
 
 	i = 0;
 	while (data->env[i])
