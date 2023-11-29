@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 17:43:46 by momox             #+#    #+#             */
-/*   Updated: 2023/11/09 20:49:57 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 20:10:19 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,6 @@ char	*cpyword_split(t_mall *mall, const char *s, size_t *i, char c)
 	return (str);
 }
 
-char	**freeall_split(char **tab)
-{
-	size_t	j;
-
-	j = 0;
-	while (tab[j])
-	{
-		//free(tab[j]);
-		j++;
-	}
-	//free(tab);
-	return (NULL);
-}
-
 char	**ft_split(t_mall *mall, char *s, char c)
 {
 	size_t		i;
@@ -96,7 +82,7 @@ char	**ft_split(t_mall *mall, char *s, char c)
 	{
 		tab[j++] = cpyword_split(mall, s, &i, c);
 		if (!tab[j - 1])
-			return (freeall_split(tab));
+			return (0);
 	}
 	tab[j] = 0;
 	return (tab);

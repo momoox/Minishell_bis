@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 16:49:25 by momox             #+#    #+#             */
-/*   Updated: 2023/11/28 19:47:03 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/29 20:10:28 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ char	*identify_replace(t_mall *mall, t_data *data, char *var_env)
 		else
 			replace = NULL;
 	}
-	//free(full_var);
 	return (replace);
 }
 

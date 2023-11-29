@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:04:02 by momox             #+#    #+#             */
-/*   Updated: 2023/11/29 18:59:42 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/29 20:11:27 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	split_op(t_data *data, char c)
 	{
 		save = temp;
 		data->parsed_line = ft_split_operators(data->mall, temp->content, c);
+		if (!data->parsed_line)
+			exit_shell(data, 300);
 		i = -1;
 		while (data->parsed_line[++i])
 		{

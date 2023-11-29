@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 21:42:33 by momox             #+#    #+#             */
-/*   Updated: 2023/11/29 18:54:14 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/29 19:59:53 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	sig_onoff(int i)
 	}
 	if (i == 1)
 	{
-		printf("coucou\n");
 		signal(SIGINT, sig_handler);
 		signal(SIGQUIT, sig_handler);
 	}

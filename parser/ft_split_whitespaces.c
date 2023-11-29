@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:46:47 by momox             #+#    #+#             */
-/*   Updated: 2023/11/29 19:11:52 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/29 20:01:45 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ char	*cpyword(t_mall *mall, char *s, int *i, int len)
 	str[u] = '\0';
 	return (str);
 }
-
 
 char	**ft_split_whitespaces(t_mall *mall, char *s)
 {

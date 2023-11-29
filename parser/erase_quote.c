@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   erase_quote.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 20:17:48 by momox             #+#    #+#             */
-/*   Updated: 2023/11/28 18:14:39 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 20:03:52 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char	*erase_quote(t_mall *mall, char *str, int *index_tab)
 	new = erase_quote_2(str, new, index_tab, index_len);
 	return (new);
 }
+
 char	is_between_quote_rem(char *str, int index)
 {
 	char	quote;

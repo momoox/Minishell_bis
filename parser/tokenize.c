@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 20:13:11 by momox             #+#    #+#             */
-/*   Updated: 2023/11/29 19:51:39 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 20:51:26 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	exec_heredoc(pid_t pid, char *line, char *bp, int fd)
 			if (!(ft_strncmp(line, bp, ft_strlen(line) + ft_strlen(bp)))
 				|| line == NULL)
 				break ;
+			free(line);
 		}
 		exit (0);
 	}
@@ -44,7 +45,10 @@ void	ft_here_doc(char *bp, t_data *data)
 	sig_onoff(1);
 	close(fd);
 	data->flag_unlink = 1;
+	if (line)
+		free(line);
 }
+	// unlink(".heredocminishelltrobien");
 
 int heredoc_manage(t_list *temp, t_data *data)
 {
@@ -70,11 +74,8 @@ int	tokenize(t_data *data)
 	{
 		if (!(ft_strncmp(temp->content, "|", 1)))
 			temp->token = PIPE;
-		else if (!(ft_strncmp(temp->content, "<<", 2)))
-		{
-			if (!heredoc_manage(temp, data))
-				return (0);
-		}
+		else if (!(ft_strncmp(temp->content, "<<", 2)) && (!heredoc_manage(temp, data)))
+			return (0);
 		else if (!(ft_strncmp(temp->content, ">>", 2)))
 			temp->token = REDIR_A;
 		else if (!(ft_strncmp(temp->content, "<", 1)))

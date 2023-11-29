@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_operators.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/28 20:22:16 by momox             #+#    #+#             */
-/*   Updated: 2023/11/09 20:49:57 by oliove           ###   ########.fr       */
+/*   Created: 2023/11/29 20:02:13 by momox             #+#    #+#             */
+/*   Updated: 2023/11/29 20:03:29 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	count_op(char *s, char c)
 	op = 0;
 	while (s[i])
 	{
-		if (s[i] != c && (!s[i + 1] || (s[i + 1] == c
-					&& is_between_quote(s, i + 1) == '0')))
+		if (s[i] != c && (!s[i + 1] || (s[i + 1] == c && is_between_quote(s, i
+						+ 1) == '0')))
 			words++;
 		if (s[i] == c && s[i + 1] == c && is_between_quote(s, i) == '0')
 		{
@@ -81,20 +81,6 @@ char	*cpyword_op(t_mall *mall, char *s, int *i, int len)
 	return (str);
 }
 
-char	**freeall_op(char **tab)
-{
-	int	j;
-
-	j = 0;
-	while (tab[j])
-	{
-		//free(tab[j]);
-		j++;
-	}
-	//free(tab);
-	return (NULL);
-}
-
 char	**ft_split_operators(t_mall *mall, char *s, char c)
 {
 	int		i;
@@ -112,7 +98,7 @@ char	**ft_split_operators(t_mall *mall, char *s, char c)
 	{
 		tab[j++] = cpyword_op(mall, s, &i, lenword_op(s, i, c));
 		if (!tab[j - 1])
-			return (freeall_op(tab));
+			return (0);
 	}
 	tab[j] = 0;
 	return (tab);

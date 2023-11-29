@@ -27,7 +27,7 @@ int	check_char(char *str, t_data *data)
 			printf("minishell: syntax error near unexpected token `%c'\n",
 				str[i]);
 			data->exit_code = 258;
-			return (258);
+			return (0);
 		}
 		i++;
 	}
