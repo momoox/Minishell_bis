@@ -1,7 +1,8 @@
 {
     "files.associations": {
         "minishell.h": "c",
-        "util_exec.h": "c"
+        "util_exec.h": "c",
+        "sstream": "c"
     },
     "makefile.launchConfigurations": [
         {

@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 02:47:43 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/28 18:00:43 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/28 22:11:18 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,16 @@ void	run_exec(t_data *data)
 	// 	printf("%s\n",data->env[i]);
 	// }
     init_wds(data);
+	int t = is_forck(data, data->exec);	
+	printf("t = %d\n",t);
+	if (data->nb_exec > 1 || is_forck(data, data->exec) == 0)
+		ft_pipe(data);
+	else
+	{
+		printf("no fork\n");
+		execute_command(data, &data->exec[0]);
+	}
 	
-	ft_pipe(data);
 }
 int	execute_local_bin(t_data *data, t_exec *cmd)
 {
@@ -100,13 +108,13 @@ int	execute_command(t_data *data, t_exec *cmd)
 	if (/* check_path_slash(ft_my_var(data,"PATH"), cmd->cmd[0]) */ft_strchr(*cmd->cmd, '/') == NULL)
 	{
 		ret = exec_build(data, cmd->cmd);
-		printf("ret1 == [%d]\n", ret);
-		if (ret != CMD_NOT_FOUND && ret != EXIT_SUCCESS)
+		printf("ret1 == [%d], is_fork = %d\n", ret, is_forck(data, cmd));
+		if (ret != CMD_NOT_FOUND && is_forck(data, cmd) == 0/*  && ret != EXIT_SUCCESS */)
 			exit_shell(data, ret);
 		if(!find_builtin(cmd->cmd[0], data->func))
 		{
 			ret = execute_sys_bin(data, cmd);
-			if (ret != CMD_NOT_FOUND && ret != EXIT_SUCCESS)
+			if (ret != CMD_NOT_FOUND && is_forck(data, cmd) == 0/* && ret != EXIT_SUCCESS */)
 				exit_shell(data, ret);
 		}
 	}
@@ -117,3 +125,24 @@ int	execute_command(t_data *data, t_exec *cmd)
 	}
 	return (ret);
 }
+
+int is_forck(t_data *data, t_exec *cmd)
+{
+	// int ret;
+	
+	builtin_func func = find_builtin(cmd->cmd[0], data->func);
+	if (func != NULL){
+		if(ft_strncmp(cmd->cmd[0], "export", 7) == 0 && cmd->cmd[1] == NULL)
+			// printf("\033[0;33mexport test is forck\033[0m\n");
+			return (0);	
+		else if (ft_strncmp(cmd->cmd[0], "env", 4) == 0)
+			// printf("\033[0;33menv test is forck\033[0m\n");
+			return (0);	
+		else if (ft_strncmp(cmd->cmd[0], "echo", 5) == 0)
+			// printf("\033[0;33mecho test is forck\033[0m\n");
+			return (0);	
+		return (1);
+	}
+	return (0);
+}
+

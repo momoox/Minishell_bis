@@ -1,38 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr_char.c                                   :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 23:06:19 by momox             #+#    #+#             */
-/*   Updated: 2023/11/28 18:37:14 by oliove           ###   ########.fr       */
+/*   Created: 2022/11/09 19:18:29 by oliove            #+#    #+#             */
+/*   Updated: 2023/11/29 01:23:30 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "util_exec.h"
 
-int	ft_strchr_char(const char *str, char *s)
+char *ft_strcpy(char *dest, char *src)
 {
-	int	i;
-	int	u;
+	int i;
+	
+	i = 0;
+	if (!src)
+		return (NULL);
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+char *ft_strcat(char *dest, char *src)
+{
+	int i;
+	int j;
 
 	i = 0;
-	u = 0;
-	while (str && s[u] && str[i])
+	while (dest[i] != '\0')
+		i++;
+	j = 0;
+	while (src[j] != '\0')
 	{
-		if (str[i] == s[u])
-		{
-			while (str[i] == s[u] && s[u] && str[i])
-			{
-				u++;
-				i++;
-				if (!s[u])
-					return (1);
-			}
-		}
-		if (str[i])
-			i++;
+		dest[i + j] = src[j];
+		j++;
 	}
-	return (0);
+	dest[i + j] = '\0';
+	return (dest);
 }

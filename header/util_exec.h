@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 23:16:06 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/27 22:08:33 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 01:24:22 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,4 +131,8 @@ int	prep_exec(t_data *data, int *fd_pipe, int *j);
 int init_io(t_data *data, int fd_pipe[2], int *j);
 
 int	check_path_slash(char *path, char *cmd);
+int is_forck(t_data *data, t_exec *cmd);
+char *ft_strcpy(char *dest, char *src);
+
+char *ft_strcat(char *dest, char *src);
 #endif

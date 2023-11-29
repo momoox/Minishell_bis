@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 00:53:27 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/24 01:08:31 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/28 22:06:41 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,9 @@ int	set_env_var(t_data *data, char *key, char *value)
 
 	idx = get_env_var_index(data, data->env, key);
 	if (value == NULL)
-		value = "";
-	tmp = ft_strjoin(data->mall, "=", value);
+		tmp = "";
+	else
+		tmp = ft_strjoin(data->mall, "=", value);
 	if (!tmp)
 		return (1);
 	if (idx != -1 && data->env[idx])
@@ -176,12 +177,17 @@ int	ft_export(t_data *data, char **args)
 		{
 			errmsg_cmd(data, "export", args[i], "not a valid identifier", false);
 			ret = EXIT_FAILURE;
+			// return (ret);
 		}
 		else if (ft_strchr(args[i], '=') != NULL)
 		{
 			tmp = get_key_value_pair(data, args[i]);
 			set_env_var(data, tmp[0], tmp[1]);
 			// free_tab_args(tmp);
+		}
+		else
+		{
+			set_env_var(data, args[i], NULL);
 		}
 		i++;
 	}

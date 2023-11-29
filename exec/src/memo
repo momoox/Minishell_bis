@@ -1,3 +1,6 @@
+a faire :
+        remplacxer strcpy et str... par des ft_str...
+        
 problemme avec echo :
         get_env_value: tmp == [OLDPWD=]
         exec_buil Test 

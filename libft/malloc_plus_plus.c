@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:53:53 by momox             #+#    #+#             */
-/*   Updated: 2023/11/09 20:50:14 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/28 20:27:13 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	free_mall(t_mall **mall)
 {
 	t_mall	*temp;
 
-	while (mall)
+	while (*mall)
 	{
 		temp = (*mall)->next;
 		free((*mall)->content);
