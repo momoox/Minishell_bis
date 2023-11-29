@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:46:47 by momox             #+#    #+#             */
-/*   Updated: 2023/11/28 22:42:08 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/29 16:05:05 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	count(char *s)
 			words++;
 		i++;
 	}
-	if (ft_whitespace(s[i]) && s[i + 1])
+	if (!ft_whitespace(s[i - 1]) && !s[i])
 		words++;
 	return (words);
 }
@@ -96,9 +96,10 @@ char	**ft_split_whitespaces(t_mall *mall, char *s)
 	tab = malloc_plus_plus(&mall, sizeof(char *) * (count(s) + 1));
 	if (!tab)
 		return (0);
+	printf("count = %d\n", count(s));
 	while (j < count(s))
 	{
-		tab[j] = cpyword(mall, s, &i, lenword(s, i));
+		tab[j++] = cpyword(mall, s, &i, lenword(s, i));
 		if (!tab[j - 1])
 			return (freeall(tab));
 	}
