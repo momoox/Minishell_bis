@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:21:33 by momox             #+#    #+#             */
-/*   Updated: 2023/11/29 19:04:42 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/29 20:00:17 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int	parser(t_data *data)
 		split_op(data, '<');
 	if (ft_strchr(data->input, '>'))
 		split_op(data, '>');
-	// if (!(ft_strncmp(data->input, "<<", 2)))
-	// 	split_hd(data, data->list);
 	if (!tokenize(data))
 		return (0);
 	check_quote_remove(data, data->list);
@@ -41,6 +39,8 @@ int	parser(t_data *data)
 	return (1);
 }
 
+	// if (!(ft_strncmp(data->input, "<<", 2)))
+	// 	split_hd(data, data->list);
 	// print_list(data->list);
 	// print_exec(data);
 	// print_token(data->list);

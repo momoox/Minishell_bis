@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 20:13:11 by momox             #+#    #+#             */
-/*   Updated: 2023/11/29 19:02:09 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/29 20:06:36 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	exec_heredoc(pid_t pid, char *line, char *bp, int fd)
 			if (!(ft_strncmp(line, bp, ft_strlen(line) + ft_strlen(bp)))
 				|| line == NULL)
 				break ;
-			//free(line);
+			free(line);
 		}
 		exit (0);
 	}
@@ -44,10 +44,11 @@ void	ft_here_doc(char *bp, t_data *data)
 	waitpid(pid, 0, 0);
 	sig_onoff(1);
 	close(fd);
-	// unlink(".heredocminishelltrobien");
 	data->flag_unlink = 1;
-	//free(line);
+	if (line)
+		free(line);
 }
+	// unlink(".heredocminishelltrobien");
 
 int heredoc_manage(t_list *temp, t_data *data)
 {
@@ -73,11 +74,8 @@ int	tokenize(t_data *data)
 	{
 		if (!(ft_strncmp(temp->content, "|", 1)))
 			temp->token = PIPE;
-		else if (!(ft_strncmp(temp->content, "<<", 2)))
-		{
-			if (!heredoc_manage(temp, data))
-				return (0);
-		}
+		else if (!(ft_strncmp(temp->content, "<<", 2)) && (!heredoc_manage(temp, data)))
+			return (0);
 		else if (!(ft_strncmp(temp->content, ">>", 2)))
 			temp->token = REDIR_A;
 		else if (!(ft_strncmp(temp->content, "<", 1)))

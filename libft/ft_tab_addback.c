@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 21:38:43 by momox             #+#    #+#             */
-/*   Updated: 2023/11/27 18:56:27 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/29 20:09:58 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,5 @@ char	**ft_tabadd_back(t_mall *mall, char **tab, char *new_str)
 		new_tab[i] = tab[i];
 	new_tab[i] = new_str;
 	new_tab[i + 1] = NULL;
-	//free(tab);
 	return (new_tab);
 }
