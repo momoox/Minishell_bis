@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:23:31 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/28 18:53:08 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 03:52:43 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 // Partie 1 : Initialisation
 int	 initialize_pipes(t_data *data, int fd_pipe[2], int *j)
 {
-	printf("nb_exec %d\n",data->nb_exec);
 	while ((*j) < data->nb_exec)
 	{
 		if (*j < data->nb_exec - 1)

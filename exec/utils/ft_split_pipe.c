@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 23:55:12 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/27 02:15:54 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 03:39:35 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,6 @@ static int	ft_word_count(char const *s, char car)
 	return (j);
 }
 
-// static char	*ft_free_sub(char *str)
-// {
-// 	//free(str);
-// 	return (NULL);
-// }
-
 static char	*ft_substr_mod(t_mall *mall, char const *s, unsigned int start, size_t len)
 {
 	int		i;
@@ -53,7 +47,7 @@ static char	*ft_substr_mod(t_mall *mall, char const *s, unsigned int start, size
 		len = 0;
 	dest = malloc_plus_plus(&mall, sizeof(char) * (len + 1));
 	if (!dest)
-		return (0);// (ft_free_sub(dest));
+		return (0);
 	while (s[i])
 	{
 		if (i >= (int)start && j < (int)len)
@@ -63,8 +57,6 @@ static char	*ft_substr_mod(t_mall *mall, char const *s, unsigned int start, size
 	dest[j] = '\0';
 	return (dest);
 }
-
-
 
 char	**ft_split_pipe(t_data *data, char const *s, char c)
 {
@@ -85,16 +77,11 @@ char	**ft_split_pipe(t_data *data, char const *s, char c)
 		i = j;
 		while (s[i] && s[i] == c)
 			i++;
-		//printf("split_pipe : S = [%s]\n",s);
 		j = i;
 		while (s[j] && s[j] != c)
 			j++;
-		//printf("split_pipe : S = [%s]\n",s);
 		tab[w++] = ft_substr_mod(data->mall, s, i, j - i);
-		// if (!tab[w - 1])
-			// return (ft_//free(tab, w));
 		tab[w] = NULL;
 	}
-	//printf("split_pipe : tab = [%s]\n",*tab);
 	return (tab);
 }

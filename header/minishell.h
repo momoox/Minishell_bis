@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:38:23 by mgeisler          #+#    #+#             */
-/*   Updated: 2023/11/28 02:54:21 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 04:48:41 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ enum	e_token
 	REDIR_HERE_DOC = 6,
 };
 
+
+
 typedef struct s_mall
 {
 	void			*content;
@@ -57,6 +59,14 @@ typedef struct s_list
 	struct s_list	*prev;
 	struct s_data	*data;
 }					t_list;
+
+typedef struct s_error_info
+{
+    char *command;
+    char *detail;
+    char *error_message;
+    int error_nb;
+} 			t_error_info;
 
 typedef struct s_exec_shell
 {
@@ -101,6 +111,7 @@ typedef struct s_data
 	t_exec_shell	*shell;
 	pid_t			pid;
 	t_builtin		*func;
+	t_error_info	error_info;
 }					t_data;
 /////////TESTE-BUILD OLIVE/////////////
 builtin_func find_builtin(const char *cmd_name, t_builtin *builtins);

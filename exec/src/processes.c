@@ -6,50 +6,11 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 00:14:52 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 00:47:40 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 03:53:09 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "util_exec.h"
-
-// void	ft_pipe(t_data *data, char *cmd, char **env)
-// {
-// 	pid_t	pid;
-// 	// int		fd_pipe[2];
-
-// 	if (pipe(data->exec->fd_pipe) == -1)
-// 		exit(0);
-// 	pid = fork();
-// 	if (pid == -1)
-// 		exit(0);
-// 	if (!pid)
-// 	{
-// 		close(data->exec->fd_pipe[0]);
-// 		dup2(data->exec->fd_pipe[1], 1);
-// 		exece(data,&cmd, env);
-// 	}
-// 	else
-// 	{
-// 		close(data->exec->fd_pipe[1]);
-// 		dup2(data->exec->fd_pipe[0], 0);
-// 	}
-// }
-
-// char *ft_my_path(t_data *data,char *cmd, char **env)
-// {
-
-// 	char	**c_args;
-// 	(void)env;
-// 	char	*path;
-// 	//printf("val cmd %s\n",cmd);
-// 	c_args = ft_split(cmd, ' ');
-// 	//printf("val2 env %s\n", data->env[0]);
-// 	path = ft_path_dir(c_args, ft_my_var(data, "PATH"), -1);
-
-// 	//printf("var = [%s]\n",ft_my_var(data,cmd));
-// 	return (path);
-
-// }
 
 int	search_idx(char **env, char *key_str)
 {

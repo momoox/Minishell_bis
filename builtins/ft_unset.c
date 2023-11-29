@@ -1,47 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 19:18:29 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 03:40:11 by oliove           ###   ########.fr       */
+/*   Created: 2023/11/29 03:28:50 by oliove            #+#    #+#             */
+/*   Updated: 2023/11/29 03:29:18 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "util_exec.h"
 
-char *ft_strcpy(char *dest, char *src)
+int	ft_unset(t_data *data, char **args)
 {
-	int i;
-	
-	i = 0;
-	if (!src)
-		return (NULL);
-	while (src[i] != '\0')
+	int	i;
+	int	idx;
+	int	ret;
+
+	ret = EXIT_SUCCESS;
+	i = 1;
+	while (args[i])
 	{
-		dest[i] = src[i];
+		if (!is_valid_env_var_key(args[i]) || ft_strchr(args[i], '=') != NULL)
+		{
+			errmsg_cmd(data,"unset", args[i], "not a valid identifier", false);
+			ret = EXIT_FAILURE;
+		}
+		else
+		{
+			idx = get_env_var_index(data, data->env, args[i]);
+			if (idx != -1)
+				remove_env_var(data, idx);
+		}
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-char *ft_strcat(char *dest, char *src)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (dest[i] != '\0')
-		i++;
-	j = 0;
-	while (src[j] != '\0')
-	{
-		dest[i + j] = src[j];
-		j++;
-	}
-	dest[i + j] = '\0';
-	return (dest);
+	return (ret);
 }
