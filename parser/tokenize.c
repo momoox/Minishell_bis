@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 20:13:11 by momox             #+#    #+#             */
-/*   Updated: 2023/11/27 20:08:22 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/29 19:02:09 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,22 @@ void	ft_here_doc(char *bp, t_data *data)
 	//free(line);
 }
 
-void heredoc_manage(t_list *temp, t_data *data)
+int heredoc_manage(t_list *temp, t_data *data)
 {
+	if (!temp->next)
+	{
+		printf("Minishell: syntax error near unexpected token `newline'\n");
+		data->exit_code = 258;
+		return (0);
+	}
 	ft_here_doc(temp->next->content, data);
 	temp->token = REDIR_I;
 	temp->content = ".heredocminishelltrobien";
 	ft_lstdel_here(&data->list, temp->next);
+	return (1);
 }
 
-void	tokenize(t_data *data)
+int	tokenize(t_data *data)
 {
 	t_list	*temp;
 
@@ -67,7 +74,10 @@ void	tokenize(t_data *data)
 		if (!(ft_strncmp(temp->content, "|", 1)))
 			temp->token = PIPE;
 		else if (!(ft_strncmp(temp->content, "<<", 2)))
-			heredoc_manage(temp, data);
+		{
+			if (!heredoc_manage(temp, data))
+				return (0);
+		}
 		else if (!(ft_strncmp(temp->content, ">>", 2)))
 			temp->token = REDIR_A;
 		else if (!(ft_strncmp(temp->content, "<", 1)))
@@ -75,13 +85,13 @@ void	tokenize(t_data *data)
 		else if (!(ft_strncmp(temp->content, ">", 1)))
 			temp->token = REDIR_O;
 		else if (temp->prev
-			&& (temp->prev->token == REDIR_I
-				|| temp->prev->token == REDIR_O
+			&& (temp->prev->token == REDIR_I || temp->prev->token == REDIR_O
 				|| temp->prev->token == REDIR_A))
 			temp->token = FILES;
 		else
 			temp->token = COMMAND;
 		temp = temp->next;
 	}
+	return (1);
 }
 	 	

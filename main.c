@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:40:29 by mgeisler          #+#    #+#             */
-/*   Updated: 2023/11/28 22:16:14 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/29 19:04:16 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ void	reader(t_data *data)
 			continue ;
 		}
 		add_history(data->input);
-		parser(data);
+		if (!parser(data))
+		{
+			free(data->input);
+			continue ;
+		}
 		run_exec(data);
 		free(data->input);
 	}
@@ -39,10 +43,15 @@ void	reader(t_data *data)
 int	main(int argc, char **argv, char **env)
 {
 	t_data	data;
+	int		exit;
 
 	(void)argc;
 	(void)argv;
 	init_data(&data);
 	tab_env(&data, env);
 	reader(&data);
+	printf("\033[1A\033[11Cexit\n");
+	exit = data.exit_code;
+	free_mall(&data.mall);
+	return (exit);
 }

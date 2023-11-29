@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_whitespaces.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:46:47 by momox             #+#    #+#             */
-/*   Updated: 2023/11/29 18:17:44 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 19:11:52 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,6 @@ char	*cpyword(t_mall *mall, char *s, int *i, int len)
 	return (str);
 }
 
-char	**freeall(char **tab)
-{
-	int	j;
-
-	j = 0;
-	while (tab[j])
-	{
-		//free(tab[j]);
-		j++;
-	}
-	return (NULL);
-}
 
 char	**ft_split_whitespaces(t_mall *mall, char *s)
 {
@@ -99,7 +87,7 @@ char	**ft_split_whitespaces(t_mall *mall, char *s)
 	{
 		tab[j++] = cpyword(mall, s, &i, lenword(s, i));
 		if (!tab[j - 1])
-			return (freeall(tab));
+			return (0);
 	}
 	tab[j] = 0;
 	return (tab);

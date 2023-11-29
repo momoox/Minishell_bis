@@ -6,17 +6,19 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:04:02 by momox             #+#    #+#             */
-/*   Updated: 2023/11/22 19:25:09 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/29 18:59:42 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "util_exec.h"
 
 void	split_hd(t_data *data, t_list *list)
 {
 	t_list	*temp;
 
 	temp = list;
+	printf("temp content = %s\n", temp->content);
 	while (temp)
 	{
 		if (!ft_strncmp(temp->content, "<", 1)
@@ -62,6 +64,8 @@ void	split_line(t_data *data)
 
 	i = -1;
 	data->parsed_line = ft_split_whitespaces(data->mall, data->input);
+	if (!data->parsed_line)
+		exit_shell(data, 300);
 	while (data->parsed_line[++i])
 	{
 		tab = ft_strdup(data, data->parsed_line[i]);

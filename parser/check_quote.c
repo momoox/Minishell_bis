@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_quote.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 18:19:24 by momox             #+#    #+#             */
-/*   Updated: 2023/11/28 18:14:16 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 19:03:44 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ char	check_quote(char *str, t_data *data)
 		printf("Minishell : syntax error near unexpected token \'%c\'\n",
 			quote);
 		data->exit_code = 258;
-		// ft_exit(258);
 	}
 	return (quote);
 }
