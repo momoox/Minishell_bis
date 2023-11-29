@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:54:40 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/28 01:53:55 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 17:36:28 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,13 +149,13 @@ bool cmd_is_dir(char *cmd)
 int check_cmd_not_found(t_data *data, t_exec *cmd)
 {
 	if(ft_strchr(cmd->cmd[0], '/') == NULL && get_env_var_index(data, data->env,"PATH") != -1)
-		return (errmsg_cmd(data, cmd->cmd[0], NULL,"command not found", CMD_NOT_FOUND)); 
+		return (errmsg_cmd(data, (char *[3]){cmd->cmd[0], NULL,"command not found"}, CMD_NOT_FOUND)); 
 	if (access(cmd->cmd[0], F_OK) != 0)
-		return (errmsg_cmd(data, cmd->cmd[0], NULL,strerror(errno), CMD_NOT_FOUND));
+		return (errmsg_cmd(data, (char *[3]){cmd->cmd[0], NULL,strerror(errno)}, CMD_NOT_FOUND));
 	else if (cmd_is_dir(cmd->cmd[0]))
-		return (errmsg_cmd(data, cmd->cmd[0], NULL, "is a directory", CMD_NOT_EXECUTABLE));
+		return (errmsg_cmd(data, (char *[3]){cmd->cmd[0], NULL, "is a directory"}, CMD_NOT_EXECUTABLE));
 	else if (access(cmd->cmd[0], F_OK | X_OK) != 0)
-		return (errmsg_cmd(data, cmd->cmd[0], NULL, strerror(errno), CMD_NOT_EXECUTABLE));
+		return (errmsg_cmd(data, (char *[3]){cmd->cmd[0], NULL, strerror(errno)}, CMD_NOT_EXECUTABLE));
 	return (EXIT_SUCCESS);	
 }
 

@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:22:10 by momox             #+#    #+#             */
-/*   Updated: 2023/11/29 15:59:43 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 18:09:47 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ int	ft_pwd(t_data *data, char **args)
 		ft_putendl_fd(cwd, STDOUT_FILENO);
 		return (EXIT_SUCCESS);
 	}
-	// errmsg_cmd("pwd", NULL, strerror(errno), errno);
+	errmsg_cmd(data, (char *[3]){"pwd", NULL, strerror(errno)}, errno);
 	return (EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 03:46:07 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 03:46:23 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 17:33:45 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	env_build(t_data *data, char **args)
 	int i;
 
 	if (args && args[1])
-		(errmsg_cmd(data,"env", NULL, "too many arguments", 2));
+		(errmsg_cmd(data, (char *[3]){"env", NULL, "too many arguments"}, 2));
 	i = 0;
 	if (!data->env)
 		return (EXIT_FAILURE);

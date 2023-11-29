@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:44:52 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/28 04:07:23 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 17:33:10 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,10 @@ int	ft_exit(t_data *data, char **args)
 	{
 		exit_code = get_exit_code(data, args[1], &error);
 		if (error)
-			exit_code = errmsg_cmd(data, "exit", args[1],
-					"numeric argument required", 2);
+			exit_code = errmsg_cmd(data, (char *[3]){"exit", args[1],
+					"numeric argument required"}, 2);
 		else if (args[2])
-			return (errmsg_cmd(data, "exit", NULL, "too many arguments", 1));
+			return (errmsg_cmd(data, (char *[3]){"exit", NULL, "too many arguments"}, 1));
 	}
 	exit_shell(data, exit_code);
 	return (2);

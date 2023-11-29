@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 00:11:03 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 15:35:28 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 17:38:54 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,29 +62,36 @@ char	*join_strs(t_data *data, char *str, char *add)
 	//free_tmp(tmp);
 	return (str);
 }
+// errmsg_cmd(data, (char[3]){cmd, detail, errmsg})
+// int		errmsg_cmd(t_data *data, char *command, char *detail, char *error_message, int error_nb)
 
-int		errmsg_cmd(t_data *data, char *command, char *detail, char *error_message, int error_nb)
+/*
+char *command[0],
+char *detail[1],
+char *error_message[3], 
+*/
+int		errmsg_cmd(t_data *data, char *msg_err[3], int error_nb)
 {
 	char	*msg;
 	bool	detail_quotes;
-
-	detail_quotes = add_detail_quotes(command);
+	
+	detail_quotes = add_detail_quotes(msg_err[0]);
 	msg = ft_strdup_pipe(data,"minishell: ");
-	if (command != NULL)
+	if (msg_err[0])
 	{
-		msg = join_strs(data, msg, command);
+		msg = join_strs(data, msg, msg_err[0]);
 		msg = join_strs(data, msg, ": ");
 	}
-	if (detail != NULL)
+	if (msg[1])
 	{
 		if (detail_quotes)
 			msg = join_strs(data, msg, "`");
-		msg = join_strs(data, msg, detail);
+		msg = join_strs(data, msg, msg_err[1]);
 		if (detail_quotes)
 			msg = join_strs(data, msg, "'");
 		msg = join_strs(data, msg, ": ");
 	}
-	msg = join_strs(data, msg, error_message);
+	msg = join_strs(data, msg, msg_err[2] /* error_message */);
 	ft_putendl_fd(msg, STDERR_FILENO);
 	//free_tmp(msg);
 	return (error_nb);

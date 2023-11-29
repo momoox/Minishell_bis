@@ -6,12 +6,13 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 02:47:43 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/28 22:11:18 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 18:11:01 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "util_exec.h"
+#include "minishell.h"
 
 int	ft_pipe2(t_exec *ex, int *fd_stdin, int *fd_stdout)
 {
@@ -63,7 +64,7 @@ int	execute_sys_bin(t_data *data, t_exec *cmd)
 	if (!cmd->path)
 		return (CMD_NOT_FOUND);
 	if (execve(cmd->path, cmd->cmd, data->env) == -1)
-		errmsg_cmd(data, "execve", NULL, strerror(errno), errno);
+		errmsg_cmd(data, (char *[3]){"execve", NULL, strerror(errno)}, errno);
 	return (EXIT_FAILURE);
 }
 
@@ -72,19 +73,14 @@ void	run_exec(t_data *data)
 	
     init_data_shell(data);
     init_env(data,data->env);
-	// for(int i = 0; data->env[i]; i++){
-	// 	printf("%s\n",data->env[i]);
-	// }
-    init_wds(data);
-	int t = is_forck(data, data->exec);	
-	printf("t = %d\n",t);
+	init_wds(data);
+	int t;
+	
+	t = is_forck(data, data->exec);	
 	if (data->nb_exec > 1 || is_forck(data, data->exec) == 0)
 		ft_pipe(data);
 	else
-	{
-		printf("no fork\n");
 		execute_command(data, &data->exec[0]);
-	}
 	
 }
 int	execute_local_bin(t_data *data, t_exec *cmd)
@@ -95,7 +91,7 @@ int	execute_local_bin(t_data *data, t_exec *cmd)
 	if (ret != 0)
 		return (ret);
 	if (execve(cmd->cmd[0], cmd->cmd, data->env) == -1)
-		return (errmsg_cmd(data, "execve", NULL, strerror(errno), errno));
+		return (errmsg_cmd(data, (char *[3]){"execve", NULL, strerror(errno)}, errno));
 	return (EXIT_FAILURE);
 }
 int	execute_command(t_data *data, t_exec *cmd)
@@ -103,8 +99,8 @@ int	execute_command(t_data *data, t_exec *cmd)
 	int	ret;
 
 	if (!cmd || !cmd->cmd)
-		exit_shell(data, errmsg_cmd(data, "child", NULL,
-				"parsing error: no cmd to execute!", EXIT_FAILURE));
+		exit_shell(data, errmsg_cmd(data, (char *[3]){"child", NULL,
+				"parsing error: no cmd to execute!"}, EXIT_FAILURE));
 	if (/* check_path_slash(ft_my_var(data,"PATH"), cmd->cmd[0]) */ft_strchr(*cmd->cmd, '/') == NULL)
 	{
 		ret = exec_build(data, cmd->cmd);
@@ -128,18 +124,14 @@ int	execute_command(t_data *data, t_exec *cmd)
 
 int is_forck(t_data *data, t_exec *cmd)
 {
-	// int ret;
 	
 	builtin_func func = find_builtin(cmd->cmd[0], data->func);
 	if (func != NULL){
 		if(ft_strncmp(cmd->cmd[0], "export", 7) == 0 && cmd->cmd[1] == NULL)
-			// printf("\033[0;33mexport test is forck\033[0m\n");
 			return (0);	
 		else if (ft_strncmp(cmd->cmd[0], "env", 4) == 0)
-			// printf("\033[0;33menv test is forck\033[0m\n");
 			return (0);	
 		else if (ft_strncmp(cmd->cmd[0], "echo", 5) == 0)
-			// printf("\033[0;33mecho test is forck\033[0m\n");
 			return (0);	
 		return (1);
 	}

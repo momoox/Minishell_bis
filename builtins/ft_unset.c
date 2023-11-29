@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 03:28:50 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 03:29:18 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 17:33:36 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_unset(t_data *data, char **args)
 	{
 		if (!is_valid_env_var_key(args[i]) || ft_strchr(args[i], '=') != NULL)
 		{
-			errmsg_cmd(data,"unset", args[i], "not a valid identifier", false);
+			errmsg_cmd(data, (char *[3]){"unset", args[i], "not a valid identifier"}, false);
 			ret = EXIT_FAILURE;
 		}
 		else

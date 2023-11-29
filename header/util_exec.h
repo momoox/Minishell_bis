@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 23:16:06 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 15:44:22 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 17:50:55 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,9 @@ char	*ft_substr_pipe(t_data *data, char *s, int start, int len);
 void	free_tab_args(char **args);
 char	*join_strs(t_data *data, char *str, char *add);
 
-int	    errmsg_cmd(t_data *data, char *command, char *detail, char *error_message, int error_nb);
+// int	    errmsg_cmd(t_data *data, char *command, char *detail, char *error_message, int error_nb);
 // void errmsg_cmd(t_data *data);//celle a utililer
+int		errmsg_cmd(t_data *data, char *msg_err[3], int error_nb);
 int ft_export2(t_data *data, char **args);
 
 bool	add_detail_quotes(char *command);
@@ -142,4 +143,5 @@ char *ft_strcat(char *dest, char *src);
 
 char	**realloc_env(t_data *data, size_t size);
 int	remove_env_var(t_data *data, int idx);
+void	sort_tab(char **tab);
 #endif

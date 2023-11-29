@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 00:53:37 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 03:51:56 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 17:43:33 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	chdir_errno_mod(char *path, t_data *data)
 {
 	if (errno == ESTALE)
 		errno = ENOENT;
-	errmsg_cmd(data,"cd", path, strerror(errno), errno);
+	errmsg_cmd(data,(char *[3]){"cd", path, strerror(errno)}, errno);
 	return (0);
 }
 
@@ -35,9 +35,9 @@ int	change_dir(t_data *data, char *path)
 	ret = getcwd(cwd, PATH_MAX);
 	if (!ret)
 	{
-		errmsg_cmd(data, "cd: error retrieving current directory",
+		errmsg_cmd(data, (char *[3]){"cd: error retrieving current directory",
 			"getcwd: cannot access parent directories",
-			strerror(errno), errno);
+			strerror(errno)}, errno);
 		ret = ft_strjoin(data->mall, data->shell->cwd, "/");
 		tmp = ret;
 		ret = ft_strjoin(data->mall, tmp, path);
@@ -58,17 +58,17 @@ int	ft_cd2(t_data *data, char **args)
 	{
 		path = get_env_var_value(data, data->env, "HOME");
 		if (!path || *path == '\0' || ft_isspace(*path))
-			return (errmsg_cmd(data,"cd", NULL, "HOME not set", EXIT_FAILURE));
+			return (errmsg_cmd(data,(char *[3]){"cd", NULL, "HOME not set"}, EXIT_FAILURE));
 		return (!change_dir(data, path));
 	}
 	if (args[2])
-		return (errmsg_cmd(data, "cd", NULL, "too many arguments", EXIT_FAILURE));
+		return (errmsg_cmd(data, (char *[3]){"cd", NULL, "too many arguments"}, EXIT_FAILURE));
 	if (ft_strncmp(args[1], "-", 2) == 0)
 	{
 		path = get_env_var_value(data, data->env,
 				"OLDPWD");
 		if (!path)
-			return (errmsg_cmd(data, "cd", NULL, "OLDPWD not set", EXIT_FAILURE));
+			return (errmsg_cmd(data, (char *[3]){"cd", NULL, "OLDPWD not set"}, EXIT_FAILURE));
 		return (!change_dir(data, path));
 	}
 	return (!change_dir(data, args[1]));

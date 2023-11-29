@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 19:18:29 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 03:40:11 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 17:50:42 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,26 @@ char *ft_strcat(char *dest, char *src)
 	}
 	dest[i + j] = '\0';
 	return (dest);
+}
+
+void	sort_tab(char **tab)
+{
+	unsigned int	i = 0;
+	unsigned int	size = 0;
+	char	*temp;
+	
+	while (tab[size++])
+		;
+	while (i < (size - 1))
+	{
+		if (ft_strcmp(tab[i], tab[i + 1]) > 0)
+		{
+			temp = tab[i];
+			tab[i] = tab[i+ 1];
+			tab[i + 1] = temp;
+			i = 0;
+		}
+		else
+			i++;
+	}
 }

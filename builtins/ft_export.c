@@ -6,22 +6,11 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 00:53:27 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 15:58:43 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 18:08:14 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "util_exec.h"
-
-// void	free_tmp(char *str)
-// {
-// 	if (str != NULL)
-// 	{
-// 		//free(str);
-// 		str = NULL;
-// 	}
-// }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 char	**get_key_value_pair(t_data *data, char *arg)
 {
@@ -45,12 +34,12 @@ int	ft_export(t_data *data, char **args)
 	ret = EXIT_SUCCESS;
 	i = 1;
 	if (!args[i])
-		return (ft_env(data, NULL));
+		return (ft_export2(data, args));
 	while (args[i])
 	{
 		if (!is_valid_env_var_key(args[i]))
 		{
-			errmsg_cmd(data, "export", args[i], "not a valid identifier", false);
+			errmsg_cmd(data, (char *[3]){"export", args[i], "not a valid identifier"}, false);
 			ret = EXIT_FAILURE;
 			return (ret);
 		}
@@ -58,12 +47,9 @@ int	ft_export(t_data *data, char **args)
 		{
 			tmp = get_key_value_pair(data, args[i]);
 			set_env_var(data, tmp[0], tmp[1]);
-			// free_tab_args(tmp);
 		}
 		else
-		{
 			set_env_var(data, args[i], NULL);
-		}
 		i++;
 	}
 	return (ret);
@@ -93,11 +79,12 @@ int ft_export2(t_data *data, char **args)
         char **env_copy = (char **)malloc_plus_plus(&data->mall, (env_count + 1) * sizeof(char *));
         if (!env_copy)
             return EXIT_FAILURE;
-        for (int i = 0; i < env_count; i++)
+        while (i++ < env_count)
             env_copy[i] = ft_strdup(data, data->env[i]);
         env_copy[env_count] = NULL;
-        qsort(env_copy, env_count, sizeof(char *), compare_env_vars);// faire ma vertion
-        for (int i = 0; i < env_count; i++)
+        sort_tab(env_copy);
+		i = 0;
+        while (i++ < env_count)
             ft_putendl_fd(env_copy[i], STDOUT_FILENO);
     }
     return ret;
