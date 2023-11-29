@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nouvell_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:23:31 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 18:36:25 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/29 19:10:48 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	 initialize_pipes(t_data *data, int fd_pipe[2], int *j)
 			data->exec[*j].fd_in = dup(STDIN_FILENO);
 		ft_pipe2(&data->exec[*j], &data->exec[*j].fd_in,
 			&data->exec[*j].fd_out);
+			sig_onoff(0);
 			data->pid = fork();
 			if (data->pid == -1)
 				exit(EXIT_FAILURE);
@@ -63,6 +64,7 @@ int	pipe_execution(t_data *data, int *j)
 	close(data->exec[*j].fd_out);
 	close(data->exec[*j].fd_in);
 	ret = execute_command(data, &data->exec[*j]);
+	sig_onoff(1);
 	return (ret);
 }
 
