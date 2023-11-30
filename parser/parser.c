@@ -6,11 +6,12 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:21:33 by momox             #+#    #+#             */
-/*   Updated: 2023/11/30 02:48:17 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/30 09:17:01 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "util_exec.h"
 
 int	parser(t_data *data)
 {
@@ -36,6 +37,7 @@ int	parser(t_data *data)
 	check_quote_remove(data, data->list);
 	cmd_tab(data);
 	tab_exec(data);
+	// print_debug(data);
 	if (data->flag_delete != 0)
 		return (0);
 	return (1);

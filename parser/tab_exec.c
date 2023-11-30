@@ -6,22 +6,37 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:38:20 by momox             #+#    #+#             */
-/*   Updated: 2023/11/30 02:34:29 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/30 09:28:28 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+t_list	*create_next(t_list *t, t_data *data, int *i)
+{
+	if (t && t->token == PIPE)
+	{
+		data->exec[*i + 1].stdin_st = t;
+		t = t->next;
+	}
+	return (t);
+}
+
 void	create_tab(t_data *data, t_list *t, t_list *lst, int i)
 {
-	while (t && i < data->nb_exec)
+	while (t && ++i < data->nb_exec)
 	{
 		while (t && t->token != PIPE)
 		{
 			if (t->token == REDIR_I && t->next && t->next->token == FILES)
 				redir_in_manage(data, t, i);
 			else if (t->token == COMMAND && data->exec[i].cmd == NULL)
-				data->exec[i].cmd = ft_tabdup(data, lst->cmd);
+			{
+				if (lst->token != COMMAND)
+					data->exec[i].cmd = ft_tabdup(data, lst->cmd);
+				else
+					data->exec[i].cmd = ft_tabdup(data, t->cmd);
+			}
 			else if (t->token == REDIR_O && t->next && t->next->token == FILES)
 				redir_out_manage(data, t, i);
 			else if (t->token == REDIR_A && t->next && t->next->token == FILES)
@@ -32,12 +47,7 @@ void	create_tab(t_data *data, t_list *t, t_list *lst, int i)
 				data->exec[i].stdout_st = t;
 			t = t->next;
 		}
-		if (t && t->token == PIPE)
-		{
-			data->exec[i + 1].stdin_st = t;
-			t = t->next;
-		}
-		i++;
+		t = create_next(t, data, &i);
 	}
 }
 
@@ -80,7 +90,7 @@ void	tab_exec(t_data *data)
 
 	temp = data->list;
 	lst = data->list;
-	i = 0;
+	i = -1;
 	data->nb_exec = count_pipe(temp);
 	init_exec(data, data->nb_exec);
 	create_tab(data, temp, lst, i);
