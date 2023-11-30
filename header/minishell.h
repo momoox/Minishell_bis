@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:38:23 by mgeisler          #+#    #+#             */
-/*   Updated: 2023/11/30 02:08:23 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 02:51:14 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ int					split_op(t_data *data, char c);
 void				split_line(t_data *data);
 void				split_hd(t_data *data, t_list *list);
 int					tokenize(t_data *data);
+int					check_token(t_data *data);
 void				exec_heredoc(pid_t pid, char *line, char *bp, int fd);
 void				tab_exec(t_data *data);
 void				file_manage(t_data *data, t_list *temp, int i);

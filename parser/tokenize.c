@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 20:13:11 by momox             #+#    #+#             */
-/*   Updated: 2023/11/30 01:45:10 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/30 02:58:00 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,30 @@ int	heredoc_manage(t_list *temp, t_data *data)
 	temp->token = REDIR_I;
 	temp->content = ".heredocminishelltrobien";
 	ft_lstdel_here(&data->list, temp->next);
+	return (1);
+}
+
+int	check_token(t_data *data)
+{
+	t_list	*temp;
+	int		i;
+
+	temp = data->list;
+	i = 0;
+	while (temp)
+	{
+		if ((temp->token == REDIR_A || temp->token == REDIR_O
+				|| temp->token == REDIR_I)
+			&& (!temp->next || temp->next->token != FILES))
+			i = 1;
+		temp = temp->next;
+	}
+	if (i == 1)
+	{
+		printf("Minishell: syntax error near unexpected token `newline'\n");
+		data->exit_code = 258;
+		return (0);
+	}
 	return (1);
 }
 
