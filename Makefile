@@ -6,7 +6,7 @@
 #    By: momox <momox@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/28 20:23:57 by momox             #+#    #+#              #
-#    Updated: 2023/11/30 21:09:55 by momox            ###   ########.fr        #
+#    Updated: 2023/11/30 21:14:30 by momox            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,27 +15,14 @@
 
 NAME		:= minishell
 CC			:=	gcc
-CFLAGS		:=	-Wall -Wextra -g3
+CFLAGS		:=	-Wall -Wextra -Werror
 HEADER		:= -I ./header
-LIB			:= -lreadline -L /opt/homebrew/Cellar/readline/8.2.1/lib
-INCLUDE 	:= -I /opt/homebrew/Cellar/readline/8.2.1/include/ 
-
-ifeq ($(42),1)
-	LIB = -lreadline -L /Users/$$USER/.brew/opt/readline/lib
-	INCLUDE = -I /Users/$$USER/.brew/opt/readline/include
-	CC = gcc
-	CFLAGS = -Wall -Wextra #-Werror -g3
-endif
-
-ifeq ($(DEBUG), 1)
-	CFLAGS	+=	-g3 -fsanitize=address
-endif
+LIB			:= -lreadline -L /Users/$$USER/.brew/opt/readline/lib
+INCLUDE 	:= -I /Users/$$USER/.brew/opt/readline/include
 
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
-
-
 
 SRCS = main.c init_struct.c \
 		libft/ft_strchr.c \
@@ -96,11 +83,8 @@ SRCS = main.c init_struct.c \
 		
 OBJECTS = $(SRCS:.c=.o)
 
-
-
 OBJS_DIR		:=	.objs
 OBJECTS =  $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
-
 
 $(OBJS_DIR)/%.o:%.c
 	@mkdir -p $(dir $@)
@@ -109,7 +93,6 @@ $(OBJS_DIR)/%.o:%.c
 ################################################################################
 #                                  Makefile  objs                              #
 ################################################################################
-
 
 CLR_RMV		:=	\033[0m
 RED			:=	\033[1;31m
