@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 20:13:11 by momox             #+#    #+#             */
-/*   Updated: 2023/11/30 02:58:00 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/30 10:07:13 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	ft_here_doc(char *bp, t_data *data)
 	if (line)
 		free(line);
 }
-// unlink(".heredocminishelltrobien");
 
 int	heredoc_manage(t_list *temp, t_data *data)
 {
@@ -71,13 +70,15 @@ int	check_token(t_data *data)
 	int		i;
 
 	temp = data->list;
-	i = 0;
+	i = 2;
 	while (temp)
 	{
 		if ((temp->token == REDIR_A || temp->token == REDIR_O
 				|| temp->token == REDIR_I)
 			&& (!temp->next || temp->next->token != FILES))
 			i = 1;
+		if (temp->token == COMMAND)
+			i = 0;
 		temp = temp->next;
 	}
 	if (i == 1)
@@ -86,6 +87,8 @@ int	check_token(t_data *data)
 		data->exit_code = 258;
 		return (0);
 	}
+	if (i == 2)
+		return (0);
 	return (1);
 }
 

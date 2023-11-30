@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:21:33 by momox             #+#    #+#             */
-/*   Updated: 2023/11/30 09:17:01 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/30 10:14:30 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ int	parser(t_data *data)
 	check_quote_remove(data, data->list);
 	cmd_tab(data);
 	tab_exec(data);
-	// print_debug(data);
-	if (data->flag_delete != 0)
+	if (data->flag_delete == 1)
 		return (0);
 	return (1);
 }
 
 	// if (!(ft_strncmp(data->input, "<<", 2)))
+	// print_debug(data);
 	// 	split_hd(data, data->list);
 	// print_exec(data);
 	// print_list(data->list);

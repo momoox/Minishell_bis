@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:40:29 by mgeisler          #+#    #+#             */
-/*   Updated: 2023/11/29 23:14:14 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/30 10:11:17 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	reader(t_data *data)
 			continue ;
 		}
 		run_exec(data);
+		if (data->flag_unlink == 1)
+			unlink(".heredocminishelltrobien");
 		free(data->input);
 	}
 }

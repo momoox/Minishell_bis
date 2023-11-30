@@ -6,7 +6,7 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 23:18:53 by momox             #+#    #+#             */
-/*   Updated: 2023/11/29 19:14:27 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/30 10:14:04 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	redir_error(t_data *data, t_list *list)
 	data->flag_delete = 1;
 	if (!list->next)
 	{
-		ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n",
-			2);
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd("syntax error near unexpected token `newline'\n", 2);
 		data->exit_code = 258;
 	}
 	else

@@ -8,15 +8,10 @@ entrée pipe
 
 setup fd
 
-expr $? + $?  exitcode 2
-ctrl \ dans cat = Quit: 3
-'$PATH' doit print $PATH: command not found
-Unset the $PATH and ensure commands are not working anymore. dit "not a valid identifier"
-minishell: execve: : Permission denied est print a la sortie du heredoc
-segfault si ""> file" sans cmd ou cmd vide
-ls > file2 | < file cat = aime pas quand c'est pas dans l'ordre, segfault
+unlink VVV
+minishell: execve: : Permission denied est print a la sortie du heredoc VVV
+
 cat | cat | ls = d'abord print le ls puis execute un cat et skip l'autre, cat attend un input
-minishell: /opt/local/sbin/: : is a directory si cmd vide
 
 minishell: execve: : No such file or directory au lieu de 'minishell: nomDeLaCommande: Command not Found' quand mauvaise commande mais qu'il y a un PATH
 minishell: execve: : No such file or directory au lieu de 'minishell: nomDeLaCommande: No such file or directory' quand pas de PATH
