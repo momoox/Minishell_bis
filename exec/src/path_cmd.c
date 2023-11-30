@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:54:40 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 20:18:58 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 19:07:49 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,7 @@ int	init_wds(t_data *data)
 		data->shell->old_pwd = ft_strdup(data, get_env_var_value(data,
 					data->env, "OLDPWD"));
 		if (!data->shell->old_pwd)
-		{
 			return (0);
-		}
 	}
 	else
 	{

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+         #
+#    By: momox <momox@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/28 20:23:57 by momox             #+#    #+#              #
-#    Updated: 2023/11/30 10:43:34 by oliove           ###   ########.fr        #
+#    Updated: 2023/11/30 21:09:55 by momox            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,8 +37,7 @@ endif
 
 
 
-SRCS = main.c init_struct.c print_tab.c print_token.c\
-		print_list.c \
+SRCS = main.c init_struct.c \
 		libft/ft_strchr.c \
 		libft/ft_strdup.c \
 		libft/ft_strncmp.c \
@@ -93,7 +92,6 @@ SRCS = main.c init_struct.c print_tab.c print_token.c\
 		builtins/ft_export.c \
 		builtins/ft_exit.c \
 		builtins/check_build.c \
-		exec/utils/debug.c \
 		builtins/ft_unset.c
 		
 OBJECTS = $(SRCS:.c=.o)
