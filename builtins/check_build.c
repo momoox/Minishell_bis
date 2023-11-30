@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 22:28:55 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/30 02:10:32 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 08:33:20 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ bool	is_build(char **cmd)
 t_builtin	*get_builting(t_data *data)
 {
 	t_builtin	*builtins;
+
 	builtins = malloc_plus_plus(&data->mall, sizeof(t_builtin) * 8);
 	builtins[0] = (t_builtin){"cd", ft_cd2};
 	builtins[1] = (t_builtin){"echo", ft_echo};
@@ -79,8 +80,11 @@ t_builtin_func	find_builtin(t_data *data, const char *cmd_name)
 	int	i;
 
 	i = 0;
+	printf("cmd_name %s\n",cmd_name);
 	while (get_builting(data)[i].cmd_name != NULL)
 	{
+			printf("je suis lalala>lallala pid = %d\n ", getpid());
+		
 		if (ft_strcmp(cmd_name, get_builting(data)[i].cmd_name) == 0)
 		{
 			return (get_builting(data)[i].func);

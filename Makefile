@@ -6,7 +6,7 @@
 #    By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/28 20:23:57 by momox             #+#    #+#              #
-#    Updated: 2023/11/29 20:39:50 by oliove           ###   ########.fr        #
+#    Updated: 2023/11/30 08:39:05 by oliove           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,8 +93,8 @@ SRCS = main.c init_struct.c print_tab.c print_token.c\
 		builtins/ft_export.c \
 		builtins/ft_exit.c \
 		builtins/check_build.c \
+		exec/utils/debug.c \
 		builtins/ft_unset.c
-# exec/utils/debug.c \
 		
 OBJECTS = $(SRCS:.c=.o)
 

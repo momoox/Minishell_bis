@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 02:47:43 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/30 02:12:29 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 08:19:42 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	ft_pipe2(t_exec *ex, int *fd_stdin, int *fd_stdout)
 	}
 	if (*fd_stdin == -1)
 		cmd1 = 0;
+
 	if (ex->stdout_st && (ex->stdout_st->token == REDIR_O
 			|| ex->stdout_st->token == REDIR_A))
 	{

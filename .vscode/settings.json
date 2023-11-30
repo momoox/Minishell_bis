@@ -2,7 +2,12 @@
     "files.associations": {
         "minishell.h": "c",
         "util_exec.h": "c",
-        "sstream": "c"
+        "sstream": "c",
+        "array": "c",
+        "iterator": "c",
+        "string": "c",
+        "string_view": "c",
+        "vector": "c"
     },
     "makefile.launchConfigurations": [
         {

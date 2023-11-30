@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 00:53:27 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/30 01:29:42 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 06:22:53 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	ft_export2(t_data *data, char **args)
 		sort_tab(env_copy);
 		i = 0;
 		while (i++ < env_count)
-			ft_putendl_fd(env_copy[i], STDOUT_FILENO);
+			ft_putendl_fd2(data, env_copy[i], STDOUT_FILENO);
 	}
 	return (ret);
 }

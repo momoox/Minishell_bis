@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:23:31 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/30 02:11:18 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 08:08:43by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 // Partie 1 : Initialisation
 int	initialize_pipes(t_data *data, int fd_pipe[2], int *j)
 {
+	
 	while ((*j) < data->nb_exec)
 	{
 		if (*j < data->nb_exec - 1)
@@ -31,6 +32,7 @@ int	initialize_pipes(t_data *data, int fd_pipe[2], int *j)
 			data->exec[*j].fd_in = dup(STDIN_FILENO);
 		ft_pipe2(&data->exec[*j], &data->exec[*j].fd_in,
 			&data->exec[*j].fd_out);
+
 		sig_onoff(0);
 		initialize_pipes2(data, j);
 		(*j)++;
@@ -40,6 +42,7 @@ int	initialize_pipes(t_data *data, int fd_pipe[2], int *j)
 
 void	initialize_pipes2(t_data *data, int *j)
 {
+
 	data->pid = fork();
 	if (data->pid == -1)
 		exit(EXIT_FAILURE);
@@ -57,11 +60,13 @@ int	pipe_execution(t_data *data, int *j)
 {
 	int				ret;
 	t_builtin_func	func;
+	int i = 0;
 
+	printf("j ============== %d\n",*j);
 	func = find_builtin(data, data->exec[*j].cmd[0]);
+	print_debug(data);
 	if (func == NULL)
 	{
-		printf("pipe_exec\n");
 		data->exec[*j].cmd[0] = ft_path_dir(data->mall, data->exec[*j].cmd[0],
 				ft_my_var(data, "PATH"), -1);
 	}
