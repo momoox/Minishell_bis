@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 02:47:43 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 20:41:47 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 01:16:19 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_lstsize(t_list *list)
 
 int	is_forck(t_data *data, t_exec *cmd)
 {
-	builtin_func	func;
+	t_builtin_func	func;
 
 	func = find_builtin(cmd->cmd[0], data->func);
 	if (func != NULL)

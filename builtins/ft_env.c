@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:22:01 by momox             #+#    #+#             */
-/*   Updated: 2023/11/29 22:23:10 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 01:33:01 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void	update_wds(t_data *data, char *wd)
 int	ft_env(t_data *data, char **env)
 {
 	int	i;
-	(void)env;
 
+	(void)env;
 	i = 0;
 	while (data->env[i])
 	{

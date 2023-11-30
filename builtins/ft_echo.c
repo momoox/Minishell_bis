@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:21:42 by momox             #+#    #+#             */
-/*   Updated: 2023/11/29 22:27:25 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 01:35:35 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ void	ft_echo_2(char **cmd)
 
 int	ft_echo(t_data *data, char **cmd)
 {
-	(void)data;
 	int	i;
+
+	(void)data;
 	if (!cmd[1])
 	{
 		printf("\n");

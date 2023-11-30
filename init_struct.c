@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 21:07:04 by momox             #+#    #+#             */
-/*   Updated: 2023/11/29 18:12:40 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/30 01:13:50 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_data(t_data *data)
 	data->exit_code = 0;
 	data->pid = -1;
 	data->mall = NULL;
-	data->func = builtins;
+	data->func = get_builting();
 }
 
 void	reinit(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 22:28:55 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 22:15:45 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 01:37:51 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,44 +58,46 @@ bool	is_build(char **cmd)
 		return (true);
 	return (false);
 }
-void get_builting()
+
+t_builtin	*get_builting(void)
 {
-    
+	t_builtin	builtins[8];
+
+	builtins[0] = (t_builtin){"cd", ft_cd2};
+	builtins[1] = (t_builtin){"echo", ft_echo};
+	builtins[2] = (t_builtin){"env", ft_env};
+	builtins[3] = (t_builtin){"export", ft_export};
+	builtins[4] = (t_builtin){"pwd", ft_pwd};
+	builtins[5] = (t_builtin){"unset", ft_unset};
+	builtins[6] = (t_builtin){"exit", ft_exit};
+	builtins[7] = (t_builtin){NULL, NULL};
+	return (builtins);
 }
-t_builtin		builtins[] = {{"cd", ft_cd2},
-						{"echo", ft_echo},
-						{"env", ft_env},
-						{"export", ft_export},
-						{"pwd", ft_pwd},
-						{"unset", ft_unset},
-						{"exit", ft_exit},
 
-						{NULL, NULL}};
-
-builtin_func	find_builtin(const char *cmd_name, t_builtin *builtins)
+t_builtin_func	find_builtin(const char *cmd_name, t_builtin *builtins)
 {
 	int	i;
 
 	i = 0;
-	while (builtins[i].cmd_name != NULL)
+	while (get_builting()[i].cmd_name != NULL)
 	{
-		if (ft_strcmp(cmd_name, builtins[i].cmd_name) == 0)
+		if (ft_strcmp(cmd_name, get_builting()[i].cmd_name) == 0)
 		{
-			return (builtins[i].func);
+			return (get_builting()[i].func);
 		}
 		i++;
 	}
-	return (NULL); // Commande non trouvée
+	return (NULL);
 }
 
 ///////////////////////////////////////////
 int	exec_build(t_data *data, char **cmd)
 {
 	int				ret;
-	builtin_func	func;
+	t_builtin_func	func;
 
 	ret = EXIT_SUCCESS;
-	func = find_builtin(cmd[0], builtins);
+	func = find_builtin(cmd[0], get_builting());
 	if (func != NULL)
 		return (func(data, cmd));
 	else
@@ -107,11 +109,11 @@ int	run_builtin(t_data *data, char **cmd)
 	int	i;
 
 	i = 0;
-	while (builtins[i].cmd_name != NULL)
+	while (get_builting()[i].cmd_name != NULL)
 	{
-		if (ft_strcmp(cmd[0], builtins[i].cmd_name) == 0)
+		if (ft_strcmp(cmd[0], get_builting()[i].cmd_name) == 0)
 		{
-			return (builtins[i].func(data, cmd));
+			return (get_builting()[i].func(data, cmd));
 		}
 		i++;
 	}

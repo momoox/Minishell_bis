@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:38:23 by mgeisler          #+#    #+#             */
-/*   Updated: 2023/11/29 21:47:29 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 01:21:03 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,20 +85,20 @@ typedef struct s_exec
 	t_exec_shell	*shell;
 }					t_exec;
 
-struct s_data;
+struct				s_data;
 
-typedef int			(*builtin_func)(struct s_data *data, char **cmd);
+typedef int			(*t_builtin_func)(struct s_data *data, char **cmd);
 
 typedef struct s_builtin
 {
 	const char		*cmd_name;
-	builtin_func	func;
+	t_builtin_func	func;
 }					t_builtin;
-extern t_builtin	builtins[];
+// extern t_builtin	builtins[];
 
 typedef struct s_data
 {
-	int flag_unlink; // here_doc
+	int				flag_unlink;
 	int				flag_delete;
 	char			*input;
 	int				nb_exec;
@@ -114,7 +114,7 @@ typedef struct s_data
 	t_error_info	error_info;
 }					t_data;
 /////////TESTE-BUILD OLIVE/////////////
-builtin_func		find_builtin(const char *cmd_name, t_builtin *builtins);
+t_builtin_func		find_builtin(const char *cmd_name, t_builtin *builtins);
 int					exec_build(t_data *data, char **cmd);
 //////////////////////////////////////////////////
 
@@ -215,6 +215,7 @@ void				print_token(t_list *list);
 int					ft_env(t_data *data, char **env);
 int					ft_echo(t_data *data, char **cmd);
 int					ft_pwd(t_data *data, char **null);
+t_builtin			*get_builting(void);
 
 // olive
 void				run_exec(t_data *data);

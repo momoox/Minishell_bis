@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:23:31 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 20:22:04 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 01:31:15 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,33 @@ int	initialize_pipes(t_data *data, int fd_pipe[2], int *j)
 		ft_pipe2(&data->exec[*j], &data->exec[*j].fd_in,
 			&data->exec[*j].fd_out);
 		sig_onoff(0);
-		data->pid = fork();
-		if (data->pid == -1)
-			exit(EXIT_FAILURE);
-		if (data->pid == 0)
-		{
-			pipe_execution(data, j);
-			exit(EXIT_SUCCESS);
-		}
-		else
-			cleanup_pipes(data, j);
+		initialize_pipes2(data, j);
 		(*j)++;
 	}
 	return (1);
+}
+
+void	initialize_pipes2(t_data *data, int *j)
+{
+	data->pid = fork();
+	if (data->pid == -1)
+		exit(EXIT_FAILURE);
+	if (data->pid == 0)
+	{
+		pipe_execution(data, j);
+		exit(EXIT_SUCCESS);
+	}
+	else
+		cleanup_pipes(data, j);
 }
 
 // Partie 2 : Gestion des tubes
 int	pipe_execution(t_data *data, int *j)
 {
 	int				ret;
-	builtin_func	func;
+	t_builtin_func	func;
 
-	func = find_builtin(data->exec[*j].cmd[0], builtins);
+	func = find_builtin(data->exec[*j].cmd[0], get_builting());
 	if (func == NULL)
 	{
 		printf("pipe_exec\n");

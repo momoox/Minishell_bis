@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 20:35:32 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/29 20:47:03 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 01:31:43 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	execute_command(t_data *data, t_exec *cmd)
 
 	if (!cmd || !cmd->cmd)
 		exit_shell(data, errmsg_cmd(data, (char *[3]){"child", NULL,
-			"parsing error: no cmd to execute!"}, EXIT_FAILURE));
+				"parsing error: no cmd to execute!"}, EXIT_FAILURE));
 	if (ft_strchr(*cmd->cmd, '/') == NULL)
 	{
 		ret = exec_build(data, cmd->cmd);

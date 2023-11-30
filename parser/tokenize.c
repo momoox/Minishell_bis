@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 20:13:11 by momox             #+#    #+#             */
-/*   Updated: 2023/11/29 20:51:26 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 01:39:57 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	exec_heredoc(pid_t pid, char *line, char *bp, int fd)
 				break ;
 			free(line);
 		}
-		exit (0);
+		exit(0);
 	}
 }
 
@@ -48,9 +48,9 @@ void	ft_here_doc(char *bp, t_data *data)
 	if (line)
 		free(line);
 }
-	// unlink(".heredocminishelltrobien");
+// unlink(".heredocminishelltrobien");
 
-int heredoc_manage(t_list *temp, t_data *data)
+int	heredoc_manage(t_list *temp, t_data *data)
 {
 	if (!temp->next)
 	{
@@ -74,7 +74,8 @@ int	tokenize(t_data *data)
 	{
 		if (!(ft_strncmp(temp->content, "|", 1)))
 			temp->token = PIPE;
-		else if (!(ft_strncmp(temp->content, "<<", 2)) && (!heredoc_manage(temp, data)))
+		else if (!(ft_strncmp(temp->content, "<<", 2)) && (!heredoc_manage(temp,
+					data)))
 			return (0);
 		else if (!(ft_strncmp(temp->content, ">>", 2)))
 			temp->token = REDIR_A;
@@ -82,8 +83,8 @@ int	tokenize(t_data *data)
 			temp->token = REDIR_I;
 		else if (!(ft_strncmp(temp->content, ">", 1)))
 			temp->token = REDIR_O;
-		else if (temp->prev
-			&& (temp->prev->token == REDIR_I || temp->prev->token == REDIR_O
+		else if (temp->prev && (temp->prev->token == REDIR_I
+				|| temp->prev->token == REDIR_O
 				|| temp->prev->token == REDIR_A))
 			temp->token = FILES;
 		else
@@ -92,4 +93,3 @@ int	tokenize(t_data *data)
 	}
 	return (1);
 }
-	 	
