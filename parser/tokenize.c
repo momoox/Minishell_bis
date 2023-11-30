@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 20:13:11 by momox             #+#    #+#             */
-/*   Updated: 2023/11/30 01:39:57 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 01:45:10 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ int	tokenize(t_data *data)
 	{
 		if (!(ft_strncmp(temp->content, "|", 1)))
 			temp->token = PIPE;
-		else if (!(ft_strncmp(temp->content, "<<", 2)) && (!heredoc_manage(temp,
-					data)))
+		else if (!(ft_strncmp(temp->content, "<<", 2))
+			&& (!heredoc_manage(temp, data)))
 			return (0);
 		else if (!(ft_strncmp(temp->content, ">>", 2)))
 			temp->token = REDIR_A;
