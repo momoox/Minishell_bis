@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_build.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
+/*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 22:28:55 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/30 09:31:46 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 09:52:25 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,10 @@ t_builtin_func	find_builtin(t_data *data, const char *cmd_name)
 	return (NULL);
 }
 
-///////////////////////////////////////////
 int	exec_build(t_data *data, char **cmd)
 {
-	int				ret;
 	t_builtin_func	func;
 
-	ret = EXIT_SUCCESS;
 	func = find_builtin(data, cmd[0]);
 	if (func != NULL)
 		return (func(data, cmd));
