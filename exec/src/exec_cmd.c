@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 20:35:32 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/30 09:48:28 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 09:51:21 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,9 @@ int	execute_sys_bin(t_data *data, t_exec *cmd)
 
 void	run_exec(t_data *data)
 {
-	int	t;
-
 	init_data_shell(data);
 	init_env(data, data->env);
 	init_wds(data);
-	t = is_forck(data, data->exec);
 	if (data->nb_exec > 1 || is_forck(data, data->exec) == 0)
 		ft_pipe(data);
 	else

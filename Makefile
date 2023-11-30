@@ -6,7 +6,7 @@
 #    By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/28 20:23:57 by momox             #+#    #+#              #
-#    Updated: 2023/11/30 08:39:05 by oliove           ###   ########.fr        #
+#    Updated: 2023/11/30 10:43:34 by oliove           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ ifeq ($(42),1)
 	LIB = -lreadline -L /Users/$$USER/.brew/opt/readline/lib
 	INCLUDE = -I /Users/$$USER/.brew/opt/readline/include
 	CC = gcc
-	CFLAGS = -Wall -Wextra #-Werror
+	CFLAGS = -Wall -Wextra #-Werror -g3
 endif
 
 ifeq ($(DEBUG), 1)

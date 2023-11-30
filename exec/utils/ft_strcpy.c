@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 19:18:29 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/30 09:37:50 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 21:00:59 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@ void	sort_tab(char **tab)
 		;
 	while (i < (size - 1))
 	{
+		printf("sort_tabW %s\n",tab[i]);
 		if (ft_strcmp(tab[i], tab[i + 1]) > 0)
 		{
+			printf("sort_tab I %s\n",tab[i]);
 			temp = tab[i];
 			tab[i] = tab[i + 1];
 			tab[i + 1] = temp;

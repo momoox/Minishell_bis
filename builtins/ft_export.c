@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 00:53:27 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/30 06:22:53 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 20:58:15 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,23 +70,26 @@ int	ft_export2(t_data *data, char **args)
 	char	**env_copy;
 
 	ret = EXIT_SUCCESS;
-	i = 0;
+	i = -1;
 	if (!args[1])
 	{
 		env_count = 0;
 		while (data->env[env_count])
 			env_count++;
-		env_copy = (char **)malloc_plus_plus(&data->mall, (env_count + 1)
+		env_copy = malloc_plus_plus(&data->mall, (env_count + 1)
 				* sizeof(char *));
 		if (!env_copy)
 			return (EXIT_FAILURE);
-		while (i++ < env_count)
+		while (++i < env_count)
 			env_copy[i] = ft_strdup(data, data->env[i]);
 		env_copy[env_count] = NULL;
+		printf("befort sotrt_tab %s\n",env_copy[0]);
 		sort_tab(env_copy);
+			printf("lsklsks\n");
 		i = 0;
-		while (i++ < env_count)
+		while (i++ < env_count){
 			ft_putendl_fd2(data, env_copy[i], STDOUT_FILENO);
+		}
 	}
 	return (ret);
 }
