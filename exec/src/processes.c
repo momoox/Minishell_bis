@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 00:14:52 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/30 06:50:18 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 09:45:48 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,12 @@ void	exece(t_data *data, char **cmd, char **env)
 		ft_putstr_fd("Minishell: ", STDERR_FILENO);
 		ft_putstr_fd(cmd[0], STDERR_FILENO);
 		ft_putstr_fd_jump(": command not found", STDERR_FILENO);
-		exit(CMD_NOT_FOUND);
+		data->exit_code = 127;
+		exit_shell(data, data->exit_code);
 	}
 	if (execve(cmd[0], cmd, data->env) == -1)
 	{
-		ft_putstr_fd("Minishell: ", STDERR_FILENO);
+		ft_putstr_fd("Minishell:1 ", STDERR_FILENO);
 		ft_putstr_fd(cmd[0], STDERR_FILENO);
 		ft_putstr_fd_jump(": No such file or directory", STDERR_FILENO);
 		exit(1);

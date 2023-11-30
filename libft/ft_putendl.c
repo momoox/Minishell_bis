@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 15:38:29 by momox             #+#    #+#             */
-/*   Updated: 2023/11/30 06:25:57 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 09:03:44 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_putendl_fd(char *s, int fd)
 	}
 	write(fd, "\n", 1);
 }
+
 void	ft_putendl_fd2(t_data *mall, char *s, int fd)
 {
 	int	i;

@@ -60,11 +60,8 @@ int	pipe_execution(t_data *data, int *j)
 {
 	int				ret;
 	t_builtin_func	func;
-	int i = 0;
 
-	printf("j ============== %d\n",*j);
 	func = find_builtin(data, data->exec[*j].cmd[0]);
-	print_debug(data);
 	if (func == NULL)
 	{
 		data->exec[*j].cmd[0] = ft_path_dir(data->mall, data->exec[*j].cmd[0],

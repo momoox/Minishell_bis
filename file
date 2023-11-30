@@ -1,5 +1,5 @@
 cmd[0] /bin/ls | cmd[1] (null)
-pip 9399, stdout = 3 | in 4, cmd : /bin/ls
+pip 20925, stdout = 3 | in 4, cmd : /bin/ls
 Makefile
 TRUCS A FAIRE
 builtins

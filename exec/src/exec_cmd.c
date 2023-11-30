@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 20:35:32 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/30 07:00:30 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 09:48:28 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,6 @@ int	execute_local_bin(t_data *data, t_exec *cmd)
 	ret = check_cmd_not_found(data, cmd);
 	if (ret != 0)
 		return (ret);
-	// exece(data, cmd->cmd, data->env);
-	printf("cmd[0] %s | cmd[1] %s\n",data->exec->cmd[0], data->exec->cmd[1]);
-	printf("pip %d, stdout = %d | in %d, cmd : %s\n",getpid(), cmd->fd_out, cmd->fd_in, cmd->cmd[0]);
-	
 	if (execve(cmd->cmd[0], cmd->cmd, data->env) == -1)
 		return (errmsg_cmd(data, (char *[3]){"execve", NULL, strerror(errno)},
 			errno));
