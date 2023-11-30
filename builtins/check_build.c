@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 22:28:55 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/30 01:37:51 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 02:10:32 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ bool	is_build(char **cmd)
 	return (false);
 }
 
-t_builtin	*get_builting(void)
+t_builtin	*get_builting(t_data *data)
 {
-	t_builtin	builtins[8];
-
+	t_builtin	*builtins;
+	builtins = malloc_plus_plus(&data->mall, sizeof(t_builtin) * 8);
 	builtins[0] = (t_builtin){"cd", ft_cd2};
 	builtins[1] = (t_builtin){"echo", ft_echo};
 	builtins[2] = (t_builtin){"env", ft_env};
@@ -74,16 +74,16 @@ t_builtin	*get_builting(void)
 	return (builtins);
 }
 
-t_builtin_func	find_builtin(const char *cmd_name, t_builtin *builtins)
+t_builtin_func	find_builtin(t_data *data, const char *cmd_name)
 {
 	int	i;
 
 	i = 0;
-	while (get_builting()[i].cmd_name != NULL)
+	while (get_builting(data)[i].cmd_name != NULL)
 	{
-		if (ft_strcmp(cmd_name, get_builting()[i].cmd_name) == 0)
+		if (ft_strcmp(cmd_name, get_builting(data)[i].cmd_name) == 0)
 		{
-			return (get_builting()[i].func);
+			return (get_builting(data)[i].func);
 		}
 		i++;
 	}
@@ -97,7 +97,7 @@ int	exec_build(t_data *data, char **cmd)
 	t_builtin_func	func;
 
 	ret = EXIT_SUCCESS;
-	func = find_builtin(cmd[0], get_builting());
+	func = find_builtin(data, cmd[0]);
 	if (func != NULL)
 		return (func(data, cmd));
 	else
@@ -109,11 +109,11 @@ int	run_builtin(t_data *data, char **cmd)
 	int	i;
 
 	i = 0;
-	while (get_builting()[i].cmd_name != NULL)
+	while (get_builting(data)[i].cmd_name != NULL)
 	{
-		if (ft_strcmp(cmd[0], get_builting()[i].cmd_name) == 0)
+		if (ft_strcmp(cmd[0], get_builting(data)[i].cmd_name) == 0)
 		{
-			return (get_builting()[i].func(data, cmd));
+			return (get_builting(data)[i].func(data, cmd));
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 21:07:04 by momox             #+#    #+#             */
-/*   Updated: 2023/11/30 01:13:50 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 02:09:11 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_data(t_data *data)
 	data->exit_code = 0;
 	data->pid = -1;
 	data->mall = NULL;
-	data->func = get_builting();
+	data->func = get_builting(data);
 }
 
 void	reinit(t_data *data)

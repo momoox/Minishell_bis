@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:38:23 by mgeisler          #+#    #+#             */
-/*   Updated: 2023/11/30 01:21:03 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 02:08:23 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ typedef struct s_data
 	t_error_info	error_info;
 }					t_data;
 /////////TESTE-BUILD OLIVE/////////////
-t_builtin_func		find_builtin(const char *cmd_name, t_builtin *builtins);
+t_builtin_func		find_builtin(t_data *data, const char *cmd_name);
 int					exec_build(t_data *data, char **cmd);
 //////////////////////////////////////////////////
 
@@ -215,7 +215,7 @@ void				print_token(t_list *list);
 int					ft_env(t_data *data, char **env);
 int					ft_echo(t_data *data, char **cmd);
 int					ft_pwd(t_data *data, char **null);
-t_builtin			*get_builting(void);
+t_builtin			*get_builting(t_data *data);
 
 // olive
 void				run_exec(t_data *data);

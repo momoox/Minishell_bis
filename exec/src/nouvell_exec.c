@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:23:31 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/30 01:31:15 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 02:11:18 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	pipe_execution(t_data *data, int *j)
 	int				ret;
 	t_builtin_func	func;
 
-	func = find_builtin(data->exec[*j].cmd[0], get_builting());
+	func = find_builtin(data, data->exec[*j].cmd[0]);
 	if (func == NULL)
 	{
 		printf("pipe_exec\n");

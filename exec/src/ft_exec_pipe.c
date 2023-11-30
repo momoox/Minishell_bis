@@ -6,7 +6,7 @@
 /*   By: oliove <olivierliove@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 02:47:43 by oliove            #+#    #+#             */
-/*   Updated: 2023/11/30 01:16:19 by oliove           ###   ########.fr       */
+/*   Updated: 2023/11/30 02:12:29 by oliove           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	is_forck(t_data *data, t_exec *cmd)
 {
 	t_builtin_func	func;
 
-	func = find_builtin(cmd->cmd[0], data->func);
+	func = find_builtin(data, cmd->cmd[0]);
 	if (func != NULL)
 	{
 		if (ft_strncmp(cmd->cmd[0], "export", 7) == 0 && cmd->cmd[1] == NULL)
