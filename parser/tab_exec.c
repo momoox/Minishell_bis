@@ -6,13 +6,13 @@
 /*   By: momox <momox@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:38:20 by momox             #+#    #+#             */
-/*   Updated: 2023/11/29 19:11:58 by momox            ###   ########.fr       */
+/*   Updated: 2023/11/30 02:34:29 by momox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	create_tab(t_data *data, t_list *t, int i)
+void	create_tab(t_data *data, t_list *t, t_list *lst, int i)
 {
 	while (t && i < data->nb_exec)
 	{
@@ -21,7 +21,7 @@ void	create_tab(t_data *data, t_list *t, int i)
 			if (t->token == REDIR_I && t->next && t->next->token == FILES)
 				redir_in_manage(data, t, i);
 			else if (t->token == COMMAND && data->exec[i].cmd == NULL)
-				data->exec[i].cmd = ft_tabdup(data, t->cmd);
+				data->exec[i].cmd = ft_tabdup(data, lst->cmd);
 			else if (t->token == REDIR_O && t->next && t->next->token == FILES)
 				redir_out_manage(data, t, i);
 			else if (t->token == REDIR_A && t->next && t->next->token == FILES)
@@ -75,11 +75,13 @@ int	count_pipe(t_list *list)
 void	tab_exec(t_data *data)
 {
 	t_list	*temp;
+	t_list	*lst;
 	int		i;
 
 	temp = data->list;
+	lst = data->list;
 	i = 0;
 	data->nb_exec = count_pipe(temp);
 	init_exec(data, data->nb_exec);
-	create_tab(data, temp, i);
+	create_tab(data, temp, lst, i);
 }
